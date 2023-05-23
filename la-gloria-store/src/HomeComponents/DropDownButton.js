@@ -1,6 +1,37 @@
-import React from 'react';
+import LogInButton from './LogInButton';
+import React, {useState} from "react";
 
-const DropDownButton = () => {
+function DropDownButton() {
+    const [button, setButton] = useState('DropDownButton');
+
+    const changeButton = () => {
+        setButton('LogIn');
+    }
+
+    return (
+        <React.Fragment>
+            {button === 'DropDownButton' ? (
+                <button className="btn" type="button" onClick={changeButton}>{button}</button>
+            ) : (
+                <LogInButton/>
+            )}
+        </React.Fragment>
+    );
+}
+
+export default DropDownButton;
+
+
+
+/*
+function DropDownButton() {
+
+    const[dropDownButton, setButton] = useState('Log In')
+
+    const changeButton = () => {
+        setButton('Log Out')
+    }
+
     return (
         <div className="dropdown">
             <button
@@ -19,13 +50,13 @@ const DropDownButton = () => {
                     </a>
                 </li>
                 <li>
-                    <a className="dropdown-item" href="#">
-                        Log Out
-                    </a>
+                    <button onClick={changeButton}>{dropDownButton}</button>
                 </li>
             </ul>
         </div>
     );
-};
+}
+
 
 export default DropDownButton;
+*/
