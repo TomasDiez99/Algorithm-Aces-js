@@ -5,13 +5,11 @@ import Product from "./pages/Product";
 import Profile from "./pages/Profile";
 import Navbar from './HomeComponents/Navbar';
 import Footer from './HomeComponents/Footer';
-import Carousel from "./HomeComponents/Carousel";
 
 function App() {
     return (
         <div>
             <Navbar/>
-            <Carousel/>
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/product" element={<Product/>}/>

@@ -1,12 +1,16 @@
 import React from 'react';
 import ProductTable from '../HomeComponents/ProductTable';
 import '../App.css';
+import Carousel from "../HomeComponents/Carousel";
 
 
 function Home() {
 
     return (
-        <ProductTable/>
+        <div>
+            <Carousel/>
+            <ProductTable/>
+        </div>
     );
 }
 
