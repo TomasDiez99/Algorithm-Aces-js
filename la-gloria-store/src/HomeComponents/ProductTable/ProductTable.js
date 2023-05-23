@@ -1,7 +1,10 @@
 import React from 'react';
-import FilterTable from "./FilterTable";
+import FilterTable from "./FilterTable/FilterTable";
 import ProductGrid from "./ProductGrid";
 function ProductTable() {
+
+
+    
     return (
         <div style={{ display: 'flex' }}>
             <div style={{ flex: 1, borderRight: '1px solid black' }}>
