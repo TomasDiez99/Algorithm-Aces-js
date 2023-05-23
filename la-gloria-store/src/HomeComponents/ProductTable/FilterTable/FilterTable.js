@@ -1,13 +1,15 @@
 import React from 'react';
+import CategoryFilter from "./CategoryFilter";
+import BrandFilter from "./BrandFIlter";
 
 function FilterTable() {
     return (
         <div>
             <div style={{ borderBottom: '1px solid black' }}>
-                <p>left top container</p>
+                <CategoryFilter/>
             </div>
             <div>
-                <p>left down container</p>
+                <BrandFilter/>
             </div>
         </div>
     );
