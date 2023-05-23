@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductCard from './ProductCard';
 
 function ProductGrid() {
     const gridStyle = {
@@ -7,20 +8,14 @@ function ProductGrid() {
         gap: '20px',
     };
 
-    const squareStyle = {
-        width: '200px',
-        height: '200px',
-        backgroundColor: '#ccc',
-    };
-
     return (
         <div style={gridStyle}>
-            <div style={squareStyle}>Product 1</div>
-            <div style={squareStyle}>Product 2</div>
-            <div style={squareStyle}>Product 3</div>
-            <div style={squareStyle}>Product 4</div>
-            <div style={squareStyle}>Product 5</div>
-            <div style={squareStyle}>Product 6</div>
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
+            <ProductCard />
         </div>
     );
 }
