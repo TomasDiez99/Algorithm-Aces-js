@@ -17,7 +17,7 @@ function ProductTable() {
                 <FilterTable setCategoryFilter = {categoryFilterHandle} setBrandFilter = {brandFilterHandle} />
             </div>
             <div style={{ flex: 4 }}>
-                <ProductGrid filter = { categoryFilter }/>
+                <ProductGrid categoryFilter = { categoryFilter } brandFilter = { brandFilter } />
             </div>
         </div>
     );

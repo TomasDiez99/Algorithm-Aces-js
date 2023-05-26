@@ -2,11 +2,11 @@ import React, {useState,useEffect} from 'react';
 import ProductCard from './ProductCard';
 
 function ProductGrid(props) {
-    const {filter} = props
+    const {categoryFilter, brandFilter} = props
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        if (filter === ''){
+        if (categoryFilter === ''){
             fetch('https://la-gloria-store-algorithm-aces.vercel.app/rest/products')
                 .then(response => response.json())
                 .then((json) => {
@@ -17,7 +17,7 @@ function ProductGrid(props) {
                 });
         }
         else{
-            fetch(`https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${filter}`)
+            fetch(`https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}`)
                 .then(response => response.json())
                 .then((json) => {
                     setProducts(json.data);
@@ -27,7 +27,31 @@ function ProductGrid(props) {
                 });
         }
 
-    }, [filter]);
+    }, [categoryFilter]);
+
+    useEffect(() => {
+        if (brandFilter === ''){
+            fetch('https://la-gloria-store-algorithm-aces.vercel.app/rest/products')
+                .then(response => response.json())
+                .then((json) => {
+                    setProducts(json.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+        else{
+            fetch(`https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}`)
+                .then(response => response.json())
+                .then((json) => {
+                    setProducts(json.data);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        }
+
+    }, [brandFilter]);
 
 
 
