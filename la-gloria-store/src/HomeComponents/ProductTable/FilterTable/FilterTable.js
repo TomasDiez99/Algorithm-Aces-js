@@ -7,10 +7,10 @@ function FilterTable(props) {
     return (
         <div>
             <div style={{ borderBottom: '1px solid black' }}>
-                <CategoryFilter setCategoryFilter={setCategoryFilter} />
+                <CategoryFilter setCategoryFilter = {setCategoryFilter} />
             </div>
             <div>
-                <BrandFilter/>
+                <BrandFilter setBrandFilter = {setBrandFilter} />
             </div>
         </div>
     );
