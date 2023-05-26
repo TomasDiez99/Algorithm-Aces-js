@@ -1,58 +1,40 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import ProductCard from './ProductCard';
 
 function ProductGrid(props) {
     const {categoryFilter, brandFilter} = props
     const [products, setProducts] = useState([]);
 
-    useEffect(() => {
-        if (categoryFilter === ''){
-            fetch('https://la-gloria-store-algorithm-aces.vercel.app/rest/products')
-                .then(response => response.json())
-                .then((json) => {
-                    setProducts(json.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-        else{
-            fetch(`https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}`)
-                .then(response => response.json())
-                .then((json) => {
-                    setProducts(json.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
+    const getProductsFromApi = (url) => {
+        fetch(url)
+            .then(response => response.json())
+            .then((json) => {
+                setProducts(json.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
 
+    useEffect(() => {
+        let url;
+        if (categoryFilter === '') {
+            url = 'https://la-gloria-store-algorithm-aces.vercel.app/rest/products';
+        } else {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}`;
+        }
+        getProductsFromApi(url);
     }, [categoryFilter]);
 
     useEffect(() => {
-        if (brandFilter === ''){
-            fetch('https://la-gloria-store-algorithm-aces.vercel.app/rest/products')
-                .then(response => response.json())
-                .then((json) => {
-                    setProducts(json.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+        let url;
+        if (brandFilter === '') {
+            url = 'https://la-gloria-store-algorithm-aces.vercel.app/rest/products';
+        } else {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}`;
         }
-        else{
-            fetch(`https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}`)
-                .then(response => response.json())
-                .then((json) => {
-                    setProducts(json.data);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-
+        getProductsFromApi(url);
     }, [brandFilter]);
-
 
 
     const gridStyle = {
