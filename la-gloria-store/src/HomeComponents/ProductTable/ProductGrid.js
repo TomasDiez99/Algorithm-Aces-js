@@ -15,27 +15,19 @@ function ProductGrid(props) {
                 console.log(error);
             });
     }
-
     useEffect(() => {
         let url;
-        if (categoryFilter === '') {
-            url = 'https://la-gloria-store-algorithm-aces.vercel.app/rest/products';
-        } else {
+        if (categoryFilter !== '' && brandFilter !== '') {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}`;
+        } else if (categoryFilter !== '') {
             url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}`;
-        }
-        getProductsFromApi(url);
-    }, [categoryFilter]);
-
-    useEffect(() => {
-        let url;
-        if (brandFilter === '') {
-            url = 'https://la-gloria-store-algorithm-aces.vercel.app/rest/products';
-        } else {
+        } else if (brandFilter !== '') {
             url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}`;
+        } else {
+            url = 'https://la-gloria-store-algorithm-aces.vercel.app/rest/products';
         }
         getProductsFromApi(url);
-    }, [brandFilter]);
-
+    }, [categoryFilter, brandFilter]);
 
     const gridStyle = {
         display: 'grid',
