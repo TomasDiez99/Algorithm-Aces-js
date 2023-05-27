@@ -9,12 +9,17 @@ function ProductGrid(props) {
         fetch(url)
             .then(response => response.json())
             .then((json) => {
-                setProducts(json.data);
+                if (json.data.length !== 0) {
+                    setProducts(json.data);
+                } else {
+                    alert('There are not products for the combination of filters selected');
+                }
             })
             .catch(error => {
                 console.log(error);
             });
     }
+
     useEffect(() => {
         let url;
         if (categoryFilter !== '' && brandFilter !== '') {
