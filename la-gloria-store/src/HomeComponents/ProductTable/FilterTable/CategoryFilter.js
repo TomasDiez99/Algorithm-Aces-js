@@ -3,25 +3,7 @@ import React, {useEffect, useState} from 'react';
 function CategoryFilter(props) {
     const {setCategoryFilter} = props;
     const [categories, setCategories] = useState([]);
-
-
-
-    const [checkboxes, setCheckboxes] = useState({});
-
-    const handleCheckboxChange = (event,categoryName) => {
-        const { name, checked } = event.target;
-        setCheckboxes((prevCheckboxes) => ({
-            ...prevCheckboxes,
-            [name]: checked,
-        }));
-
-        if(checked){
-            setCategoryFilter(categoryName);
-        }
-        else{
-            setCategoryFilter('');
-        }
-    };
+    const [selectedCategory, setSelectedCategory] = useState('');
 
     useEffect(() => {
         fetch('https://la-gloria-store-algorithm-aces.vercel.app/rest/categories')
@@ -34,6 +16,18 @@ function CategoryFilter(props) {
             });
     }, []);
 
+    const handleCheckboxChange = (event, categoryName) => {
+        const {checked} = event.target;
+
+        if (checked) {
+            setSelectedCategory(categoryName);
+            setCategoryFilter(categoryName);
+        } else {
+            setSelectedCategory('');
+            setCategoryFilter('');
+        }
+    };
+
     return (
         <div>
             <h3>Categories:</h3>
@@ -43,7 +37,7 @@ function CategoryFilter(props) {
                         <input
                             type="checkbox"
                             name={category.id}
-                            checked={checkboxes[category.id] || false}
+                            checked={selectedCategory === category.name}
                             onChange={(event) => handleCheckboxChange(event, category.name)}
                         />
                         {category.name}
@@ -52,8 +46,6 @@ function CategoryFilter(props) {
             ))}
         </div>
     );
-
-
-
 }
+
 export default CategoryFilter;
