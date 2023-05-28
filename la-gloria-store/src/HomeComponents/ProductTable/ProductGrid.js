@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-
+//import 'src/home.css';
 function ProductGrid(props) {
     const { categoryFilter, brandFilter } = props;
     const [currentPage, setCurrentPage] = useState(1);
@@ -63,10 +63,10 @@ function ProductGrid(props) {
                 ))}
             </div>
             <div>
-                <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+                <button  className="btn btn-red" onClick={handlePreviousPage} disabled={currentPage === 1}>
                     Previous
                 </button>
-                <button onClick={handleNextPage} disabled={currentPage === lastPage}>
+                <button className= "btn btn-red" onClick={handleNextPage} disabled={currentPage === lastPage}>
                     Next
                 </button>
             </div>

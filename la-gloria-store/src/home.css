@@ -1,3 +1,21 @@
 .github-icon:hover {
     cursor: pointer;
 }
+
+.btn {
+    /* Estilos generales para los botones */
+    /* Agrega aquí los estilos deseados para los botones en general */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-red {
+    /* Estilos específicos para el botón de peligro */
+    /* Agrega aquí los estilos deseados para el botón de peligro */
+    background-color: red;
+    /* Puedes personalizar otros estilos según tus necesidades */
+}
