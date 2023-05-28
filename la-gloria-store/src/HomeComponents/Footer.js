@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer = () => {
+function Footer (){
     const handleGithubClick = () => {
         window.open('https://github.com/TomasDiez99/Algorithm-Aces-js', '_blank');
     };
@@ -19,6 +19,6 @@ const Footer = () => {
             </div>
         </footer>
     );
-};
+}
 
 export default Footer;
