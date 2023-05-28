@@ -1,5 +1,5 @@
 import React from 'react';
-
+import '../home.css';
 function Footer (){
     const handleGithubClick = () => {
         window.open('https://github.com/TomasDiez99/Algorithm-Aces-js', '_blank');
@@ -10,7 +10,7 @@ function Footer (){
             <div className="container py-2">
                 <div className="row justify-content-center text-center">
                     <div className="col-auto">
-                        <i className="fab fa-github" onClick={handleGithubClick}></i>
+                        <i className="fab fa-github github-icon" onClick={handleGithubClick}></i>
                     </div>
                     <div className="col-auto">
                         <i className="fab fa-react"></i>
