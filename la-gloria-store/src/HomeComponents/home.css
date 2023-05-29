@@ -1,0 +1,40 @@
+.github-icon:hover {
+    cursor: pointer;
+}
+
+.btn {
+
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.btn-red {
+    background-color: red;
+}
+.filter-black {
+    background-color: #282c34;
+}
+.filter-white {
+    color: white
+}
+.page-backgroud-color {
+    background-color: rgba(255, 0, 0, 0.3);
+
+}
+.navbar-icon-img {
+    width: 100px;
+    height: 100px;
+}
+
+.grid-margin {
+    border-radius: 10px;
+    margin-right: 20px;
+}
+.radius-component {
+    border-radius: 10px;
+}
+

@@ -1,10 +1,10 @@
 import React from 'react';
 
 
-const Carousel = () => {
+function Carousel(){
     const carouselStyle = {
-        width: '50%', // Reducción del ancho al 80%
-        height: '30%', // Ajuste de altura automática
+        width: '20%', // Reducción del ancho al 80%
+        height: '20%', // Ajuste de altura automática
         margin: '0 auto', // Centrado horizontal
     };
 return (
