@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-//import 'src/home.css';
+
 function ProductGrid(props) {
     const { categoryFilter, brandFilter } = props;
     const [currentPage, setCurrentPage] = useState(1);
@@ -53,20 +53,30 @@ function ProductGrid(props) {
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
         gap: '20px',
+        justifyContent: 'center',
+        alignItems: 'center',
+        margin: '0 20px',
+    };
+
+    const cardContainerStyle = {
+        marginLeft: '35px',
+        marginRight: '30px',
     };
 
     return (
-        <div>
-            <div style={gridStyle}>
+        <div className="page-backgroud-color" style={{ borderRadius: '10px' }}>
+            <div className="grid-margin" style={gridStyle}>
                 {products.map((product) => (
-                    <ProductCard key={product.id} {...product} />
+                    <div style={cardContainerStyle} key={product.id}>
+                        <ProductCard {...product} />
+                    </div>
                 ))}
             </div>
-            <div>
-                <button  className="btn btn-red" onClick={handlePreviousPage} disabled={currentPage === 1}>
+            <div style={{ marginTop: '10px' }}>
+                <button className="btn btn-red" onClick={handlePreviousPage} disabled={currentPage === 1}>
                     Previous
                 </button>
-                <button className= "btn btn-red" onClick={handleNextPage} disabled={currentPage === lastPage}>
+                <button className="btn btn-red" onClick={handleNextPage} disabled={currentPage === lastPage}>
                     Next
                 </button>
             </div>

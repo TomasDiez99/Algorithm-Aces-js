@@ -1,5 +1,5 @@
 import React from 'react';
-import '../home.css';
+import './home.css';
 function Footer (){
     const handleGithubClick = () => {
         window.open('https://github.com/TomasDiez99/Algorithm-Aces-js', '_blank');

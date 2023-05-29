@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import "../../home.css";
 
 function BrandFilter(props) {
     const { setBrandFilter } = props;
@@ -29,8 +30,8 @@ function BrandFilter(props) {
     }, []);
 
     return (
-        <div>
-            <h3>Brands:</h3>
+        <div className="radius-component ">
+            <h3 className= "filter-white">Brands:</h3>
             {brands.map((brand) => (
                 <div key={brand.id}>
                     <label>
@@ -40,7 +41,7 @@ function BrandFilter(props) {
                             checked={selectedBrand === brand.name}
                             onChange={(event) => handleCheckboxChange(event, brand.name)}
                         />
-                        {brand.name}
+                        <span className="filter-white">{brand.name}</span>
                     </label>
                 </div>
             ))}

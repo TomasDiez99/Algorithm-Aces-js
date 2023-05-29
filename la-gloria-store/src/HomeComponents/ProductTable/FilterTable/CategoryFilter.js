@@ -30,7 +30,7 @@ function CategoryFilter(props) {
 
     return (
         <div>
-            <h3>Categories:</h3>
+            <h3 className= "filter-white">Categories:</h3>
             {categories.map((category) => (
                 <div key={category.id}>
                     <label>
@@ -40,7 +40,7 @@ function CategoryFilter(props) {
                             checked={selectedCategory === category.name}
                             onChange={(event) => handleCheckboxChange(event, category.name)}
                         />
-                        {category.name}
+                        <span className="filter-white">{category.name}</span>
                     </label>
                 </div>
             ))}
