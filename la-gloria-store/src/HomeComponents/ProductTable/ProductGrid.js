@@ -38,19 +38,6 @@ function ProductGrid(props) {
     }
     fetchProductsFromApi(url);
   }, [categoryFilter, brandFilter, currentPage]);
-  /*
-    const handleNextPage = () => {
-        if (currentPage < lastPage) {
-            setCurrentPage(currentPage + 1);
-        }
-    };
-
-    const handlePreviousPage = () => {
-        if (currentPage > 1) {
-            setCurrentPage(currentPage - 1);
-        }
-    };
-*/
 
   const goToPage = (page) => {
     if (page >= 1 && page <= lastPage) {
