@@ -78,7 +78,9 @@ function Product() {
               <h1>Product info</h1>
               {product ? (
                 <div>
-                  <h3><strong>{product.name}</strong></h3>
+                  <h3>
+                    <strong>{product.name}</strong>
+                  </h3>
                   <p>Price: ${product.price}</p>
                   <p>Category: {product.category.name}</p>
                   <p>Brand: {product.brand.name}</p>
