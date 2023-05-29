@@ -29,8 +29,8 @@ function CategoryFilter(props) {
     };
 
     return (
-        <div>
-            <h3 className= "filter-white">Categories:</h3>
+        <div className= "radius-component">
+            <h3 className= "filter-white" style={{ marginLeft: '5px' }}>Categories:</h3>
             {categories.map((category) => (
                 <div key={category.id}>
                     <label>
@@ -39,8 +39,9 @@ function CategoryFilter(props) {
                             name={category.id}
                             checked={selectedCategory === category.name}
                             onChange={(event) => handleCheckboxChange(event, category.name)}
+                            style={{ marginLeft: '5px' }}
                         />
-                        <span className="filter-white">{category.name}</span>
+                        <span className="filter-white" style={{ marginLeft: '5px' }}>{category.name}</span>
                     </label>
                 </div>
             ))}

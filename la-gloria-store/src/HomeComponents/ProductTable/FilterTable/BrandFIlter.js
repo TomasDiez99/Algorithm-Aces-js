@@ -31,7 +31,7 @@ function BrandFilter(props) {
 
     return (
         <div className="radius-component ">
-            <h3 className= "filter-white">Brands:</h3>
+            <h3 className= "filter-white" style={{ marginLeft: '5px' }}>Brands:</h3>
             {brands.map((brand) => (
                 <div key={brand.id}>
                     <label>
@@ -40,8 +40,9 @@ function BrandFilter(props) {
                             name={brand.id}
                             checked={selectedBrand === brand.name}
                             onChange={(event) => handleCheckboxChange(event, brand.name)}
+                            style={{ marginLeft: '5px' }}
                         />
-                        <span className="filter-white">{brand.name}</span>
+                        <span className="filter-white" style={{ marginLeft: '5px' }}>{brand.name}</span>
                     </label>
                 </div>
             ))}
