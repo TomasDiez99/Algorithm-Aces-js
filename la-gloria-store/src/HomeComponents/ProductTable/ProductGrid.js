@@ -15,11 +15,15 @@ function ProductGrid(props) {
                 if (json.data.length !== 0) {
                     setProducts(json.data);
                     setLastPage(json.meta.last_page);
+                } else if (currentPage !== 1) {
+                    setCurrentPage(1);
                 } else {
                     alert(
                         "There are no products for the combination of filters selected"
                     );
                 }
+
+
             })
             .catch((error) => {
                 console.log(error);
