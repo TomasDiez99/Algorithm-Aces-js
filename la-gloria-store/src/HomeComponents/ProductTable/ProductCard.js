@@ -7,7 +7,7 @@ function ProductCard(props) {
   return (
     <div className="card" style={{ width: "14rem" }}>
       <img
-        src="https://2.bp.blogspot.com/-_Tx3nbVr5mM/U7ctz8a3LDI/AAAAAAAAAkM/YDDEPDIHjVE/s1600/escudoo.png"
+        src={image}
         className="card-img-top"
         alt={name}
       />

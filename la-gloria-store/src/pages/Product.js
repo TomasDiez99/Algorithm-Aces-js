@@ -63,7 +63,7 @@ function Product() {
                   <MDBCarouselItem itemId="1">
                     <img
                       className="carousel-image"
-                      src="https://2.bp.blogspot.com/-_Tx3nbVr5mM/U7ctz8a3LDI/AAAAAAAAAkM/YDDEPDIHjVE/s1600/escudoo.png"
+                      src= {product ? product.image : "https://2.bp.blogspot.com/-_Tx3nbVr5mM/U7ctz8a3LDI/AAAAAAAAAkM/YDDEPDIHjVE/s1600/escudoo.png"}
                       alt="Imagen 1"
                     />
                   </MDBCarouselItem>
