@@ -4,7 +4,8 @@ import ProductCarrousel from "../ProductComponents/ProductCarrousel";
 import ProductPageContent from "../ProductComponents/ProductPageContent";
 import {useParams} from "react-router-dom";
 
-function Product (){
+function Product (prop){
+    const { addOrderDetails } = prop;
 
     const params = useParams();
     const productId = params.productId;
@@ -14,18 +15,17 @@ function Product (){
     useEffect(() => {
         const fetchData = async (productId) => {
             try {
-                const response = await fetch(
-                    `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
-                );
+                const response = await fetch(`https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`);
                 if (response.ok) {
                     const json = await response.json();
                     setProduct(json.data);
                 } else {
-                    throw new Error("Error fetching product: " + response.status);
+                    console.error("Error fetching product: " + response.status);
                 }
             } catch (error) {
-                console.log(error);
+                console.error("Error fetching product:", error);
             }
+
         };
 
         fetchData(productId);
@@ -37,7 +37,7 @@ function Product (){
           <ProductCarrousel product = {product}/>
         </div>
         <div style={{ flex: 4, marginLeft: '4px' }}>
-            <ProductPageContent product = {product}/>
+            <ProductPageContent product = {product} addOrderDetails = {addOrderDetails}/>
         </div>
       </div>
 

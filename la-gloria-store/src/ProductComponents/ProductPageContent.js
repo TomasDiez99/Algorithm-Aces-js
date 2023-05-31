@@ -8,17 +8,21 @@ import {
 } from "mdbreact";
 
 function ProductPageComponent(props) {
-    const {product} = props;
+    const {product, addOrderDetails} = props;
     const [quantity, setQuantity] = useState(1);
+
+    const handleAddToCart = () => {
+        const orderDetail = {
+            product_id: product.id,
+            quantity: quantity
+        };
+        addOrderDetails(orderDetail);
+    };
 
     const handleProductAmount = (newAmount) => {
         if (quantity >= 1) {
             setQuantity(newAmount);
         }
-    };
-
-    const handleAddToCart = () => {
-        console.log(`Adding ${quantity} ${product.name} to cart...`);
     };
 
     return (
