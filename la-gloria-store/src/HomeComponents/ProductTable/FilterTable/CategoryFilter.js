@@ -5,16 +5,19 @@ function CategoryFilter(props) {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  useEffect(() => {
-    fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/categories")
-      .then((response) => response.json())
-      .then((json) => {
-        setCategories(json.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
+    useEffect(() => {
+        fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/categories")
+            .then((response) => response.json())
+            .then((json) => {
+                const enabledCategories = json.data.filter(
+                    (category) => category.enable === true
+                );
+                setCategories(enabledCategories);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
 
   const handleCheckboxChange = (event, categoryName) => {
     const { checked } = event.target;
@@ -47,7 +50,7 @@ function CategoryFilter(props) {
       ))}
     </div>
   );
-  
+
 }
 
 export default CategoryFilter;

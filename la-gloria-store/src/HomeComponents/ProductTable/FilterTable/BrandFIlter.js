@@ -6,6 +6,22 @@ function BrandFilter(props) {
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
 
+
+
+  useEffect(() => {
+    fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/brands")
+      .then((response) => response.json())
+      .then((json) => {
+        const enabledBrands = json.data.filter(
+            (brand) => brand.enable === true
+        );
+        setBrands(enabledBrands);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const handleCheckboxChange = (event, brandName) => {
     const { checked } = event.target;
 
@@ -17,17 +33,6 @@ function BrandFilter(props) {
       setBrandFilter("");
     }
   };
-
-  useEffect(() => {
-    fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/brands")
-      .then((response) => response.json())
-      .then((json) => {
-        setBrands(json.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, []);
 
   return (
     <div className="radius-component">
