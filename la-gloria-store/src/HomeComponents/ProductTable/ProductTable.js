@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import FilterTable from './FilterTable/FilterTable';
 import ProductGrid from './ProductGrid';
+import "../home.css";
 
 function ProductTable() {
     const [categoryFilter, setCategoryFilter] = useState('');
@@ -14,18 +15,19 @@ function ProductTable() {
     };
 
     return (
-        <div style={{ display: 'flex', marginRight: '15px' }}>
-            <div style={{ flex: 1, marginRight: '4px' }}>
-                <FilterTable
-                    setCategoryFilter={categoryFilterHandle}
-                    setBrandFilter={brandFilterHandle}
-                />
-            </div>
-            <div style={{ flex: 4, marginLeft: '4px' }}>
-                <ProductGrid categoryFilter={categoryFilter} brandFilter={brandFilter} />
-            </div>
+        <div className="home-container">
+          <div className="filter">
+            <FilterTable
+              setCategoryFilter={categoryFilterHandle}
+              setBrandFilter={brandFilterHandle}
+            />
+          </div>
+          <div className="grid">
+            <ProductGrid categoryFilter={categoryFilter} brandFilter={brandFilter} />
+          </div>
         </div>
-    );
+      );
+      
 }
 
 export default ProductTable;
