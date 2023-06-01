@@ -22,8 +22,6 @@ function ProductGrid(props) {
                         "There are no products for the combination of filters selected"
                     );
                 }
-
-
             })
             .catch((error) => {
                 console.log(error);
@@ -49,7 +47,6 @@ function ProductGrid(props) {
             setCurrentPage(page);
         }
     };
-
 
     return (
         <div className="page-background-color radius-component">

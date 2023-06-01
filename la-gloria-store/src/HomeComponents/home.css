@@ -1,59 +1,101 @@
-.github-icon:hover {
-    cursor: pointer;
+.footer-icon:hover {
+  cursor: pointer;
 }
 
 .btn {
-
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .btn-red {
-    background-color: red;
+  background-color: red;
 }
 .filter-black {
-    background-color: #282c34;
+  background-color: #282c34;
 }
 .filter-white {
-    color: white
+  color: white;
 }
 .page-background-color {
-    background-color: rgba(255, 0, 0, 0.3);
-
+  background-color: rgba(255, 0, 0, 0.3);
 }
 .navbar-icon-img {
-    width: 100px;
-    height: 100px;
+  width: 100px;
+  height: 100px;
+}
+
+.filter-title {
+  text-align: center;
 }
 
 .grid-margin {
-    border-radius: 10px;
-    margin-right: 20px;
+  border-radius: 10px;
+  margin-right: 20px;
 }
 .radius-component {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
-.cardContainerStyle  {
-    margin-left: 35px;
-    margin-right: 30px;
+.cardContainerStyle {
+  margin-left: 30px;
+  margin-right: 30px;
 }
 
 .productGridStyle {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    justify-content: center;
-    align-items: center;
-    margin: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
 }
 
 .paginateButtonStyle {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.home-container {
+  display: flex;
+  margin-right: 15px;
+}
+
+.filter {
+  flex: 1;
+  margin-right: 4px;
+}
+
+.grid {
+  flex: 4;
+  margin-left: 4px;
+}
+
+.radius-component {
+  margin-left: 5px;
+}
+
+.filter-black {
+  border-bottom: 1px solid black;
+}
+
+.filter-white {
+  margin-left: 5px;
+}
+
+.checkbox-container {
+  margin-left: 5px;
+}
+
+.checkbox-label {
+  margin-left: 5px;
+}
+
+
+.card {
+  width: 14rem;
 }
