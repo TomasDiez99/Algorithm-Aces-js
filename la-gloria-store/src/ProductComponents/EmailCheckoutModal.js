@@ -42,7 +42,6 @@ function EmailCheckoutModal(props) {
 
   const submitShoppingCart = async () => {
     const jsonBody = JSON.stringify(shoppingCart);
-    console.log(jsonBody);
     try {
       const response = await fetch(
         "https://la-gloria-store-algorithm-aces.vercel.app/rest/shopping-carts/",
