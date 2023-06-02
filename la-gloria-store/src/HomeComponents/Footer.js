@@ -1,7 +1,7 @@
 import React from "react";
 import "./home.css";
 function Footer() {
-  const githubLink = "https://github.com/iaw-2023/Algorithm-Aces/issues";
+  const githubLink = "https://github.com/iaw-2023/Algorithm-Aces/";
   const reactLink = "https://react.dev/";
   const handleHyperLink = (link) => {
     window.open(link, "_blank");
