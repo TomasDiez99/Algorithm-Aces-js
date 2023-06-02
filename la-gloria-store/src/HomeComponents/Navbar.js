@@ -64,7 +64,7 @@ function Navbar(prop) {
               ></button>
             </div>
             <div className="modal-body">
-              <ShoppingCart orderDetailList={orderDetailList} />
+              <ShoppingCart orderDetailList={orderDetailList} handleCloseCart={() => handleShowCart(false)} />
             </div>
           </div>
         </div>

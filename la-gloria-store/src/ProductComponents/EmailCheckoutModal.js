@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function EmailCheckoutModal(props) {
   const [email, setEmail] = useState("");
-  const { orderDetailList, show, handleClose } = props;
+  const {
+    orderDetailList,
+    show,
+    handleCloseEmailCheckoutModal,
+    handleCloseCart,
+  } = props;
+  const navigate = useNavigate();
 
   const [shoppingCart, setShoppingCart] = useState({
     total_price: 0,
@@ -10,6 +17,11 @@ function EmailCheckoutModal(props) {
     client_id: null,
     order_details: [],
   });
+
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [modalsClosed, setModalsClosed] = useState(false); // Flag to check if the modals were closed
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -55,12 +67,15 @@ function EmailCheckoutModal(props) {
       );
 
       if (response.ok) {
+        setSuccess(true);
         console.log("Shopping cart submitted successfully");
       } else {
         console.log("Failed to submit shopping cart");
       }
     } catch (error) {
       console.log("Error submitting shopping cart:", error);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -95,11 +110,49 @@ function EmailCheckoutModal(props) {
       };
       setShoppingCart(updatedShoppingCart);
 
-      handleClose();
+      setSubmitting(true);
     } else {
       console.log("Email not found");
     }
   };
+
+  useEffect(() => {
+    const closeModals = () => {
+      handleCloseEmailCheckoutModal();
+      handleCloseCart();
+      setModalsClosed(true);
+      setShowSuccessAlert(true);
+    };
+
+    if (success && !modalsClosed) {
+      const timeoutId = setTimeout(() => {
+        closeModals();
+        navigate("/");
+      }, 2000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [
+    success,
+    modalsClosed,
+    navigate,
+    handleCloseEmailCheckoutModal,
+    handleCloseCart,
+  ]);
+
+  useEffect(() => {
+    if (showSuccessAlert) {
+      const timeoutId = setTimeout(() => {
+        setShowSuccessAlert(false); // Desactivar la alerta de éxito después de un tiempo
+      }, 1000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [showSuccessAlert]);
 
   return (
     <div
@@ -113,10 +166,16 @@ function EmailCheckoutModal(props) {
             <button
               type="button"
               className="btn-close"
-              onClick={handleClose}
+              onClick={handleCloseEmailCheckoutModal}
             ></button>
           </div>
           <div className="modal-body">
+            {submitting && (
+              <div className="alert alert-info">Submitting...</div>
+            )}
+            {success && (
+              <div className="alert alert-success">Checkout successful!</div>
+            )}
             <form onSubmit={handleSubmit}>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
@@ -132,7 +191,11 @@ function EmailCheckoutModal(props) {
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={submitting || success}
+              >
                 Submit
               </button>
             </form>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EmailCheckoutModal from "./EmailCheckoutModal";
 
 function ShoppingCart(props) {
-  const { orderDetailList } = props;
+  const { orderDetailList, handleCloseCart } = props;
   const [showEmailCheckoutModal, setShowEmailCheckoutModal] = useState(false);
 
   const handleShowModal = (show) => {
@@ -38,7 +38,8 @@ function ShoppingCart(props) {
       <EmailCheckoutModal
         orderDetailList = {orderDetailList}
         show={showEmailCheckoutModal}
-        handleClose={() => handleShowModal(false)}
+        handleCloseEmailCheckoutModal={() => handleShowModal(false)}
+        handleCloseCart={handleCloseCart}
       />
     </div>
   );
