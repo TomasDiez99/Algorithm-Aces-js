@@ -1,10 +1,13 @@
-import React from "react";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import '../errorPage.css';
 
-function ErrorPage() {
+const ErrorPage = () => {
   return (
-    <div>
-      <h1>Error 404: Page not found</h1>
-      <p>The requested page does not exist.</p>
+    <div className="error-container">
+      <h1 className='error-h1'>¡Ups! Ha ocurrido un error.</h1>
+      <p className='error-p'>Lamentamos las molestias. Por favor, intenta volver al inicio e intenta nuevamente.</p>
+      <Link to="/" className="btn btn-primary error-btn">Volver al inicio</Link>
     </div>
   );
 }

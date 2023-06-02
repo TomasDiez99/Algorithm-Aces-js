@@ -70,10 +70,12 @@ function EmailCheckoutModal(props) {
         setSuccess(true);
         console.log("Shopping cart submitted successfully");
       } else {
+        navigate("/error");
         console.log("Failed to submit shopping cart");
       }
     } catch (error) {
       console.log("Error submitting shopping cart:", error);
+      navigate("/error");
     } finally {
       setSubmitting(false);
     }
