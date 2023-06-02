@@ -5,9 +5,9 @@ import '../errorPage.css';
 const ErrorPage = () => {
   return (
     <div className="error-container">
-      <h1 className='error-h1'>¡Ups! Ha ocurrido un error.</h1>
-      <p className='error-p'>Lamentamos las molestias. Por favor, intenta volver al inicio e intenta nuevamente.</p>
-      <Link to="/" className="btn btn-primary error-btn">Volver al inicio</Link>
+      <h1 className='error-h1'>¡Ups! Something went wrong.</h1>
+      <p className='error-p'>Sorry for the inconvenience. Please try to go back to the start and try again.</p>
+      <Link to="/" className="btn btn-primary error-btn">Home page</Link>
     </div>
   );
 }
