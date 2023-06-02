@@ -14,7 +14,7 @@ function ProductPageComponent(props) {
     const handleAddToCart = () => {
         const orderDetail = {
             product_id: product.id,
-            quantity: quantity
+            product_amount: quantity
         };
         addOrderDetails(orderDetail);
     };
