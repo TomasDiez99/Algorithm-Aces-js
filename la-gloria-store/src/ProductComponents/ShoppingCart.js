@@ -32,6 +32,7 @@ function ShoppingCart(props) {
         className="btn btn-secondary"
         data-bs-dismiss="modal"
         onClick={() => handleShowModal(true)}
+        disabled={orderDetailList.length === 0}
       >
         Checkout
       </button>
