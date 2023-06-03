@@ -8,18 +8,22 @@ import Footer from "./HomeComponents/Footer";
 import { useState } from "react";
 
 function App() {
-  const [orderDetailList, setOrderDetail] = useState([]);
+  const [orderDetailList, setOrderDetailList] = useState([]);
 
   const addOrderDetails = (orderDetail) => {
-    setOrderDetail((prevOrderDetailList) => [
+    setOrderDetailList((prevOrderDetailList) => [
       ...prevOrderDetailList,
       orderDetail,
     ]);
   };
 
+  const handleOrderDetailList = (newOrderDetailList) => {
+    setOrderDetailList(newOrderDetailList);
+  }
+
   return (
     <div>
-      <Navbar orderDetailList={orderDetailList} />
+      <Navbar orderDetailList={orderDetailList} handleOrderDetailList={handleOrderDetailList} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route

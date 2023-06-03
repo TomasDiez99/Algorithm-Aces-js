@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ShoppingCart from "../ProductComponents/ShoppingCart";
 
 function Navbar(prop) {
-  const { orderDetailList } = prop;
+  const { orderDetailList, handleOrderDetailList} = prop;
 
   const [showCartModal, setShowCartModal] = useState(false);
 
@@ -64,7 +64,11 @@ function Navbar(prop) {
               ></button>
             </div>
             <div className="modal-body">
-              <ShoppingCart orderDetailList={orderDetailList} handleCloseCart={() => handleShowCart(false)} />
+              <ShoppingCart
+                orderDetailList={orderDetailList}
+                handleCloseCart={() => handleShowCart(false)}
+                handleOrderDetailList={handleOrderDetailList}
+              />
             </div>
           </div>
         </div>

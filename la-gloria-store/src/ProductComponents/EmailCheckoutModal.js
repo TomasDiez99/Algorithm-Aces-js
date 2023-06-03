@@ -5,6 +5,7 @@ function EmailCheckoutModal(props) {
   const [email, setEmail] = useState("");
   const {
     orderDetailList,
+    handleOrderDetailList,
     show,
     handleCloseEmailCheckoutModal,
     handleCloseCart,
@@ -22,6 +23,51 @@ function EmailCheckoutModal(props) {
   const [success, setSuccess] = useState(false);
   const [modalsClosed, setModalsClosed] = useState(false); // Flag to check if the modals were closed
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  useEffect(() => {
+    if (shoppingCart.order_details.length > 0) {
+      submitShoppingCart();
+    }
+  }, [shoppingCart]);
+
+  useEffect(() => {
+    const closeModals = () => {
+      handleCloseEmailCheckoutModal();
+      handleCloseCart();
+      setModalsClosed(true);
+      setShowSuccessAlert(true);
+    };
+
+    if (success && !modalsClosed) {
+      const timeoutId = setTimeout(() => {
+        closeModals();
+        handleOrderDetailList([]);
+        navigate("/");
+      }, 2000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [
+    success,
+    modalsClosed,
+    navigate,
+    handleCloseEmailCheckoutModal,
+    handleCloseCart,
+  ]);
+
+  useEffect(() => {
+    if (showSuccessAlert) {
+      const timeoutId = setTimeout(() => {
+        setShowSuccessAlert(false); // Desactivar la alerta de éxito después de un tiempo
+      }, 1000);
+
+      return () => {
+        clearTimeout(timeoutId);
+      };
+    }
+  }, [showSuccessAlert]);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -81,12 +127,6 @@ function EmailCheckoutModal(props) {
     }
   };
 
-  useEffect(() => {
-    if (shoppingCart.order_details.length > 0) {
-      submitShoppingCart();
-    }
-  }, [shoppingCart]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -117,44 +157,6 @@ function EmailCheckoutModal(props) {
       console.log("Email not found");
     }
   };
-
-  useEffect(() => {
-    const closeModals = () => {
-      handleCloseEmailCheckoutModal();
-      handleCloseCart();
-      setModalsClosed(true);
-      setShowSuccessAlert(true);
-    };
-
-    if (success && !modalsClosed) {
-      const timeoutId = setTimeout(() => {
-        closeModals();
-        navigate("/");
-      }, 2000);
-
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-  }, [
-    success,
-    modalsClosed,
-    navigate,
-    handleCloseEmailCheckoutModal,
-    handleCloseCart,
-  ]);
-
-  useEffect(() => {
-    if (showSuccessAlert) {
-      const timeoutId = setTimeout(() => {
-        setShowSuccessAlert(false); // Desactivar la alerta de éxito después de un tiempo
-      }, 1000);
-
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-  }, [showSuccessAlert]);
 
   return (
     <div
