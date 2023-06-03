@@ -41,26 +41,3 @@
   max-height: 400px; /* Establece la altura máxima del contenedor */
   overflow-y: auto; /* Habilita el scroll vertical */
 }
-
-
-
-.product-container {
-  display: flex;
-  align-items: center;
-}
-
-.carousel-container {
-  flex: 1;
-}
-
-.product-data-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  flex: 1;
-}
-
-.product-data-content {
-  text-align: center;
-}
