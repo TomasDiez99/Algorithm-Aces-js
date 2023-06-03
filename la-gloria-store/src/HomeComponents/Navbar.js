@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ShoppingCart from "../ProductComponents/ShoppingCart";
+import CartModal from "./CartModal";
+import HistoryModal from "./HistoryModal";
 
 function Navbar(prop) {
   const { orderDetailList, handleOrderDetailList } = prop;
@@ -9,11 +10,11 @@ function Navbar(prop) {
   const [showCartModal, setShowCartModal] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
 
-  const handleShowCart = (show) => {
+  const toggleCartModal = (show) => {
     setShowCartModal(show);
   };
 
-  const handleShowHistory = (show) => {
+  const toggleHistoryModal = (show) => {
     setShowHistoryModal(show);
   };
 
@@ -53,89 +54,33 @@ function Navbar(prop) {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <button
             className="btn btn-primary"
-            onClick={() => handleShowCart(true)}
+            onClick={() => toggleCartModal(true)}
           >
             <i className="fa-thin fa-cart-shopping"></i> Cart
           </button>
 
           <button
             className="btn btn-success"
-            onClick={() => handleShowHistory(true)}
+            onClick={() => toggleHistoryModal(true)}
           >
             <i className="fa-thin fa-cart-shopping"></i> History
           </button>
         </div>
       </div>
 
-      {/* Cart Modal */}
-      <div
-        className={`modal ${showCartModal ? "show" : ""}`}
-        tabIndex="-1"
-        style={{ display: showCartModal ? "block" : "none" }}
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Shopping Cart</h5>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                onClick={() => handleShowCart(false)}
-              ></button>
-            </div>
-            <div className="modal-body">
-              <ShoppingCart
-                orderDetailList={orderDetailList}
-                handleCloseCart={() => handleShowCart(false)}
-                handleOrderDetailList={handleOrderDetailList}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* History Modal */}
-      <div
-        className={`modal ${showHistoryModal ? "show" : ""}`}
-        tabIndex="-1"
-        style={{ display: showHistoryModal ? "block" : "none" }}
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Shopping cart history</h5>
-              <button
-                type="button"
-                className="btn-close"
-                onClick={() => handleShowHistory(false)}
-              ></button>
-            </div>
-            <div className="modal-body">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="Enter client email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    required
-                  />
-                </div>
-                <button type="submit" className="btn btn-primary">
-                  See history
-                </button>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
+      <CartModal
+        showCartModal={showCartModal}
+        handleCloseCart={() => toggleCartModal(false)}
+        orderDetailList={orderDetailList}
+        handleOrderDetailList={handleOrderDetailList}
+      />
+      <HistoryModal
+        showHistoryModal={showHistoryModal}
+        handleShowHistory={toggleHistoryModal}
+        email={email}
+        handleEmailChange={handleEmailChange}
+        handleSubmit={handleSubmit}
+      />
     </nav>
   );
 }
