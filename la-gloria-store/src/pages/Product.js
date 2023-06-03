@@ -27,7 +27,7 @@ function Product(prop) {
           navigate("/error");
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
+          navigate("/error");
       }
     };
 
