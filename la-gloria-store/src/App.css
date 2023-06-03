@@ -37,6 +37,13 @@
   }
 }
 
+.cart-table-container {
+  max-height: 400px; /* Establece la altura máxima del contenedor */
+  overflow-y: auto; /* Habilita el scroll vertical */
+}
+
+
+
 .product-container {
   display: flex;
   align-items: center;
