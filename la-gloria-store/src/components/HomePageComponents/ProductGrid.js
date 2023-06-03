@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import ProductCard from "./ProductCard";
-import '../home.css';
+import '../../styles/home.css';
 
 function ProductGrid(props) {
     const {categoryFilter, brandFilter} = props;

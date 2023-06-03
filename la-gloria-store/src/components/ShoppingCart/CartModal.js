@@ -1,5 +1,5 @@
 import React from "react";
-import ShoppingCart from "../ProductComponents/ShoppingCart";
+import ShoppingCart from "./ShoppingCart";
 
 function CartModal({
   showCartModal,

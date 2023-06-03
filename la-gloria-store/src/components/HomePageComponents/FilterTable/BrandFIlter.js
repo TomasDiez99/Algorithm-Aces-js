@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../../home.css";
+import "../../../styles/home.css";
 
 function BrandFilter(props) {
   const { setBrandFilter } = props;

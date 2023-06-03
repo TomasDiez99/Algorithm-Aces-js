@@ -1,7 +1,7 @@
 import React from "react";
 import CategoryFilter from "./CategoryFilter";
 import BrandFilter from "./BrandFIlter";
-import "../../home.css";
+import "../../../styles/home.css";
 
 function FilterTable(props) {
   const { setCategoryFilter, setBrandFilter } = props;

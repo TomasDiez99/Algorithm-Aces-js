@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FilterTable from './FilterTable/FilterTable';
 import ProductGrid from './ProductGrid';
-import "../home.css";
+import "../../styles/home.css";
 
 function ProductTable() {
     const [categoryFilter, setCategoryFilter] = useState('');

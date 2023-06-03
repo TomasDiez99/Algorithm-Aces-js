@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../product-page.css";
+import "../../styles/product-page.css";
 
 function ProductPageComponent(props) {
   const { product, addOrderDetails } = props;

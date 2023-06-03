@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ErrorPage from "./pages/ErrorPage";
-import Navbar from "./HomeComponents/Navbar";
-import Footer from "./HomeComponents/Footer";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import { useState } from "react";
 
 function App() {

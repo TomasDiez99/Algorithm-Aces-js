@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import ProductCarrousel from "../ProductComponents/ProductCarrousel";
-import ProductPageContent from "../ProductComponents/ProductPageContent";
+import ProductCarrousel from "../components/ProductPageComponents/ProductCarrousel";
+import ProductPageContent from "../components/ProductPageComponents/ProductPageContent";
 import { useParams } from "react-router-dom";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
-import "../product-page.css";
+import "../styles/product-page.css";
 
 function Product(prop) {
   const { addOrderDetails } = prop;

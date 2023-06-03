@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBCarousel, MDBCarouselInner, MDBCarouselItem } from "mdbreact";
-import "../product-page.css";
+import "../../styles/product-page.css";
 
 function ProductCarrousel(props) {
   const { product } = props;

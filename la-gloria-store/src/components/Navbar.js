@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import CartModal from "./CartModal";
+import CartModal from "./ShoppingCart/CartModal";
 import HistoryModal from "./HistoryModal";
 
 function Navbar(prop) {
@@ -56,7 +56,7 @@ function Navbar(prop) {
             className="btn btn-primary"
             onClick={() => toggleCartModal(true)}
           >
-            <i class="fas fa-shopping-cart"></i>
+            <i className="fas fa-shopping-cart"></i>
           </button>
 
           <button

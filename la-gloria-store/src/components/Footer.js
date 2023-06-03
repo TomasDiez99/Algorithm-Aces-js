@@ -1,5 +1,5 @@
 import React from "react";
-import "./home.css";
+import "../styles/home.css";
 function Footer() {
   const githubLink = "https://github.com/iaw-2023/Algorithm-Aces/";
   const reactLink = "https://react.dev/";

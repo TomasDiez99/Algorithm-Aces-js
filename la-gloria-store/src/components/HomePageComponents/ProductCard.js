@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import "../home.css";
+import "../../styles/home.css";
 
 function ProductCard(props) {
     const { id, name, image, price, enable } = props;

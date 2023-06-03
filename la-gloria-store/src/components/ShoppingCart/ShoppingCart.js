@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import EmailCheckoutModal from "./EmailCheckoutModal";
-import "../App.css";
+import "../../App.css";
 
 function OrderDetailItem({ orderDetail, onRemove }) {
   const { product_id, product_amount } = orderDetail;
