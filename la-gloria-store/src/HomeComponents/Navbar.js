@@ -3,12 +3,27 @@ import { Link } from "react-router-dom";
 import ShoppingCart from "../ProductComponents/ShoppingCart";
 
 function Navbar(prop) {
-  const { orderDetailList, handleOrderDetailList} = prop;
+  const { orderDetailList, handleOrderDetailList } = prop;
+  const [email, setEmail] = useState("");
 
   const [showCartModal, setShowCartModal] = useState(false);
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
 
   const handleShowCart = (show) => {
     setShowCartModal(show);
+  };
+
+  const handleShowHistory = (show) => {
+    setShowHistoryModal(show);
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("sara cunta tunga tunga");
   };
 
   return (
@@ -44,15 +59,15 @@ function Navbar(prop) {
           </button>
 
           <button
-            className="btn btn-primary"
-            onClick={() => handleShowCart(true)}
+            className="btn btn-success"
+            onClick={() => handleShowHistory(true)}
           >
             <i className="fa-thin fa-cart-shopping"></i> History
           </button>
         </div>
       </div>
 
-      {/* Modal */}
+      {/* Cart Modal */}
       <div
         className={`modal ${showCartModal ? "show" : ""}`}
         tabIndex="-1"
@@ -76,6 +91,47 @@ function Navbar(prop) {
                 handleCloseCart={() => handleShowCart(false)}
                 handleOrderDetailList={handleOrderDetailList}
               />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* History Modal */}
+      <div
+        className={`modal ${showHistoryModal ? "show" : ""}`}
+        tabIndex="-1"
+        style={{ display: showHistoryModal ? "block" : "none" }}
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Shopping cart history</h5>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => handleShowHistory(false)}
+              ></button>
+            </div>
+            <div className="modal-body">
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder="Enter client email"
+                    value={email}
+                    onChange={handleEmailChange}
+                    required
+                  />
+                </div>
+                <button type="submit" className="btn btn-primary">
+                  See history
+                </button>
+              </form>
             </div>
           </div>
         </div>
