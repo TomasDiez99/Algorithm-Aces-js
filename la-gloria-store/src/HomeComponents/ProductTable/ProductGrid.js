@@ -8,6 +8,20 @@ function ProductGrid(props) {
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
 
+    useEffect(() => {
+        let url;
+        if (categoryFilter !== "" && brandFilter !== "") {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
+        } else if (categoryFilter !== "") {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
+        } else if (brandFilter !== "") {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
+        } else {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
+        }
+        fetchProductsFromApi(url);
+    }, [categoryFilter, brandFilter, currentPage]);
+
     const fetchProductsFromApi = (url) => {
         fetch(url)
             .then((response) => response.json())
@@ -27,20 +41,6 @@ function ProductGrid(props) {
                 console.log(error);
             });
     };
-
-    useEffect(() => {
-        let url;
-        if (categoryFilter !== "" && brandFilter !== "") {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
-        } else if (categoryFilter !== "") {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
-        } else if (brandFilter !== "") {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
-        } else {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
-        }
-        fetchProductsFromApi(url);
-    }, [categoryFilter, brandFilter, currentPage]);
 
     const goToPage = (page) => {
         if (page >= 1 && page <= lastPage) {
