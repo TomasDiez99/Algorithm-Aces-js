@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 function BrandFilter(props) {
   const { setBrandFilter } = props;
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
-
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -17,8 +18,8 @@ function BrandFilter(props) {
         );
         setBrands(enabledBrands);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        navigate("/error");
       });
   }, []);
 

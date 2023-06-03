@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import {useNavigate} from "react-router-dom";
+import "../../../styles/home.css";
 
 function CategoryFilter(props) {
   const { setCategoryFilter } = props;
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const navigate = useNavigate();
 
     useEffect(() => {
         fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/categories")
@@ -14,8 +17,8 @@ function CategoryFilter(props) {
                 );
                 setCategories(enabledCategories);
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                navigate("/error");
             });
     }, []);
 

@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from "react";
 import ProductCard from "./ProductCard";
 import '../../styles/home.css';
+import { useNavigate } from "react-router-dom";
 
 function ProductGrid(props) {
     const {categoryFilter, brandFilter} = props;
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         let url;
@@ -37,8 +39,8 @@ function ProductGrid(props) {
                     );
                 }
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                navigate("/error");
             });
     };
 

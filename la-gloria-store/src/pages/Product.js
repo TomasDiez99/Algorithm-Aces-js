@@ -4,14 +4,15 @@ import ProductPageContent from "../components/ProductPageComponents/ProductPageC
 import { useParams } from "react-router-dom";
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 import "../styles/product-page.css";
+import { useNavigate } from "react-router-dom";
 
 function Product(prop) {
   const { addOrderDetails } = prop;
+  const [product, setProduct] = useState(null);
 
   const params = useParams();
   const productId = params.productId;
-
-  const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async (productId) => {
@@ -23,10 +24,10 @@ function Product(prop) {
           const json = await response.json();
           setProduct(json.data);
         } else {
-          console.error("Error fetching product: " + response.status);
+          navigate("/error");
         }
       } catch (error) {
-        console.error("Error fetching product:", error);
+          navigate("/error");
       }
     };
 
