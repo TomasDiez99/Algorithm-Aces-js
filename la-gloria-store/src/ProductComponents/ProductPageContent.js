@@ -1,11 +1,14 @@
 import "../App.css";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { MDBContainer, MDBRow, MDBCol } from "mdbreact";
 
 function ProductPageComponent(props) {
   const { product, addOrderDetails } = props;
   const [quantity, setQuantity] = useState(1);
+  const [addedToCart, setAddedToCart] = useState(false);
+  const navigate = useNavigate();
 
   const handleAddToCart = () => {
     const orderDetail = {
@@ -13,6 +16,8 @@ function ProductPageComponent(props) {
       product_amount: quantity,
     };
     addOrderDetails(orderDetail);
+    setAddedToCart(true);
+    navigate("/");
   };
 
   const handleProductAmount = (newAmount, maxLimit) => {
@@ -61,6 +66,7 @@ function ProductPageComponent(props) {
                   <button
                     className="btn btn-outline-success btn-lg"
                     onClick={handleAddToCart}
+                    disabled={addedToCart}
                   >
                     Add to Cart
                   </button>

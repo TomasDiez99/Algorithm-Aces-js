@@ -42,6 +42,13 @@ function Navbar(prop) {
           >
             <i className="fa-thin fa-cart-shopping"></i> Cart
           </button>
+
+          <button
+            className="btn btn-primary"
+            onClick={() => handleShowCart(true)}
+          >
+            <i className="fa-thin fa-cart-shopping"></i> History
+          </button>
         </div>
       </div>
 
