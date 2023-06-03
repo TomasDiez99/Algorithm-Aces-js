@@ -21,8 +21,9 @@ function EmailCheckoutModal(props) {
 
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-  const [modalsClosed, setModalsClosed] = useState(false); // Flag to check if the modals were closed
+  const [modalsClosed, setModalsClosed] = useState(false);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
 
   useEffect(() => {
     if (shoppingCart.order_details.length > 0) {
@@ -60,7 +61,7 @@ function EmailCheckoutModal(props) {
   useEffect(() => {
     if (showSuccessAlert) {
       const timeoutId = setTimeout(() => {
-        setShowSuccessAlert(false); // Desactivar la alerta de éxito después de un tiempo
+        setShowSuccessAlert(false);
       }, 1000);
 
       return () => {
@@ -81,7 +82,7 @@ function EmailCheckoutModal(props) {
       const productAmount = orderDetail.product_amount;
 
       const response = await fetch(
-        `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
+          `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
       );
 
       if (response.ok) {
@@ -102,25 +103,22 @@ function EmailCheckoutModal(props) {
     const jsonBody = JSON.stringify(shoppingCart);
     try {
       const response = await fetch(
-        "https://la-gloria-store-algorithm-aces.vercel.app/rest/shopping-carts/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: jsonBody,
-        }
+          "https://la-gloria-store-algorithm-aces.vercel.app/rest/shopping-carts/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: jsonBody,
+          }
       );
 
       if (response.ok) {
         setSuccess(true);
-        console.log("Shopping cart submitted successfully");
       } else {
         navigate("/error");
-        console.log("Failed to submit shopping cart");
       }
     } catch (error) {
-      console.log("Error submitting shopping cart:", error);
       navigate("/error");
     } finally {
       setSubmitting(false);
@@ -131,7 +129,7 @@ function EmailCheckoutModal(props) {
     e.preventDefault();
 
     const response = await fetch(
-      `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
+        `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
     );
 
     if (response.ok) {
@@ -154,59 +152,62 @@ function EmailCheckoutModal(props) {
 
       setSubmitting(true);
     } else {
-      console.log("Email not found");
+      setShowErrorAlert(true);
     }
   };
 
   return (
-    <div
-      className={`modal ${show ? "show" : ""}`}
-      style={{ display: show ? "block" : "none" }}
-    >
-      <div className="modal-dialog">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Checkout</h5>
-            <button
-              type="button"
-              className="btn-close"
-              onClick={handleCloseEmailCheckoutModal}
-            ></button>
-          </div>
-          <div className="modal-body">
-            {submitting && (
-              <div className="alert alert-info">Submitting...</div>
-            )}
-            {success && (
-              <div className="alert alert-success">Checkout successful!</div>
-            )}
-            <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                <label htmlFor="email" className="form-label">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  placeholder="Enter email"
-                  value={email}
-                  onChange={handleEmailChange}
-                  required
-                />
-              </div>
+      <div
+          className={`modal ${show ? "show" : ""}`}
+          style={{ display: show ? "block" : "none" }}
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title">Checkout</h5>
               <button
-                type="submit"
-                className="btn btn-primary"
-                disabled={submitting || success}
-              >
-                Submit
-              </button>
-            </form>
+                  type="button"
+                  className="btn-close"
+                  onClick={handleCloseEmailCheckoutModal}
+              ></button>
+            </div>
+            <div className="modal-body">
+              {submitting && (
+                  <div className="alert alert-info">Submitting...</div>
+              )}
+              {success && (
+                  <div className="alert alert-success">Checkout successful!</div>
+              )}
+              {showErrorAlert && (
+                  <div className="alert alert-danger">Email not found</div>
+              )}
+              <form onSubmit={handleSubmit}>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email
+                  </label>
+                  <input
+                      type="email"
+                      className="form-control"
+                      id="email"
+                      placeholder="Enter email"
+                      value={email}
+                      onChange={handleEmailChange}
+                      required
+                  />
+                </div>
+                <button
+                    type="submit"
+                    className="btn btn-primary"
+                    disabled={submitting || success}
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
-    </div>
   );
 }
 
