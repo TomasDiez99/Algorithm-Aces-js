@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import ErrorPage from "./pages/ErrorPage";
+import HistoryPage from "./pages/HistoryPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { useState } from "react";
@@ -30,6 +31,7 @@ function App() {
           path="/product/:productId"
           element={<Product addOrderDetails={addOrderDetails} />}
         />
+        <Route path="/history/:clientEmail" element={<HistoryPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />

@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function HistoryModal({
-  showHistoryModal,
-  handleShowHistory,
-  email,
-  handleEmailChange,
-  handleSubmit,
-}) {
+function HistoryModal({ showHistoryModal, handleShowHistory }) {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState(""); // Estado local para almacenar el email
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(`Yendo a history con email ${email}`);
+    navigate(`/history/${email}`);
+  };
+
   return (
     <div
       className={`modal ${showHistoryModal ? "show" : ""}`}

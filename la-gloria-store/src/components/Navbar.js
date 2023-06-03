@@ -22,10 +22,6 @@ function Navbar(prop) {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("sara cunta tunga tunga");
-  };
 
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -77,9 +73,7 @@ function Navbar(prop) {
       <HistoryModal
         showHistoryModal={showHistoryModal}
         handleShowHistory={toggleHistoryModal}
-        email={email}
         handleEmailChange={handleEmailChange}
-        handleSubmit={handleSubmit}
       />
     </nav>
   );
