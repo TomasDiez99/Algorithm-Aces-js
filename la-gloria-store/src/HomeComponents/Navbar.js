@@ -56,7 +56,7 @@ function Navbar(prop) {
             className="btn btn-primary"
             onClick={() => toggleCartModal(true)}
           >
-            <i className="fa-thin fa-cart-shopping"></i> Cart
+            <i class="fas fa-shopping-cart"></i>
           </button>
 
           <button
