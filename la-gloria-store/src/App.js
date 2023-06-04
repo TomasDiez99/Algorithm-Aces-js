@@ -1,36 +1,42 @@
 import "./App.css";
-import {Route, Routes} from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
-import Profile from "./pages/Profile";
-import Navbar from './HomeComponents/Navbar';
-import Footer from './HomeComponents/Footer';
-import {useState} from "react";
+import ErrorPage from "./pages/ErrorPage";
+import HistoryPage from "./pages/HistoryPage";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import { useState } from "react";
 
 function App() {
-    const [orderDetailList,setOrderDetail] = useState([]);
+  const [orderDetailList, setOrderDetailList] = useState([]);
 
-    const addOrderDetails = (orderDetail) => {
-        setOrderDetail((prevOrderDetailList) => [...prevOrderDetailList, orderDetail]);
-    };
+  const addOrderDetails = (orderDetail) => {
+    setOrderDetailList((prevOrderDetailList) => [
+      ...prevOrderDetailList,
+      orderDetail,
+    ]);
+  };
 
+  const handleOrderDetailList = (newOrderDetailList) => {
+    setOrderDetailList(newOrderDetailList);
+  }
 
-    return (
-        <div>
-            <Navbar orderDetailList = {orderDetailList} />
-            <Routes>
-                <Route path="/" element={<Home/>}/>
-                <Route
-                    path="/product/:productId"
-                    element={<Product addOrderDetails={addOrderDetails} />}
-                />
-
-                <Route path="/profile" element={<Profile/>}/>
-            </Routes>
-            <Footer/>
-        </div>
-
-    );
+  return (
+    <div>
+      <Navbar orderDetailList={orderDetailList} handleOrderDetailList={handleOrderDetailList} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/product/:productId"
+          element={<Product addOrderDetails={addOrderDetails} />}
+        />
+        <Route path="/history/:clientEmail" element={<HistoryPage />} />
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

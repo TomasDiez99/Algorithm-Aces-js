@@ -1,12 +1,28 @@
 import React, {useState, useEffect} from "react";
 import ProductCard from "./ProductCard";
-import '../home.css';
+import '../../styles/home.css';
+import {useNavigate} from "react-router-dom";
 
 function ProductGrid(props) {
     const {categoryFilter, brandFilter} = props;
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        let url;
+        if (categoryFilter !== "" && brandFilter !== "") {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
+        } else if (categoryFilter !== "") {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
+        } else if (brandFilter !== "") {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
+        } else {
+            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
+        }
+        fetchProductsFromApi(url);
+    }, [categoryFilter, brandFilter, currentPage]);
 
     const fetchProductsFromApi = (url) => {
         fetch(url)
@@ -23,24 +39,10 @@ function ProductGrid(props) {
                     );
                 }
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                navigate("/error");
             });
     };
-
-    useEffect(() => {
-        let url;
-        if (categoryFilter !== "" && brandFilter !== "") {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
-        } else if (categoryFilter !== "") {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
-        } else if (brandFilter !== "") {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
-        } else {
-            url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
-        }
-        fetchProductsFromApi(url);
-    }, [categoryFilter, brandFilter, currentPage]);
 
     const goToPage = (page) => {
         if (page >= 1 && page <= lastPage) {
