@@ -11,8 +11,6 @@ function EmailCheckoutModal(props) {
     } = props;
 
     const [email, setEmail] = useState("");
-    const navigate = useNavigate();
-
     const [shoppingCart, setShoppingCart] = useState({
         total_price: 0,
         date: "",
@@ -20,10 +18,7 @@ function EmailCheckoutModal(props) {
         order_details: [],
     });
 
-    const [submitting, setSubmitting] = useState(false);
     const [success, setSuccess] = useState(false);
-    const [modalsClosed, setModalsClosed] = useState(false);
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     useEffect(() => {
@@ -32,17 +27,7 @@ function EmailCheckoutModal(props) {
         }
     }, [shoppingCart]);
 
-    useEffect(() => {
-        if (showSuccessAlert) {
-            const timeoutId = setTimeout(() => {
-                setShowSuccessAlert(false);
-            }, 1000);
-
-            return () => {
-                clearTimeout(timeoutId);
-            };
-        }
-    }, [showSuccessAlert]);
+    const navigate = useNavigate();
 
     const clearOrderDetails = () => {
         handleOrderDetailList([]);
@@ -52,15 +37,12 @@ function EmailCheckoutModal(props) {
 
     const resetAlertStates = () => {
         setSuccess(false);
-        setShowSuccessAlert(false);
         setShowErrorAlert(false);
     }
 
     const closeModals = () => {
         handleCloseEmailCheckoutModal();
         handleCloseCart();
-        setModalsClosed(true);
-        setShowSuccessAlert(true);
     };
 
     const handleEmailChange = (e) => {
@@ -117,8 +99,6 @@ function EmailCheckoutModal(props) {
         } catch (error) {
             clearOrderDetails();
             navigate("/error");
-        } finally {
-            setSubmitting(false);
         }
     };
 
@@ -146,8 +126,6 @@ function EmailCheckoutModal(props) {
                 order_details: orderDetailList,
             };
             setShoppingCart(updatedShoppingCart);
-
-            setSubmitting(true);
         } else {
             setShowErrorAlert(true);
         }
@@ -176,7 +154,7 @@ function EmailCheckoutModal(props) {
                         {success && (
                             <div className="alert alert-success">Checkout successful!</div>
                         )}
-                        {showErrorAlert && (
+                        {showErrorAlert && !success &&(
                             <div className="alert alert-danger">Email not found</div>
                         )}
                         <form onSubmit={handleSubmit}>
@@ -197,7 +175,7 @@ function EmailCheckoutModal(props) {
                             <button
                                 type="submit"
                                 className="btn btn-primary"
-                                disabled={submitting || success}
+                                disabled={success}
                             >
                                 Submit
                             </button>
