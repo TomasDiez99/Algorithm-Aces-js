@@ -86,8 +86,6 @@ function HistoryPage() {
                             <tr>
                               <th>Product Amount</th>
                               <th>Created At</th>
-                              <th>Updated At</th>
-                              <th>Shopping Cart ID</th>
                               <th>Product ID</th>
                             </tr>
                           </thead>
@@ -95,9 +93,7 @@ function HistoryPage() {
                             {orderDetails.map((orderDetail) => (
                               <tr key={orderDetail.id}>
                                 <td>{orderDetail.product_amount}</td>
-                                <td>{orderDetail.created_at}</td>
-                                <td>{orderDetail.updated_at}</td>
-                                <td>{orderDetail.shopping_cart_id}</td>
+                                <td>{orderDetail.created_at.substring(0, 10) /*To get only the YYYY-MM-DD format*/}</td>
                                 <td>{orderDetail.product_id}</td>
                               </tr>
                             ))}
