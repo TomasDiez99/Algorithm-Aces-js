@@ -37,7 +37,7 @@ function Product(prop) {
     }, [productId]);
 
     const checkProductUnavailable = (product) => {
-        if (product === 0 || product.enable === false) {
+        if (product.stock === 0 || product.enable === false) {
             navigate("/error");
         }
     };
