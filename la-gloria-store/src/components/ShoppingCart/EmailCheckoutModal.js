@@ -1,214 +1,212 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, {useState, useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 function EmailCheckoutModal(props) {
-  const [email, setEmail] = useState("");
-  const {
-    orderDetailList,
-    handleOrderDetailList,
-    show,
-    handleCloseEmailCheckoutModal,
-    handleCloseCart,
-  } = props;
-  const navigate = useNavigate();
+    const {
+        orderDetailList,
+        handleOrderDetailList,
+        show,
+        handleCloseEmailCheckoutModal,
+        handleCloseCart,
+    } = props;
 
-  const [shoppingCart, setShoppingCart] = useState({
-    total_price: 0,
-    date: "",
-    client_id: null,
-    order_details: [],
-  });
+    const [email, setEmail] = useState("");
+    const navigate = useNavigate();
 
-  const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [modalsClosed, setModalsClosed] = useState(false);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [shoppingCart, setShoppingCart] = useState({
+        total_price: 0,
+        date: "",
+        client_id: null,
+        order_details: [],
+    });
 
-  useEffect(() => {
-    if (shoppingCart.order_details.length > 0) {
-      submitShoppingCart();
+    const [submitting, setSubmitting] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [modalsClosed, setModalsClosed] = useState(false);
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+    useEffect(() => {
+        if (shoppingCart.order_details.length > 0) {
+            submitShoppingCart();
+        }
+    }, [shoppingCart]);
+
+    useEffect(() => {
+        if (showSuccessAlert) {
+            const timeoutId = setTimeout(() => {
+                setShowSuccessAlert(false);
+            }, 1000);
+
+            return () => {
+                clearTimeout(timeoutId);
+            };
+        }
+    }, [showSuccessAlert]);
+
+    const clearOrderDetails = () => {
+        handleOrderDetailList([]);
+        closeModals();
+        resetAlertStates();
     }
-  }, [shoppingCart]);
 
-  useEffect(() => {
+    const resetAlertStates = () => {
+        setSuccess(false);
+        setShowSuccessAlert(false);
+        setShowErrorAlert(false);
+    }
+
     const closeModals = () => {
-      handleCloseEmailCheckoutModal();
-      handleCloseCart();
-      setModalsClosed(true);
-      setShowSuccessAlert(true);
+        handleCloseEmailCheckoutModal();
+        handleCloseCart();
+        setModalsClosed(true);
+        setShowSuccessAlert(true);
     };
 
-    if (success && !modalsClosed) {
-      const timeoutId = setTimeout(() => {
-        closeModals();
-        handleOrderDetailList([]);
-        navigate("/");
-      }, 2000);
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+    };
 
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-  }, [
-    success,
-    modalsClosed,
-    navigate,
-    handleCloseEmailCheckoutModal,
-    handleCloseCart,
-  ]);
+    const calculateTotalPrice = async () => {
+        let totalPrice = 0;
 
-  useEffect(() => {
-    if (showSuccessAlert) {
-      const timeoutId = setTimeout(() => {
-        setShowSuccessAlert(false);
-      }, 1000);
+        for (const orderDetail of orderDetailList) {
+            const productId = orderDetail.product_id;
+            const productAmount = orderDetail.product_amount;
 
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-  }, [showSuccessAlert]);
+            const response = await fetch(
+                `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
+            );
 
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                const product = jsonResponse.data;
 
-  const calculateTotalPrice = async () => {
-    let totalPrice = 0;
+                const price = product.price;
+                const orderDetailPrice = price * productAmount;
 
-    for (const orderDetail of orderDetailList) {
-      const productId = orderDetail.product_id;
-      const productAmount = orderDetail.product_amount;
+                totalPrice += orderDetailPrice;
+            }
+        }
 
-      const response = await fetch(
-          `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
-      );
+        return totalPrice;
+    };
 
-      if (response.ok) {
-        const jsonResponse = await response.json();
-        const product = jsonResponse.data;
+    const submitShoppingCart = async () => {
+        const jsonBody = JSON.stringify(shoppingCart);
+        try {
+            const response = await fetch(
+                "https://la-gloria-store-algorithm-aces.vercel.app/rest/shopping-carts/",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: jsonBody,
+                }
+            );
+            if (response.ok) {
+                setSuccess(true);
+                setTimeout(() => {
+                    clearOrderDetails();
+                }, 2000);
+            } else {
+                clearOrderDetails();
+                navigate("/error");
+            }
+        } catch (error) {
+            clearOrderDetails();
+            navigate("/error");
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
-        const price = product.price;
-        const orderDetailPrice = price * productAmount;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
-        totalPrice += orderDetailPrice;
-      }
-    }
+        const response = await fetch(
+            `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
+        );
 
-    return totalPrice;
-  };
+        if (response.ok) {
+            const client = await response.json();
+            const clientId = client.data.id;
 
-  const submitShoppingCart = async () => {
-    const jsonBody = JSON.stringify(shoppingCart);
-    try {
-      const response = await fetch(
-          "https://la-gloria-store-algorithm-aces.vercel.app/rest/shopping-carts/",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: jsonBody,
-          }
-      );
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().split("T")[0];
 
-      if (response.ok) {
-        setSuccess(true);
-      } else {
-        navigate("/error");
-      }
-    } catch (error) {
-      navigate("/error");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+            const totalPrice = await calculateTotalPrice();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+            const updatedShoppingCart = {
+                ...shoppingCart,
+                total_price: totalPrice,
+                client_id: clientId,
+                date: formattedDate,
+                order_details: orderDetailList,
+            };
+            setShoppingCart(updatedShoppingCart);
 
-    const response = await fetch(
-        `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
-    );
+            setSubmitting(true);
+        } else {
+            setShowErrorAlert(true);
+        }
+    };
 
-    if (response.ok) {
-      const client = await response.json();
-      const clientId = client.data.id;
+    return (
+        <div
+            className={`modal ${show ? "show" : ""}`}
+            style={{display: show ? "block" : "none"}}
+        >
+            <div className="modal-dialog">
+                <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title">Checkout</h5>
+                        <button
+                            type="button"
+                            className="btn-close"
+                            onClick={() => {
+                                handleCloseEmailCheckoutModal();
+                                resetAlertStates();
+                            }}
 
-      const currentDate = new Date();
-      const formattedDate = currentDate.toISOString().split("T")[0];
-
-      const totalPrice = await calculateTotalPrice();
-
-      const updatedShoppingCart = {
-        ...shoppingCart,
-        total_price: totalPrice,
-        client_id: clientId,
-        date: formattedDate,
-        order_details: orderDetailList,
-      };
-      setShoppingCart(updatedShoppingCart);
-
-      setSubmitting(true);
-    } else {
-      setShowErrorAlert(true);
-    }
-  };
-
-  return (
-      <div
-          className={`modal ${show ? "show" : ""}`}
-          style={{ display: show ? "block" : "none" }}
-      >
-        <div className="modal-dialog">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title">Checkout</h5>
-              <button
-                  type="button"
-                  className="btn-close"
-                  onClick={handleCloseEmailCheckoutModal}
-              ></button>
-            </div>
-            <div className="modal-body">
-              {submitting && (
-                  <div className="alert alert-info">Submitting...</div>
-              )}
-              {success && (
-                  <div className="alert alert-success">Checkout successful!</div>
-              )}
-              {showErrorAlert && (
-                  <div className="alert alert-danger">Email not found</div>
-              )}
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email
-                  </label>
-                  <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      placeholder="Enter email"
-                      value={email}
-                      onChange={handleEmailChange}
-                      required
-                  />
+                        ></button>
+                    </div>
+                    <div className="modal-body">
+                        {success && (
+                            <div className="alert alert-success">Checkout successful!</div>
+                        )}
+                        {showErrorAlert && (
+                            <div className="alert alert-danger">Email not found</div>
+                        )}
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-3">
+                                <label htmlFor="email" className="form-label">
+                                    Email
+                                </label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="email"
+                                    placeholder="Enter email"
+                                    value={email}
+                                    onChange={handleEmailChange}
+                                    required
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                                className="btn btn-primary"
+                                disabled={submitting || success}
+                            >
+                                Submit
+                            </button>
+                        </form>
+                    </div>
                 </div>
-                <button
-                    type="submit"
-                    className="btn btn-primary"
-                    disabled={submitting || success}
-                >
-                  Submit
-                </button>
-              </form>
             </div>
-          </div>
         </div>
-      </div>
-  );
+    );
 }
 
 export default EmailCheckoutModal;
