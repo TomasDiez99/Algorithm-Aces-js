@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function HistoryModal({ showHistoryModal, handleShowHistory }) {
   const navigate = useNavigate();
-  const [email, setEmail] = useState(""); // Estado local para almacenar el email
+  const [email, setEmail] = useState("");
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -11,7 +11,7 @@ function HistoryModal({ showHistoryModal, handleShowHistory }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(`Yendo a history con email ${email}`);
+    handleShowHistory(false);
     navigate(`/history/${email}`);
   };
 
