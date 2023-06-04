@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import FilterTable from './FilterTable/FilterTable';
 import ProductGrid from './ProductGrid';
 import "../../styles/home.css";
@@ -16,18 +16,18 @@ function ProductTable() {
 
     return (
         <div className="home-container">
-          <div className="filter">
-            <FilterTable
-              setCategoryFilter={categoryFilterHandle}
-              setBrandFilter={brandFilterHandle}
-            />
-          </div>
-          <div className="grid">
-            <ProductGrid categoryFilter={categoryFilter} brandFilter={brandFilter} />
-          </div>
+            <div className="filter">
+                <FilterTable
+                    setCategoryFilter={categoryFilterHandle}
+                    setBrandFilter={brandFilterHandle}
+                />
+            </div>
+            <div className="grid">
+                <ProductGrid categoryFilter={categoryFilter} brandFilter={brandFilter}/>
+            </div>
         </div>
-      );
-      
+    );
+
 }
 
 export default ProductTable;

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ProductCard from "./ProductCard";
 import '../../styles/home.css';
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 function ProductGrid(props) {
     const {categoryFilter, brandFilter} = props;

@@ -154,7 +154,7 @@ function EmailCheckoutModal(props) {
                         {success && (
                             <div className="alert alert-success">Checkout successful!</div>
                         )}
-                        {showErrorAlert && !success &&(
+                        {showErrorAlert && !success && (
                             <div className="alert alert-danger">Email not found</div>
                         )}
                         <form onSubmit={handleSubmit}>

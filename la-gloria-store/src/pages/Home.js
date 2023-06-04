@@ -3,7 +3,6 @@ import ProductTable from '../components/HomePageComponents/ProductTable';
 import '../App.css';
 
 
-
 function Home() {
 
     return (
