@@ -6,6 +6,9 @@
 
 - Somos conscientes que al ir a los detalles de cada producto, se hace un fetch a la API para recolectarlos y es redundante ya que se obtuvieron esos datos en el home. Creemos que en este caso, no es un problema prioritario ya que repetir esta solicitud de datos no es prohibitivo. Tambien sucede algo parecido al cargar la pagina home, en la que se piden las categorias, filtros y la grid de productos. En los primeros dos casos, no es tan malo por la misma razón que se nombró anteriormente.
 
-- Hay situaciones con el carrito en las que te deja pasarte del stock de un producto. Esto es posible ya que agregar al carrito no actualiza la base de datos (y por consecuente, el stock visible).
+- Hay situaciones con el carrito en las que te deja pasarte del stock de un producto ya que al agregar al carrito sumas menores al limite pero cuya sumatoria total sí puede pasarlo (Si hay un producto con 14 de stock, se pueden agregar detalles de orden con monto 10 varias veces. Al final, se estarían intentando comprar decenas de productos y esto supera el stock 14). Esto es posible ya que agregar al carrito no actualiza la base de datos (y por consecuente, el stock visible).
 
-- Cuando compras todo el stock de un producto y haces el checkout desde la pagina home, hasta que no se recargue la página el producto no quedara como deshabilitado. Creemos que esto es porque el navigate del react router no actualiza la pagina cuando ya está en esa misma página. 
+- Cuando compras todo el stock de un producto y haces el checkout desde la pagina home, hasta que no se recargue la página el producto no quedara como deshabilitado. Creemos que esto es porque el navigate del react router no actualiza la pagina cuando ya está en esa misma página.
+
+#
+Dependencias externas usadas:
