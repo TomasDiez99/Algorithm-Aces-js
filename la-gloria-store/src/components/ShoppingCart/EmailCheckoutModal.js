@@ -91,6 +91,7 @@ function EmailCheckoutModal(props) {
                 setSuccess(true);
                 setTimeout(() => {
                     clearOrderDetails();
+                    navigate("/");
                 }, 2000);
             } else {
                 clearOrderDetails();
