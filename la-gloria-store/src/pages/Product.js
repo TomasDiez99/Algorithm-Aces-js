@@ -1,23 +1,64 @@
-import logo from "../logo.svg";
-import "../App.css";
+import React, {useEffect, useState} from "react";
+import ProductCarrousel from "../components/ProductPageComponents/ProductCarrousel";
+import ProductPageContent from "../components/ProductPageComponents/ProductPageContent";
+import {useParams} from "react-router-dom";
+import {MDBContainer, MDBRow, MDBCol} from "mdbreact";
+import "../styles/product-page.css";
+import {useNavigate} from "react-router-dom";
 
-function Product() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>PRODUCTTEST</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function Product(prop) {
+    const {addOrderDetails} = prop;
+    const [product, setProduct] = useState(null);
+
+    const params = useParams();
+    const productId = params.productId;
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async (productId) => {
+            try {
+                const response = await fetch(
+                    `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
+                );
+                if (response.ok) {
+                    const json = await response.json();
+                    setProduct(json.data);
+                    const localProduct = json.data
+                    checkProductUnavailable(localProduct);
+                } else {
+                    navigate("/error");
+                }
+            } catch (error) {
+                navigate("/error");
+            }
+        };
+
+        fetchData(productId);
+    }, [productId]);
+
+    const checkProductUnavailable = (product) => {
+        if (product.stock === 0 || product.enable === false) {
+            navigate("/error");
+        }
+    };
+
+    return (
+        <div className="product-page-container">
+            <MDBContainer>
+                <MDBRow>
+                    <MDBCol md="6">
+                        <ProductCarrousel product={product}/>
+                    </MDBCol>
+                    <MDBCol md="6">
+                        <ProductPageContent
+                            product={product}
+                            addOrderDetails={addOrderDetails}
+                        />
+                    </MDBCol>
+                </MDBRow>
+            </MDBContainer>
+        </div>
+    );
 }
 
 export default Product;
