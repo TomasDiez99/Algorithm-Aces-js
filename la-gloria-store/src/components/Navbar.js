@@ -28,10 +28,10 @@ function Navbar(prop) {
             <div className="container-fluid">
                 <Link to="/" className="navbar-brand">
                     <img
-                        src="https://2.bp.blogspot.com/-_Tx3nbVr5mM/U7ctz8a3LDI/AAAAAAAAAkM/YDDEPDIHjVE/s1600/escudoo.png"
+                        src="/logo.png"
                         alt="Logo"
-                        width="30"
-                        height="30"
+                        width="25"
+                        height="25"
                         className="d-inline-block align-text-top"
                     />{" "}
                     La Gloria Store

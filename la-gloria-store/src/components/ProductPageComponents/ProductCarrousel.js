@@ -15,7 +15,7 @@ function ProductCarrousel(props) {
                             src={
                                 product
                                     ? product.image
-                                    : "https://2.bp.blogspot.com/-_Tx3nbVr5mM/U7ctz8a3LDI/AAAAAAAAAkM/YDDEPDIHjVE/s1600/escudoo.png"
+                                    : "/loading.png"
                             }
                             alt="Imagen 1"
                         />
