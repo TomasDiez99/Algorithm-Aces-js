@@ -7,7 +7,6 @@ function HistoryPage() {
     const email = params.clientEmail;
     const [shoppingCarts, setShoppingCarts] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
-    //const [orderDetails, setOrderDetails] = useState([]);
     const [orderDetailProductPairs, setOrderDetailProductPairs] = useState([]);
 
     const navigate = useNavigate();
@@ -28,6 +27,43 @@ function HistoryPage() {
         fetchShoppingCarts();
     }, [email]);
 
+    const handleRowClick = async (index, shoppingCartId) => {
+        if (expandedRows.includes(index)) {
+            setExpandedRows([]);
+        } else {
+            const newExpandedRows = [index];
+            setExpandedRows(newExpandedRows);
+            await retrieveOrderDetailData(shoppingCartId);
+        }
+    };
+
+    const retrieveOrderDetailData = async (shoppingCartId) => {
+        try {
+            const response = await fetch(
+                `https://la-gloria-store-algorithm-aces.vercel.app/rest/order-details/shopping-cart/${shoppingCartId}`
+            );
+            const data = await response.json();
+            const pairs = await getOrderDetailProductPairs(data);
+            setOrderDetailProductPairs(pairs);
+        } catch (error) {
+            navigate("/error");
+        }
+    };
+
+    const getOrderDetailProductPairs = async (data) => {
+        const pairs = await Promise.all(
+            data.map(async (orderDetail) => {
+                return await createOrderDetailProductPair(orderDetail);
+            })
+        );
+        return pairs;
+    };
+
+    const createOrderDetailProductPair = async (orderDetail) => {
+        const product = await getProduct(orderDetail.product_id);
+        return [orderDetail, product];
+    };
+
     const getProduct = async (productId) => {
         try {
             const response = await fetch(
@@ -43,52 +79,6 @@ function HistoryPage() {
             navigate("/error");
         }
     };
-
-    const createOrderDetailProductPair = async (orderDetail) => {
-        const product = await getProduct(orderDetail.product_id);
-        const orderDetailProductPair = [orderDetail, product];
-        return orderDetailProductPair;
-    };
-
-
-
-    const getOrderDetailProductPairs = async (data) => {
-        const pairs = await Promise.all(
-            data.map(async (orderDetail) => {
-                const product = await getProduct(orderDetail.product_id);
-                return [orderDetail, product];
-            })
-        );
-        return pairs;
-    };
-
-
-    const retrieveOrderDetailData = async (shoppingCartId) => {
-        try {
-            const response = await fetch(
-                `https://la-gloria-store-algorithm-aces.vercel.app/rest/order-details/shopping-cart/${shoppingCartId}`
-            );
-            const data = await response.json();
-            const pairs = await getOrderDetailProductPairs(data);
-            //setOrderDetails(data);
-            setOrderDetailProductPairs(pairs);
-        } catch (error) {
-            navigate("/error");
-        }
-    };
-
-
-    const handleRowClick = async (index, shoppingCartId) => {
-        if (expandedRows.includes(index)) {
-            setExpandedRows([]);
-        } else {
-            const newExpandedRows = [index];
-            setExpandedRows(newExpandedRows);
-            await retrieveOrderDetailData(shoppingCartId);
-        }
-    };
-
-
 
     return (
         <div>
