@@ -43,35 +43,33 @@ function HistoryPage() {
             navigate("/error");
         }
     };
-/*
+
     const createOrderDetailProductPair = async (orderDetail) => {
         const product = await getProduct(orderDetail.product_id);
         const orderDetailProductPair = [orderDetail, product];
         return orderDetailProductPair;
     };
 
-    const getOrderDetailProductPairs = async () => {
+
+
+    const getOrderDetailProductPairs = async (data) => {
         const pairs = await Promise.all(
-            orderDetails.map(async (orderDetail) => {
-                const orderDetailProductPair = await createOrderDetailProductPair(orderDetail);
-                return orderDetailProductPair;
+            data.map(async (orderDetail) => {
+                const product = await getProduct(orderDetail.product_id);
+                return [orderDetail, product];
             })
         );
         return pairs;
     };
-*/
-    const fetchOrderDetails = async (shoppingCartId) => {
+
+
+    const retrieveOrderDetailData = async (shoppingCartId) => {
         try {
             const response = await fetch(
                 `https://la-gloria-store-algorithm-aces.vercel.app/rest/order-details/shopping-cart/${shoppingCartId}`
             );
             const data = await response.json();
-            const pairs = await Promise.all(
-                data.map(async (orderDetail) => {
-                    const product = await getProduct(orderDetail.product_id);
-                    return [orderDetail, product];
-                })
-            );
+            const pairs = await getOrderDetailProductPairs(data);
             //setOrderDetails(data);
             setOrderDetailProductPairs(pairs);
         } catch (error) {
@@ -82,13 +80,11 @@ function HistoryPage() {
 
     const handleRowClick = async (index, shoppingCartId) => {
         if (expandedRows.includes(index)) {
-            // Si el botón ya está abierto, lo cerramos
             setExpandedRows([]);
         } else {
-            // Si se hace clic en un nuevo botón, cerramos el anterior y abrimos el nuevo
             const newExpandedRows = [index];
             setExpandedRows(newExpandedRows);
-            await fetchOrderDetails(shoppingCartId);
+            await retrieveOrderDetailData(shoppingCartId);
         }
     };
 
