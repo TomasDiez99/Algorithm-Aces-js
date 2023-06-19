@@ -2,8 +2,8 @@ import React, {useState} from "react";
 import EmailCheckoutModal from "./EmailCheckoutModal";
 import "../../App.css";
 
-function OrderDetailItem({orderDetail, onRemove}) {
-    const {product_id, product_amount} = orderDetail;
+function OrderDetailItem({orderProductPair, onRemove}) {
+    const {product_id, product_amount} = orderProductPair;
 
     return (
         <tr>
@@ -19,7 +19,7 @@ function OrderDetailItem({orderDetail, onRemove}) {
 }
 
 function ShoppingCart(props) {
-    const {orderDetailList, handleOrderDetailList, handleCloseCart} = props;
+    const {orderProductPairList, handleOrderProductPairList, handleCloseCart} = props;
     const [showEmailCheckoutModal, setShowEmailCheckoutModal] = useState(false);
 
     const handleShowModal = (show) => {
@@ -27,10 +27,10 @@ function ShoppingCart(props) {
     };
 
     const handleRemoveOrderDetail = (index) => {
-        const updatedOrderDetailList = orderDetailList.filter(
+        const orderProductPairList = orderProductPairList.filter(
             (_, i) => i !== index
         );
-        handleOrderDetailList(updatedOrderDetailList);
+        handleOrderProductPairList(orderProductPairList);
     };
 
     return (
@@ -45,10 +45,10 @@ function ShoppingCart(props) {
                     </tr>
                     </thead>
                     <tbody>
-                    {orderDetailList.map((orderDetail, index) => (
+                    {orderProductPairList.map((orderProductPair, index) => (
                         <OrderDetailItem
                             key={index}
-                            orderDetail={orderDetail}
+                            orderProductPair={orderProductPair}
                             onRemove={() => handleRemoveOrderDetail(index)}
                         />
                     ))}
@@ -57,11 +57,11 @@ function ShoppingCart(props) {
             </div>
 
             <EmailCheckoutModal
-                orderDetailList={orderDetailList}
+                orderProductPairList={orderProductPairList}
                 show={showEmailCheckoutModal}
                 handleCloseEmailCheckoutModal={() => handleShowModal(false)}
                 handleCloseCart={handleCloseCart}
-                handleOrderDetailList={handleOrderDetailList}
+                handleOrderProductPairList={handleOrderProductPairList}
             />
             <div className="modal-footer">
                 <button
@@ -69,7 +69,7 @@ function ShoppingCart(props) {
                     className="btn btn-secondary"
                     data-bs-dismiss="modal"
                     onClick={() => handleShowModal(true)}
-                    disabled={orderDetailList.length === 0}
+                    disabled={orderProductPairList.length === 0}
                 >
                     Checkout
                 </button>

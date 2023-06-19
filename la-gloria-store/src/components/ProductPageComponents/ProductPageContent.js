@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import "../../styles/product-page.css";
 
 function ProductPageComponent(props) {
-    const {product, addOrderDetails} = props;
+    const {product, addOrderProductPair} = props;
     const [quantity, setQuantity] = useState(1);
     const [addedToCart, setAddedToCart] = useState(false);
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ function ProductPageComponent(props) {
             product_id: product.id,
             product_amount: quantity,
         };
-        addOrderDetails(orderDetail);
+        addOrderProductPair(orderDetail);
         setAddedToCart(true);
         navigate("/");
     };

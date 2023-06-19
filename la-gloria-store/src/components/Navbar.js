@@ -4,7 +4,7 @@ import CartModal from "./ShoppingCart/CartModal";
 import HistoryModal from "./HistoryModal";
 
 function Navbar(prop) {
-    const {orderDetailList, handleOrderDetailList} = prop;
+    const {orderProductPairList, handleOrderProductPairList} = prop;
     const [email, setEmail] = useState("");
 
     const [showCartModal, setShowCartModal] = useState(false);
@@ -67,8 +67,8 @@ function Navbar(prop) {
             <CartModal
                 showCartModal={showCartModal}
                 handleCloseCart={() => toggleCartModal(false)}
-                orderDetailList={orderDetailList}
-                handleOrderDetailList={handleOrderDetailList}
+                orderProductPairList={orderProductPairList}
+                handleOrderProductPairList={handleOrderProductPairList}
             />
             <HistoryModal
                 showHistoryModal={showHistoryModal}

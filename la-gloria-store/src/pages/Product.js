@@ -7,7 +7,7 @@ import "../styles/product-page.css";
 import {useNavigate} from "react-router-dom";
 
 function Product(prop) {
-    const {addOrderDetails} = prop;
+    const {addOrderProductPair} = prop;
     const [product, setProduct] = useState(null);
 
     const params = useParams();
@@ -52,7 +52,7 @@ function Product(prop) {
                     <MDBCol md="6">
                         <ProductPageContent
                             product={product}
-                            addOrderDetails={addOrderDetails}
+                            addOrderProductPair={addOrderProductPair}
                         />
                     </MDBCol>
                 </MDBRow>
