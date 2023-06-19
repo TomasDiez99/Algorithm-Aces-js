@@ -3,8 +3,8 @@ import {useNavigate} from "react-router-dom";
 
 function EmailCheckoutModal(props) {
     const {
-        orderDetailList,
-        handleOrderDetailList,
+        orderProductPairList,
+        handleOrderProductPairList,
         show,
         handleCloseEmailCheckoutModal,
         handleCloseCart,
@@ -30,7 +30,7 @@ function EmailCheckoutModal(props) {
     const navigate = useNavigate();
 
     const clearOrderDetails = () => {
-        handleOrderDetailList([]);
+        handleOrderProductPairList([]);
         closeModals();
         resetAlertStates();
     }
@@ -49,30 +49,59 @@ function EmailCheckoutModal(props) {
         setEmail(e.target.value);
     };
 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const response = await fetch(
+            `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
+        );
+
+        if (response.ok) {
+            const client = await response.json();
+            const clientId = client.data.id;
+
+            const currentDate = new Date();
+            const formattedDate = currentDate.toISOString().split("T")[0];
+
+            const totalPrice = await calculateTotalPrice();
+            const orderDetailList = await getOrderDetailList();
+
+            const updatedShoppingCart = {
+                ...shoppingCart,
+                total_price: totalPrice,
+                client_id: clientId,
+                date: formattedDate,
+                order_details: orderDetailList,
+            };
+            setShoppingCart(updatedShoppingCart);
+        } else {
+            setShowErrorAlert(true);
+        }
+    };
+
     const calculateTotalPrice = async () => {
         let totalPrice = 0;
 
-        for (const orderDetail of orderDetailList) {
-            const productId = orderDetail.product_id;
+        for (const [orderDetail, product] of orderProductPairList) {
+            const productPrice = product.price;
             const productAmount = orderDetail.product_amount;
 
-            const response = await fetch(
-                `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
-            );
-
-            if (response.ok) {
-                const jsonResponse = await response.json();
-                const product = jsonResponse.data;
-
-                const price = product.price;
-                const orderDetailPrice = price * productAmount;
-
-                totalPrice += orderDetailPrice;
-            }
+            const orderDetailPrice = productPrice * productAmount;
+            totalPrice += orderDetailPrice;
         }
 
         return totalPrice;
     };
+
+    const getOrderDetailList = async () => {
+        let orderDetailList = [];
+
+        for (const [orderDetail, product] of orderProductPairList) {
+            orderDetailList.push(orderDetail);
+        }
+
+        return orderDetailList;
+    }
 
     const submitShoppingCart = async () => {
         const jsonBody = JSON.stringify(shoppingCart);
@@ -93,9 +122,6 @@ function EmailCheckoutModal(props) {
                     clearOrderDetails();
                     navigate("/");
                 }, 2000);
-            } else {
-                clearOrderDetails();
-                navigate("/error");
             }
         } catch (error) {
             clearOrderDetails();
@@ -103,34 +129,6 @@ function EmailCheckoutModal(props) {
         }
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const response = await fetch(
-            `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
-        );
-
-        if (response.ok) {
-            const client = await response.json();
-            const clientId = client.data.id;
-
-            const currentDate = new Date();
-            const formattedDate = currentDate.toISOString().split("T")[0];
-
-            const totalPrice = await calculateTotalPrice();
-
-            const updatedShoppingCart = {
-                ...shoppingCart,
-                total_price: totalPrice,
-                client_id: clientId,
-                date: formattedDate,
-                order_details: orderDetailList,
-            };
-            setShoppingCart(updatedShoppingCart);
-        } else {
-            setShowErrorAlert(true);
-        }
-    };
 
     return (
         <div
