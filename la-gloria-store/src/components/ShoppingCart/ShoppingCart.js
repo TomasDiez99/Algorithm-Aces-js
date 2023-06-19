@@ -27,10 +27,10 @@ function ShoppingCart(props) {
     };
 
     const handleRemoveOrderDetail = (index) => {
-        const orderProductPairList = orderProductPairList.filter(
+        const updatedOrderProductPairList = orderProductPairList.filter(
             (_, i) => i !== index
         );
-        handleOrderProductPairList(orderProductPairList);
+        handleOrderProductPairList(updatedOrderProductPairList);
     };
 
     return (
