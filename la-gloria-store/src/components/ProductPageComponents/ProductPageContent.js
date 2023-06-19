@@ -39,8 +39,7 @@ function ProductPageComponent(props) {
     } else {
       addOrderProductPair([orderDetail, product]);
     }
-    
-    console.log(orderProductPairList);
+
     setAddedToCart(true);
     navigate("/");
   };
@@ -77,10 +76,7 @@ function ProductPageComponent(props) {
           <h3>
             <strong>{product.name}</strong>
           </h3>
-          <h2>API stock: {product.stock}</h2>
-          <h2>Quantity: {quantity}</h2>
-          <h2>Cart stock: {getProductStockInCart(product.id)}</h2>
-          <h2>Updated stock: {getUpdatedStock(product.id, product.stock)}</h2>
+          <h2>Current stock: {getUpdatedStock(product.id, product.stock)}</h2>
           <p>Price: ${product.price}</p>
           <p>Category: {product.category.name}</p>
           <p>Brand: {product.brand.name}</p>
