@@ -18,7 +18,28 @@ function ProductPageComponent(props) {
       product_id: product.id,
       product_amount: quantity,
     };
-    addOrderProductPair([orderDetail, product]);
+    
+    const existingPairIndex = orderProductPairList.findIndex(
+      ([pairProduct, _]) => pairProduct.product_id === product.id
+    );
+    
+    if (existingPairIndex !== -1) {
+      const [existingOrderDetail, existingProduct] = orderProductPairList[existingPairIndex];
+      const updatedProductAmount = existingOrderDetail.product_amount + quantity;
+      
+      const updatedOrderDetail = {
+        product_id: existingProduct.id,
+        product_amount: updatedProductAmount,
+      };
+      
+      const updatedPairList = [...orderProductPairList];
+      updatedPairList[existingPairIndex] = [updatedOrderDetail, existingProduct];
+      
+      handleOrderProductPairList(updatedPairList);
+    } else {
+      addOrderProductPair([orderDetail, product]);
+    }
+    
     console.log(orderProductPairList);
     setAddedToCart(true);
     navigate("/");
