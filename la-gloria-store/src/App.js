@@ -29,7 +29,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route
           path="/product/:productId"
-          element={<Product addOrderProductPair={addOrderProductPair} />}
+          element={<Product orderProductPairList={orderProductPairList} handleOrderProductPairList={handleOrderProductPairList} addOrderProductPair={addOrderProductPair} />}
         />
         <Route path="/history/:clientEmail" element={<HistoryPage />} />
         <Route path="*" element={<ErrorPage />} />
