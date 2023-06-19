@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import EmailCheckoutModal from "./EmailCheckoutModal";
 import "../../App.css";
 
-function OrderDetailItem({orderProductPair, onRemove}) {
-    const {product_id, product_amount} = orderProductPair;
+function OrderDetailItem({ orderDetail, product, onRemove }) {
 
     return (
         <tr>
-            <td>{product_id}</td>
-            <td>{product_amount}</td>
+            <td>{product.name}</td>
+            <td>{product.price}</td>
+            <td>{orderDetail.product_amount}</td>
             <td>
                 <button type="button" className="btn btn-danger" onClick={onRemove}>
                     Remove
@@ -17,6 +17,7 @@ function OrderDetailItem({orderProductPair, onRemove}) {
         </tr>
     );
 }
+
 
 function ShoppingCart(props) {
     const {orderProductPairList, handleOrderProductPairList, handleCloseCart} = props;
@@ -39,19 +40,22 @@ function ShoppingCart(props) {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
                         <th>Quantity</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {orderProductPairList.map((orderProductPair, index) => (
+                    {orderProductPairList.map(([orderDetail, product], index) => (
                         <OrderDetailItem
                             key={index}
-                            orderProductPair={orderProductPair}
+                            orderDetail={orderDetail}
+                            product={product}
                             onRemove={() => handleRemoveOrderDetail(index)}
                         />
                     ))}
+
                     </tbody>
                 </table>
             </div>

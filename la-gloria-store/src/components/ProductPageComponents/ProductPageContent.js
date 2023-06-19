@@ -13,7 +13,7 @@ function ProductPageComponent(props) {
             product_id: product.id,
             product_amount: quantity,
         };
-        addOrderProductPair(orderDetail);
+        addOrderProductPair([orderDetail,product]);
         setAddedToCart(true);
         navigate("/");
     };
