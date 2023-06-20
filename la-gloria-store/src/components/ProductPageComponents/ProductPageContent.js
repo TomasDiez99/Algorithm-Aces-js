@@ -44,22 +44,21 @@ function ProductPageComponent(props) {
     navigate("/");
   };
 
-  const getProductStockInCart = (productId) => {
-    let totalStock = 0;
-    for (const pair of orderProductPairList) {
-      const [product, _] = pair;
-      if (product.product_id === productId) {
-        totalStock += product.product_amount;
-      }
-    }
-    return totalStock;
-  };
-
   const getUpdatedStock = (productId, oldStock) => {
-    const cartStock = getProductStockInCart(productId);
-    const newStock = oldStock - cartStock;
-    return newStock;
+    const getProductStockInCart = () => {
+      let totalStock = 0;
+      for (const pair of orderProductPairList) {
+        const [product, _] = pair;
+        if (product.product_id === productId) {
+          totalStock += product.product_amount;
+        }
+      }
+      return totalStock;
+    };
+  
+    return oldStock - getProductStockInCart();
   };
+  
 
   const handleProductAmount = (newAmount) => {
     const updatedStock = getUpdatedStock(product.id, product.stock);
