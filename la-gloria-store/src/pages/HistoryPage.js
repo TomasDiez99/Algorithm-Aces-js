@@ -127,7 +127,7 @@ function HistoryPage() {
                                                         <tr key={orderDetail.id}>
                                                             <td>{orderDetail.product_amount}</td>
                                                             <td>{product.name}</td>
-                                                            <td>{product.price}</td>
+                                                            <td>${product.price}</td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
