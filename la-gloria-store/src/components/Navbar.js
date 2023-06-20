@@ -26,7 +26,13 @@ function Navbar(prop) {
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid d-flex justify-content-between">
         <div>
-          <Link to="/" className="navbar-brand">
+          <Link
+            to="/"
+            className="navbar-brand"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Home"
+          >
             <img
               src="/logo.png"
               alt="Logo"
@@ -41,13 +47,18 @@ function Navbar(prop) {
           <button
             className="btn btn-primary"
             onClick={() => toggleCartModal(true)}
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Shopping Cart"
           >
             <i className="fas fa-shopping-cart"></i>
           </button>
-
           <button
             className="btn btn-success"
             onClick={() => toggleHistoryModal(true)}
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="History"
           >
             <i className="fa-thin fa-cart-shopping"></i> History
           </button>
