@@ -1,6 +1,13 @@
-.footer-icon:hover {
+.footer-icon {
+  text-decoration: none;
+  color: inherit;
   cursor: pointer;
 }
+
+.icon-text {
+  margin-left: 0.5rem; /* Puedes ajustar el valor según tus necesidades */
+}
+
 
 .btn {
   padding: 10px 20px;
