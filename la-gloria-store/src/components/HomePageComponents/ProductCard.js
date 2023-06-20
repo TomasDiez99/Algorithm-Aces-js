@@ -2,10 +2,10 @@ import {Link} from "react-router-dom";
 import "../../styles/home.css";
 
 function ProductCard(props) {
-    const {id, name, image, price, enable, stock} = props;
+    const { id, name, image, price, enable, stock, getUpdatedStock } = props;
 
     function isProductAvailable() {
-        return enable && stock > 0;
+        return enable && getUpdatedStock(id, stock) > 0;
     }
 
     return (

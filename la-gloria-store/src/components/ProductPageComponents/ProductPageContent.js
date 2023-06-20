@@ -8,6 +8,7 @@ function ProductPageComponent(props) {
     orderProductPairList,
     handleOrderProductPairList,
     addOrderProductPair,
+    getUpdatedStock
   } = props;
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
@@ -43,22 +44,6 @@ function ProductPageComponent(props) {
     setAddedToCart(true);
     navigate("/");
   };
-
-  const getUpdatedStock = (productId, oldStock) => {
-    const getProductStockInCart = () => {
-      let totalStock = 0;
-      for (const pair of orderProductPairList) {
-        const [product, _] = pair;
-        if (product.product_id === productId) {
-          totalStock += product.product_amount;
-        }
-      }
-      return totalStock;
-    };
-  
-    return oldStock - getProductStockInCart();
-  };
-  
 
   const handleProductAmount = (newAmount) => {
     const updatedStock = getUpdatedStock(product.id, product.stock);

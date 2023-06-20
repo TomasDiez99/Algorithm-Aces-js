@@ -4,7 +4,7 @@ import '../../styles/home.css';
 import {useNavigate} from "react-router-dom";
 
 function ProductGrid(props) {
-    const {categoryFilter, brandFilter} = props;
+    const {categoryFilter, brandFilter, getUpdatedStock} = props;
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
@@ -55,7 +55,15 @@ function ProductGrid(props) {
             <div className="grid-margin productGridStyle">
                 {products.map((product) => (
                     <div className="cardContainerStyle" key={product.id}>
-                        <ProductCard {...product} />
+                        <ProductCard
+                        id={product.id}
+                        name={product.name}
+                        image={product.image}
+                        price={product.price}
+                        enable={product.enable}
+                        stock={product.stock}
+                        getUpdatedStock={getUpdatedStock} />
+
                     </div>
                 ))}
             </div>

@@ -3,7 +3,8 @@ import FilterTable from './FilterTable/FilterTable';
 import ProductGrid from './ProductGrid';
 import "../../styles/home.css";
 
-function ProductTable() {
+function ProductTable(props) {
+    const { getUpdatedStock }= props;
     const [categoryFilter, setCategoryFilter] = useState('');
     const [brandFilter, setBrandFilter] = useState('');
 
@@ -23,7 +24,11 @@ function ProductTable() {
                 />
             </div>
             <div className="grid">
-                <ProductGrid categoryFilter={categoryFilter} brandFilter={brandFilter}/>
+                <ProductGrid 
+                categoryFilter={categoryFilter} 
+                brandFilter={brandFilter}
+                getUpdatedStock={getUpdatedStock}
+                />
             </div>
         </div>
     );
