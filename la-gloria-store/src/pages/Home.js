@@ -3,11 +3,12 @@ import ProductTable from '../components/HomePageComponents/ProductTable';
 import '../App.css';
 
 
-function Home() {
+function Home(props) {
+    const { getUpdatedStock }=props;
 
     return (
         <div>
-            <ProductTable/>
+            <ProductTable getUpdatedStock={getUpdatedStock}/>
         </div>
     );
 }

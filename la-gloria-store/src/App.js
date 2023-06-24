@@ -9,27 +9,51 @@ import Footer from "./components/Footer";
 import { useState } from "react";
 
 function App() {
-  const [orderDetailList, setOrderDetailList] = useState([]);
+  const [orderProductPairList, setOrderProductPairList] = useState([]);
 
-  const addOrderDetails = (orderDetail) => {
-    setOrderDetailList((prevOrderDetailList) => [
-      ...prevOrderDetailList,
-      orderDetail,
+  const addOrderProductPair = (orderProductPair) => {
+    setOrderProductPairList((prevOrderProductPairList) => [
+      ...prevOrderProductPairList,
+      orderProductPair,
     ]);
   };
 
-  const handleOrderDetailList = (newOrderDetailList) => {
-    setOrderDetailList(newOrderDetailList);
+  const handleOrderProductPairList = (newOrderProductList) => {
+    setOrderProductPairList(newOrderProductList);
   }
+
+  const getUpdatedStock = (productId, oldStock) => {
+    const getProductStockInCart = () => {
+      let totalStock = 0;
+      for (const pair of orderProductPairList) {
+        const [product, _] = pair;
+        if (product.product_id === productId) {
+          totalStock += product.product_amount;
+        }
+      }
+      return totalStock;
+    };
+  
+    return oldStock - getProductStockInCart();
+  };
 
   return (
     <div>
-      <Navbar orderDetailList={orderDetailList} handleOrderDetailList={handleOrderDetailList} />
+      <Navbar orderProductPairList={orderProductPairList} handleOrderProductPairList={handleOrderProductPairList} />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route 
+        path="/" 
+        element={<Home
+          getUpdatedStock={getUpdatedStock}
+        />} />
         <Route
           path="/product/:productId"
-          element={<Product addOrderDetails={addOrderDetails} />}
+          element={<Product 
+            orderProductPairList={orderProductPairList} 
+            handleOrderProductPairList={handleOrderProductPairList} 
+            addOrderProductPair={addOrderProductPair}
+            getUpdatedStock = {getUpdatedStock}
+             />}
         />
         <Route path="/history/:clientEmail" element={<HistoryPage />} />
         <Route path="*" element={<ErrorPage />} />

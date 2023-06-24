@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import "../styles/history-page.css";
 
 function HistoryPage() {
@@ -7,7 +7,9 @@ function HistoryPage() {
     const email = params.clientEmail;
     const [shoppingCarts, setShoppingCarts] = useState([]);
     const [expandedRows, setExpandedRows] = useState([]);
-    const [orderDetails, setOrderDetails] = useState([]);
+    const [orderDetailProductPairs, setOrderDetailProductPairs] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchShoppingCarts = async () => {
@@ -18,35 +20,64 @@ function HistoryPage() {
                 const data = await response.json();
                 setShoppingCarts(data);
             } catch (error) {
-                console.error(error);
+                navigate("/error");
             }
         };
 
         fetchShoppingCarts();
     }, [email]);
 
-    const fetchOrderDetails = async (shoppingCartId) => {
+    const handleRowClick = async (index, shoppingCartId) => {
+        if (expandedRows.includes(index)) {
+            setExpandedRows([]);
+        } else {
+            const newExpandedRows = [index];
+            setExpandedRows(newExpandedRows);
+            await retrieveOrderDetailData(shoppingCartId);
+        }
+    };
+
+    const retrieveOrderDetailData = async (shoppingCartId) => {
         try {
             const response = await fetch(
                 `https://la-gloria-store-algorithm-aces.vercel.app/rest/order-details/shopping-cart/${shoppingCartId}`
             );
             const data = await response.json();
-            setOrderDetails(data);
+            const pairs = await getOrderDetailProductPairs(data);
+            setOrderDetailProductPairs(pairs);
         } catch (error) {
-            console.error(error);
+            navigate("/error");
         }
     };
 
-    const handleRowClick = async (index, shoppingCartId) => {
-        const rowIndex = expandedRows.indexOf(index);
-        const newExpandedRows = [...expandedRows];
-        if (rowIndex === -1) {
-            newExpandedRows.push(index);
-            await fetchOrderDetails(shoppingCartId);
-        } else {
-            newExpandedRows.splice(rowIndex, 1);
+    const getOrderDetailProductPairs = async (data) => {
+        const pairs = await Promise.all(
+            data.map(async (orderDetail) => {
+                return await createOrderDetailProductPair(orderDetail);
+            })
+        );
+        return pairs;
+    };
+
+    const createOrderDetailProductPair = async (orderDetail) => {
+        const product = await getProduct(orderDetail.product_id);
+        return [orderDetail, product];
+    };
+
+    const getProduct = async (productId) => {
+        try {
+            const response = await fetch(
+                `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
+            );
+            if (response.ok) {
+                const json = await response.json();
+                return json.data;
+            } else {
+                navigate("/error");
+            }
+        } catch (error) {
+            navigate("/error");
         }
-        setExpandedRows(newExpandedRows);
     };
 
     return (
@@ -67,7 +98,7 @@ function HistoryPage() {
                         <React.Fragment key={cart.id}>
                             <tr>
                                 <td>{cart.date}</td>
-                                <td>{cart.total_price}</td>
+                                <td>${cart.total_price}</td>
                                 <td>
                                     <button
                                         className="btn btn-primary btn-sm"
@@ -85,18 +116,20 @@ function HistoryPage() {
                                                 <thead>
                                                 <tr>
                                                     <th>Product Amount</th>
-                                                    <th>Created At</th>
-                                                    <th>Product ID</th>
+                                                    <th>Product Name</th>
+                                                    <th>Product Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
-                                                {orderDetails.map((orderDetail) => (
-                                                    <tr key={orderDetail.id}>
-                                                        <td>{orderDetail.product_amount}</td>
-                                                        <td>{orderDetail.created_at.substring(0, 10) /*To get only the YYYY-MM-DD format*/}</td>
-                                                        <td>{orderDetail.product_id}</td>
-                                                    </tr>
-                                                ))}
+                                                {orderDetailProductPairs
+                                                    .filter(([orderDetail]) => orderDetail.shopping_cart_id === cart.id)
+                                                    .map(([orderDetail, product]) => (
+                                                        <tr key={orderDetail.id}>
+                                                            <td>{orderDetail.product_amount}</td>
+                                                            <td>{product.name}</td>
+                                                            <td>${product.price}</td>
+                                                        </tr>
+                                                    ))}
                                                 </tbody>
                                             </table>
                                         </div>

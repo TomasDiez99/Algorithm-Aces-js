@@ -4,8 +4,8 @@ import ShoppingCart from "./ShoppingCart";
 function CartModal({
                        showCartModal,
                        handleCloseCart,
-                       orderDetailList,
-                       handleOrderDetailList,
+                       orderProductPairList,
+                       handleOrderProductPairList,
                    }) {
     return (
         <div
@@ -27,9 +27,9 @@ function CartModal({
                     </div>
                     <div className="modal-body">
                         <ShoppingCart
-                            orderDetailList={orderDetailList}
+                            orderProductPairList={orderProductPairList}
                             handleCloseCart={handleCloseCart}
-                            handleOrderDetailList={handleOrderDetailList}
+                            handleOrderProductPairList={handleOrderProductPairList}
                         />
                     </div>
                 </div>

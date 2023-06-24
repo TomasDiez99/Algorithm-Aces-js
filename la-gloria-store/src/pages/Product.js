@@ -7,7 +7,7 @@ import "../styles/product-page.css";
 import {useNavigate} from "react-router-dom";
 
 function Product(prop) {
-    const {addOrderDetails} = prop;
+    const {orderProductPairList, handleOrderProductPairList, addOrderProductPair, getUpdatedStock} = prop;
     const [product, setProduct] = useState(null);
 
     const params = useParams();
@@ -52,7 +52,10 @@ function Product(prop) {
                     <MDBCol md="6">
                         <ProductPageContent
                             product={product}
-                            addOrderDetails={addOrderDetails}
+                            orderProductPairList={orderProductPairList}
+                            handleOrderProductPairList={handleOrderProductPairList}
+                            addOrderProductPair={addOrderProductPair}
+                            getUpdatedStock = {getUpdatedStock}
                         />
                     </MDBCol>
                 </MDBRow>

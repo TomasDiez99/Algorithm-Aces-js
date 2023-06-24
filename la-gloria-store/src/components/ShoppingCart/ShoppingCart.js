@@ -2,13 +2,13 @@ import React, {useState} from "react";
 import EmailCheckoutModal from "./EmailCheckoutModal";
 import "../../App.css";
 
-function OrderDetailItem({orderDetail, onRemove}) {
-    const {product_id, product_amount} = orderDetail;
+function OrderDetailItem({ orderDetail, product, onRemove }) {
 
     return (
         <tr>
-            <td>{product_id}</td>
-            <td>{product_amount}</td>
+            <td>{product.name}</td>
+            <td>${product.price}</td>
+            <td>{orderDetail.product_amount}</td>
             <td>
                 <button type="button" className="btn btn-danger" onClick={onRemove}>
                     Remove
@@ -18,8 +18,9 @@ function OrderDetailItem({orderDetail, onRemove}) {
     );
 }
 
+
 function ShoppingCart(props) {
-    const {orderDetailList, handleOrderDetailList, handleCloseCart} = props;
+    const {orderProductPairList, handleOrderProductPairList, handleCloseCart} = props;
     const [showEmailCheckoutModal, setShowEmailCheckoutModal] = useState(false);
 
     const handleShowModal = (show) => {
@@ -27,10 +28,10 @@ function ShoppingCart(props) {
     };
 
     const handleRemoveOrderDetail = (index) => {
-        const updatedOrderDetailList = orderDetailList.filter(
+        const updatedOrderProductPairList = orderProductPairList.filter(
             (_, i) => i !== index
         );
-        handleOrderDetailList(updatedOrderDetailList);
+        handleOrderProductPairList(updatedOrderProductPairList);
     };
 
     return (
@@ -39,29 +40,32 @@ function ShoppingCart(props) {
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>Product ID</th>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
                         <th>Quantity</th>
                         <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    {orderDetailList.map((orderDetail, index) => (
+                    {orderProductPairList.map(([orderDetail, product], index) => (
                         <OrderDetailItem
                             key={index}
                             orderDetail={orderDetail}
+                            product={product}
                             onRemove={() => handleRemoveOrderDetail(index)}
                         />
                     ))}
+
                     </tbody>
                 </table>
             </div>
 
             <EmailCheckoutModal
-                orderDetailList={orderDetailList}
+                orderProductPairList={orderProductPairList}
                 show={showEmailCheckoutModal}
                 handleCloseEmailCheckoutModal={() => handleShowModal(false)}
                 handleCloseCart={handleCloseCart}
-                handleOrderDetailList={handleOrderDetailList}
+                handleOrderProductPairList={handleOrderProductPairList}
             />
             <div className="modal-footer">
                 <button
@@ -69,7 +73,7 @@ function ShoppingCart(props) {
                     className="btn btn-secondary"
                     data-bs-dismiss="modal"
                     onClick={() => handleShowModal(true)}
-                    disabled={orderDetailList.length === 0}
+                    disabled={orderProductPairList.length === 0}
                 >
                     Checkout
                 </button>
