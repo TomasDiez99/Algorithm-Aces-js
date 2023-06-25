@@ -31,15 +31,17 @@ const HomeCarrousel = () => {
   }
 
   return (
-    <MDBCarousel
-      activeItem={1}
-      length={imageUrls.length}
-      showControls={true}
-      showIndicators={true}
-      className="z-depth-1 home-carousel-container"
-    >
-      <MDBCarouselInner>{carouselItems}</MDBCarouselInner>
-    </MDBCarousel>
+    <div className="carousel-wrapper">
+      <MDBCarousel
+        activeItem={1}
+        length={imageUrls.length}
+        showControls={true}
+        showIndicators={true}
+        className="z-depth-1 home-carousel-container"
+      >
+        <MDBCarouselInner>{carouselItems}</MDBCarouselInner>
+      </MDBCarousel>
+    </div>
   );
 };
 
