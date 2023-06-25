@@ -7,7 +7,7 @@ function FilterTable(props) {
     const {setCategoryFilter, setBrandFilter} = props;
     return (
         <div className="radius-component filter-black">
-            <div className="filter-black">
+            <div>
                 <CategoryFilter setCategoryFilter={setCategoryFilter}/>
             </div>
             <div>

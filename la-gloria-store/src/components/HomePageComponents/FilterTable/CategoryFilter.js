@@ -35,7 +35,7 @@ function CategoryFilter(props) {
     };
 
     return (
-        <div className="radius-component">
+        <div>
             <h3 className="filter-white filter-title">Categories</h3>
             {categories.map((category) => (
                 <div key={category.id}>

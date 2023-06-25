@@ -5,7 +5,7 @@
 }
 
 .icon-text {
-  margin-left: 0.5rem; /* Puedes ajustar el valor según tus necesidades */
+  margin-left: 0.5rem;
 }
 
 
@@ -70,6 +70,7 @@
 .home-container {
   display: flex;
   margin-right: 15px;
+  margin-bottom: 15px;
 }
 
 .carousel-wrapper {
