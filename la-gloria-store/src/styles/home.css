@@ -72,6 +72,15 @@
   margin-right: 15px;
 }
 
+.home-carousel-container {
+  width: 100%;
+  height: 60vh;
+}
+
+.home-carousel-img {
+  height: 60vh;
+}
+
 .filter {
   flex: 1;
   margin-right: 4px;
