@@ -1,3 +1,5 @@
+@import "./global.css";
+
 .product-page-container {
   display: flex;
   flex-direction: column;
@@ -26,4 +28,29 @@
   max-height: 100%;
   width: auto;
   height: auto;
+}
+
+
+.more-button.btn {
+  border-color: black;
+  background-color: var(--color-accent-2);
+  color: black;
+}
+
+.less-button.btn {
+  border-color: var(--color-primary);
+  background-color: var(--color-accent-2);
+  color: black;
+}
+
+.add-to-cart-button.red-border {
+  border-color: var(--color-primary);
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+.add-to-cart-button.red-border:hover {
+  border-color: red;
+  background-color: red;
+  color: black;
 }

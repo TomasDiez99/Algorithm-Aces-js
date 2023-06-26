@@ -51,8 +51,8 @@ function ProductGrid(props) {
   };
 
   return (
-    <div className="page-background-color radius-component">
-      <div className="grid-margin productGridStyle">
+    <div>
+      <div className="productGridStyle">
         {products.map((product) => (
           <div className="cardContainerStyle" key={product.id}>
             <ProductCard
