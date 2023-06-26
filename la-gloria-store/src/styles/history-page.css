@@ -1,4 +1,11 @@
 .table-wrapper {
-    max-height: 100vh;
-    overflow-y: auto;
-  }
+  height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+.btn.see-cart-details-button {
+  border-color: var(--color-primary);
+  background-color: var(--color-accent-2);
+  color: black;
+}

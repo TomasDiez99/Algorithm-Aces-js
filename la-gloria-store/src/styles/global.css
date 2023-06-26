@@ -26,3 +26,8 @@
     background-color: red;
     color: black;
 }
+
+.btn.see-history-button {
+  background-color: var(--color-primary);
+  color: black;
+}

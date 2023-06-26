@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import "../styles/global.css";
 
 function HistoryModal({showHistoryModal, handleShowHistory}) {
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ function HistoryModal({showHistoryModal, handleShowHistory}) {
                                     required
                                 />
                             </div>
-                            <button type="submit" className="btn btn-primary">
+                            <button type="submit" className="btn see-history-button">
                                 See history
                             </button>
                         </form>

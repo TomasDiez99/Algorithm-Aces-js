@@ -85,7 +85,7 @@ function HistoryPage() {
             <h1 className="text-center">History</h1>
             <p className="text-center">{email}</p>
             <div className="table-wrapper">
-                <table className="table">
+                <table className="table table-striped">
                     <thead>
                     <tr>
                         <th>Date</th>
@@ -101,7 +101,7 @@ function HistoryPage() {
                                 <td>${cart.total_price}</td>
                                 <td>
                                     <button
-                                        className="btn btn-primary btn-sm"
+                                        className="btn btn-sm see-cart-details-button"
                                         onClick={() => handleRowClick(index, cart.id)}
                                     >
                                         {expandedRows.includes(index) ? "-" : "+"}
