@@ -16,6 +16,42 @@
   margin-left: 0.5rem;
 } 
 
+.title-text {
+  font-family: "Arial", sans-serif;
+}
+
+.home-page-title {
+  text-align: center;
+  background-color: var(--color-primary);
+  width: 80vw;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.secondary-text {
+  color: var(--color-secondary);
+}
+
+.white-text {
+  color: white;
+}
+
+
+.btn.newsletter-confirm-btn {
+  color: black;
+  background-color: var(--color-primary);
+}
+
+.container-fluid.newsletter-container {
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+h2, p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .btn {
   padding: 10px 20px;
   border: none;
