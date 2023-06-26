@@ -3,17 +3,19 @@ import "../../styles/product-page.css";
 
 const VerticalBanner = () => {
   return (
-    <div className="banner-container debug-container-4">
+    <div className="banner-container">
       <img
-        src="/verticalad.jpg"
+        src="/clickhere.jpg"
         alt="Vertical Ad Banner"
-        className="vertical-banner img-fluid"
+        className="vertical-banner"
         onError={(e) => {
-            e.target.src = "/notfound.png";
-          }}
+          e.target.src = "/notfound.png";
+        }}
       />
+      
     </div>
   );
 };
+
 
 export default VerticalBanner;

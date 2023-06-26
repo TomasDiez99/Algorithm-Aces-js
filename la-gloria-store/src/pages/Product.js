@@ -48,28 +48,28 @@ function Product(prop) {
   };
 
   return (
-      <div className="product-page-container container-fluid debug-container-2">
-        <div className="row">
-          <div className="col-5">
-            <ProductCarrousel product={product} />
-          </div>
-          <div className="col-5">
-            <ProductPageContent
-              product={product}
-              orderProductPairList={orderProductPairList}
-              handleOrderProductPairList={handleOrderProductPairList}
-              addOrderProductPair={addOrderProductPair}
-              getUpdatedStock={getUpdatedStock}
-            />
-          </div>
-          <div className="col-2 justify-content-end vertical-banner-container debug-container-3">
+    <div className="product-page-container container-fluid">
+      <div className="row">
+        <div className="col-5">
+          <ProductCarrousel product={product} />
+        </div>
+        <div className="col-5">
+          <ProductPageContent
+            product={product}
+            orderProductPairList={orderProductPairList}
+            handleOrderProductPairList={handleOrderProductPairList}
+            addOrderProductPair={addOrderProductPair}
+            getUpdatedStock={getUpdatedStock}
+          />
+        </div>
+        <div className="col-2 justify-content-end">
+          <a href="#">
             <VerticalBanner />
-          </div>
+          </a>
         </div>
       </div>
+    </div>
   );
-  
-  
 }
 
 export default Product;
