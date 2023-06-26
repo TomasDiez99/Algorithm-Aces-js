@@ -1,7 +1,28 @@
 :root {
     --color-primary: #FF0000;
+    --color-primary-light: #FF7070;
     --color-secondary: #0D1821;
     --color-accent-1: #89023E;
     --color-accent-2: #A799B7;
     background-color: var(--color-secondary);
+}
+
+.btn.cart-button {
+    background-color: black;
+    color: var(--color-accent-2);
+  }
+  
+.btn.cart-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+  
+.btn.history-button {
+    background-color: var(--color-secondary);
+    color: var(--color-accent-2);
+  }
+  
+.btn.history-button:hover {
+    background-color: red;
+    color: black;
 }

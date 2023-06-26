@@ -6,9 +6,15 @@
   cursor: pointer;
 }
 
+
+.footer-icon:hover {
+  color: red;
+  cursor: pointer;
+}
+
 .icon-text {
   margin-left: 0.5rem;
-}
+} 
 
 .btn {
   padding: 10px 20px;
@@ -19,7 +25,13 @@
   cursor: pointer;
 }
 
-.btn-red {
+.btn.change-page-button {
+  color: var(--color-accent-2);
+  background-color: var(--color-secondary);
+}
+
+.btn.change-page-button:hover {
+  color: black;
   background-color: var(--color-primary);
 }
 
@@ -93,7 +105,7 @@
 .grid {
   flex: 4;
   margin-left: 4px;
-  background-color: var(--color-accent-1);
+  background-color: var(--color-accent-2);
   border-radius: 10px;
   margin-right: 20px;
 }
@@ -101,9 +113,6 @@
 .radius-component {
   margin-left: 5px;
 }
-
-
-
 
 .checkbox-container {
   margin-left: 5px;
@@ -113,9 +122,18 @@
   margin-left: 5px;
 }
 
-
 .card {
   width: 14rem;
+}
+
+.btn.card-button-details {
+  color: var(--color-accent-2);
+  background-color: var(--color-secondary);
+}
+
+.btn.card-button-details:hover {
+  color: black;
+  background-color: var(--color-primary);
 }
 
 

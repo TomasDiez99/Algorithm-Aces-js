@@ -69,7 +69,7 @@ function ProductGrid(props) {
       </div>
       <div className="paginateButtonStyle">
         <button
-          className="btn btn-red"
+          className="btn change-page-button"
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
           data-toggle="tooltip"
@@ -79,7 +79,7 @@ function ProductGrid(props) {
           Previous
         </button>
         <button
-          className="btn btn-red"
+          className="btn change-page-button"
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === lastPage}
           data-toggle="tooltip"

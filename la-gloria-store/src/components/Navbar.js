@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import CartModal from "./ShoppingCart/CartModal";
 import HistoryModal from "./HistoryModal";
+import "../styles/global.css";
 
 function Navbar(prop) {
   const { orderProductPairList, handleOrderProductPairList } = prop;
@@ -45,7 +46,7 @@ function Navbar(prop) {
         </div>
         <div>
           <button
-            className="btn btn-primary"
+            className="btn cart-button btn-sm"
             onClick={() => toggleCartModal(true)}
             data-bs-toggle="tooltip"
             data-bs-placement="bottom"
@@ -54,7 +55,7 @@ function Navbar(prop) {
             <i className="fas fa-shopping-cart"></i>
           </button>
           <button
-            className="btn btn-success"
+            className="btn history-button btn-sm"
             onClick={() => toggleHistoryModal(true)}
             data-bs-toggle="tooltip"
             data-bs-placement="bottom"

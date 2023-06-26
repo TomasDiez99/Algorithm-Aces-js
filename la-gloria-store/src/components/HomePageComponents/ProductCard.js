@@ -39,11 +39,11 @@ function ProductCard(props) {
         <p className="card-text">${price}</p>
         <div className="text-center">
           {isProductAvailable() ? (
-            <Link to={`/product/${id}`} className="btn btn-primary">
+            <Link to={`/product/${id}`} className="btn card-button-details">
               See details
             </Link>
           ) : (
-            <button className="btn btn-primary" disabled>
+            <button className="btn card-button-details" disabled>
               Product Unavailable
             </button>
           )}
