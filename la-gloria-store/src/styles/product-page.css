@@ -1,10 +1,27 @@
 @import "./global.css";
+@import "./debug.css";
 
 .product-page-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; 
-  
+  height: 100vh;
+  width: 100%;
+  justify-content: center;
+}
+
+.vertical-banner-container {
+  height: 99vh;
+}
+
+.banner-container {
+  height: 99vh;
+  display: flex;
+  background-color: black;
+}
+
+.vertical-banner {
+  height: 100%;
+  object-fit: contain;
 }
 
 .center-content {
@@ -54,13 +71,3 @@
   background-color: red;
   color: black;
 }
-
-.vertical-banner-container {
-  height: 100%;
-}
-
-.banner-container {
-  height: 100vh;
-  background-color: black;
-}
-

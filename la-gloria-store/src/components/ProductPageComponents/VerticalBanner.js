@@ -3,9 +3,9 @@ import "../../styles/product-page.css";
 
 const VerticalBanner = () => {
   return (
-    <div className="banner-container">
+    <div className="banner-container debug-container-4">
       <img
-        src="/adbanners/banner.jpg"
+        src="/verticalad.jpg"
         alt="Vertical Ad Banner"
         className="vertical-banner img-fluid"
         onError={(e) => {

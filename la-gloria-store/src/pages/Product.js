@@ -48,13 +48,12 @@ function Product(prop) {
   };
 
   return (
-    <div className="product-page-container">
-      <div className="container">
+      <div className="product-page-container container-fluid debug-container-2">
         <div className="row">
-          <div className="col-6">
+          <div className="col-5">
             <ProductCarrousel product={product} />
           </div>
-          <div className="col-4">
+          <div className="col-5">
             <ProductPageContent
               product={product}
               orderProductPairList={orderProductPairList}
@@ -63,12 +62,11 @@ function Product(prop) {
               getUpdatedStock={getUpdatedStock}
             />
           </div>
-          <div className="col-2 d-flex justify-content-end vertical-banner-container">
+          <div className="col-2 justify-content-end vertical-banner-container debug-container-3">
             <VerticalBanner />
           </div>
         </div>
       </div>
-    </div>
   );
   
   
