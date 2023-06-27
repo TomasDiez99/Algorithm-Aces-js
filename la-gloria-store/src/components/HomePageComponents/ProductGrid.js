@@ -67,7 +67,7 @@ function ProductGrid(props) {
           </div>
         ))}
       </div>
-      <div className="paginateButtonStyle">
+      <div className="container-fluid paginateButtonStyle radius-component">
         <button
           className="btn change-page-button"
           onClick={() => goToPage(currentPage - 1)}

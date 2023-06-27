@@ -20,20 +20,22 @@ function ProductCard(props) {
 
   return (
     <div className="card">
-      {isLoading && (
+      <div className="card-img-wrapper">
+        {isLoading && (
+          <img
+            src="loading.png"
+            className="loading-image img-fluid"
+            alt="Loading"
+          />
+        )}
         <img
-          src="loading.png"
-          className="loading-image"
-          alt="Loading"
+          src={image}
+          className={`card-img-top ${isLoading ? "hidden" : ""}`}
+          alt={name}
+          onLoad={handleImageLoad}
+          onError={handleImageLoadError}
         />
-      )}
-      <img
-        src={image}
-        className={`card-img-top ${isLoading ? "hidden" : ""}`}
-        alt={name}
-        onLoad={handleImageLoad}
-        onError={handleImageLoadError}
-      />
+      </div>
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p className="card-text">${price}</p>

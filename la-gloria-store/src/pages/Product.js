@@ -50,7 +50,7 @@ function Product(prop) {
   return (
     <div className="product-page-container container-fluid">
       <div className="row">
-        <div className="col-5">
+        <div className="col-5 debug-1">
           <ProductCarrousel product={product} />
         </div>
         <div className="col-5">

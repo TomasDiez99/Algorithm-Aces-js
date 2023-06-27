@@ -68,7 +68,7 @@ h2, p {
 
 .btn.change-page-button:hover {
   color: black;
-  background-color: var(--color-primary);
+  background-color: var(--color-accent-2);
 }
 
 .filter-table {
@@ -110,12 +110,16 @@ h2, p {
   gap: 20px;
   justify-content: center;
   align-items: center;
-  margin: 0 20px;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
 }
 
-.paginateButtonStyle {
-  margin-top: 10px;
+.container-fluid.paginateButtonStyle {
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+  background-color: var(--color-accent-1);
   display: flex;
+  width: 50%;
   justify-content: center;
 }
 
@@ -161,6 +165,22 @@ h2, p {
 .card {
   width: 14rem;
 }
+
+.card-img-wrapper {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+}
+
+.card-img-top {
+  max-height: 100%;
+  height: 100vh;
+  width: auto;
+  object-fit: fill;
+}
+
+
 
 .btn.card-button-details {
   color: var(--color-accent-2);
