@@ -45,15 +45,28 @@
 }
 
 
+
 .more-button.btn {
-  border-color: black;
-  background-color: var(--color-accent-2);
+  border-color: var(--color-primary);
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+.more-button.btn:hover {
+  border-color: red;
+  background-color: red;
   color: black;
 }
 
 .less-button.btn {
   border-color: var(--color-primary);
-  background-color: var(--color-accent-2);
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+.less-button.btn:hover {
+  border-color: red;
+  background-color: red;
   color: black;
 }
 

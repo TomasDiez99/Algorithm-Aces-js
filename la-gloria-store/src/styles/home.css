@@ -44,7 +44,7 @@
 
 .container-fluid.newsletter-container {
   background-color: black;
-  color: var(--color-accent-2);
+  color: white;
 }
 
 h2, p {
@@ -76,7 +76,7 @@ h2, p {
 }
 
 .filter-white {
-  color: var(--color-accent-2);
+  color: white;
 
   margin-left: 5px;
 }
@@ -141,7 +141,7 @@ h2, p {
 .grid {
   flex: 4;
   margin-left: 4px;
-  background-color: var(--color-accent-2);
+  background-color: var(--color-primary-light);
   border-radius: 10px;
   margin-right: 20px;
 }

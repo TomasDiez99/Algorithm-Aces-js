@@ -10,7 +10,6 @@ function Home(props) {
     return (
         <div
         >
-            <HomePageTitle/>
             <HomeCarrousel/>
             <ProductTable getUpdatedStock={getUpdatedStock}/>
             <NewsletterSection/>

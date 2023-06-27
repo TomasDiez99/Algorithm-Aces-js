@@ -7,7 +7,7 @@ function NewsletterSection() {
   };
 
   return (
-    <div className="container-fluid newsletter-container text-center my-4">
+    <div className="container-fluid newsletter-container text-center bg-dark">
       <div className="row">
         <div className="col">
           <h2>
@@ -30,10 +30,10 @@ function NewsletterSection() {
                 placeholder="Your email address"
                 aria-label="Your email address"
               />
-              <button className="btn newsletter-confirm-btn" type="submit">
-                Confirm
-              </button>
             </div>
+            <button className="btn newsletter-confirm-btn mt-2" type="submit">
+              Confirm
+            </button>
           </form>
         </div>
       </div>
