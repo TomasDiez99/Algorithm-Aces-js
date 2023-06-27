@@ -7,7 +7,7 @@ function ProductCarousel(props) {
 
   return (
     <MDBCarousel
-      className="carousel-container carousel-dark" // Agrega la clase carousel-dark aquí
+      className="carousel-container carousel-dark"
       activeItem={1}
       length={1}
       showControls

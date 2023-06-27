@@ -6,7 +6,6 @@
   cursor: pointer;
 }
 
-
 .footer-icon:hover {
   color: red;
   cursor: pointer;
@@ -62,6 +61,7 @@ h2, p {
 }
 
 .btn.change-page-button {
+  width: 10rem;
   color: var(--color-accent-2);
   background-color: var(--color-secondary);
 }
@@ -85,6 +85,11 @@ h2, p {
   flex: 1;
   margin-right: 4px;
 }
+
+.selected {
+  color: red;
+}
+
 
 .filter-title {
   text-align: center;
@@ -117,7 +122,6 @@ h2, p {
 .container-fluid.paginateButtonStyle {
   margin-top: 3vh;
   margin-bottom: 1vh;
-  background-color: var(--color-accent-1);
   display: flex;
   width: 50%;
   justify-content: center;
