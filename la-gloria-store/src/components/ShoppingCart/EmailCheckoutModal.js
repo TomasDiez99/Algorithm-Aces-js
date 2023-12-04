@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import "../../App.css";
 
 function EmailCheckoutModal(props) {
     const {
@@ -173,7 +174,7 @@ function EmailCheckoutModal(props) {
                             </div>
                             <button
                                 type="submit"
-                                className="btn btn-primary"
+                                className="btn checkout-button"
                                 disabled={success}
                             >
                                 Submit

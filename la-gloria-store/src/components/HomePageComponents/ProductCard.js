@@ -20,30 +20,32 @@ function ProductCard(props) {
 
   return (
     <div className="card">
-      {isLoading && (
+      <div className="card-img-wrapper">
+        {isLoading && (
+          <img
+            src="loading.png"
+            className="loading-image img-fluid"
+            alt="Loading"
+          />
+        )}
         <img
-          src="loading.png"
-          className="loading-image"
-          alt="Loading"
+          src={image}
+          className={`card-img-top ${isLoading ? "hidden" : ""}`}
+          alt={name}
+          onLoad={handleImageLoad}
+          onError={handleImageLoadError}
         />
-      )}
-      <img
-        src={image}
-        className={`card-img-top ${isLoading ? "hidden" : ""}`}
-        alt={name}
-        onLoad={handleImageLoad}
-        onError={handleImageLoadError}
-      />
+      </div>
       <div className="card-body">
         <h5 className="card-title">{name}</h5>
         <p className="card-text">${price}</p>
         <div className="text-center">
           {isProductAvailable() ? (
-            <Link to={`/product/${id}`} className="btn btn-primary">
+            <Link to={`/product/${id}`} className="btn card-button-details">
               See details
             </Link>
           ) : (
-            <button className="btn btn-primary" disabled>
+            <button className="btn card-button-details" disabled>
               Product Unavailable
             </button>
           )}

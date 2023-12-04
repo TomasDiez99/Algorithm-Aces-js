@@ -1,0 +1,33 @@
+:root {
+    --color-primary: #FF0000;
+    --color-primary-light: #c12f2f;
+    --color-secondary: #0D1821;
+    --color-accent-1: #651919;
+    --color-accent-2: white;
+    background-color: var(--color-secondary);
+}
+
+.btn.cart-button {
+    background-color: black;
+    color: var(--color-accent-2);
+  }
+  
+.btn.cart-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+  
+.btn.history-button {
+    background-color: var(--color-secondary);
+    color: var(--color-accent-2);
+  }
+  
+.btn.history-button:hover {
+    background-color: red;
+    color: black;
+}
+
+.btn.see-history-button {
+  background-color: var(--color-primary);
+  color: black;
+}

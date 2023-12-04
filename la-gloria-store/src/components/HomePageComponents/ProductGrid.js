@@ -51,8 +51,8 @@ function ProductGrid(props) {
   };
 
   return (
-    <div className="page-background-color radius-component">
-      <div className="grid-margin productGridStyle">
+    <div>
+      <div className="productGridStyle">
         {products.map((product) => (
           <div className="cardContainerStyle" key={product.id}>
             <ProductCard
@@ -67,9 +67,9 @@ function ProductGrid(props) {
           </div>
         ))}
       </div>
-      <div className="paginateButtonStyle">
+      <div className="container-fluid paginateButtonStyle radius-component">
         <button
-          className="btn btn-red"
+          className="btn change-page-button"
           onClick={() => goToPage(currentPage - 1)}
           disabled={currentPage === 1}
           data-toggle="tooltip"
@@ -79,7 +79,7 @@ function ProductGrid(props) {
           Previous
         </button>
         <button
-          className="btn btn-red"
+          className="btn change-page-button"
           onClick={() => goToPage(currentPage + 1)}
           disabled={currentPage === lastPage}
           data-toggle="tooltip"
