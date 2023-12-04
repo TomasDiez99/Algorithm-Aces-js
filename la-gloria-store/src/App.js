@@ -6,6 +6,7 @@ import HistoryPage from "./pages/HistoryPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import MercadoPago from "./components/MercadoPago";
 
 function App() {
   const [orderProductPairList, setOrderProductPairList] = useState([]);
@@ -55,6 +56,7 @@ function App() {
              />}
         />
         <Route path="/history/:clientEmail" element={<HistoryPage />} />
+        <Route path="/mercado-pago" element={<MercadoPago />} /> {/* Nueva ruta para MercadoPago */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
       <Footer />
