@@ -4,12 +4,15 @@ import CartModal from "./ShoppingCart/CartModal";
 import HistoryModal from "./HistoryModal";
 import "../styles/global.css";
 
+
 function Navbar(prop) {
   const { orderProductPairList, handleOrderProductPairList } = prop;
   const [email, setEmail] = useState("");
 
   const [showCartModal, setShowCartModal] = useState(false);
   const [showHistoryModal, setShowHistoryModal] = useState(false);
+
+
 
   const toggleCartModal = (show) => {
     setShowCartModal(show);
@@ -18,6 +21,7 @@ function Navbar(prop) {
   const toggleHistoryModal = (show) => {
     setShowHistoryModal(show);
   };
+
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -45,6 +49,17 @@ function Navbar(prop) {
           </Link>
         </div>
         <div>
+
+          <Link
+              to="/login"
+              className="btn login-button btn-sm"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              title="Login"
+          >
+            <i className="fas fa-user"></i>
+          </Link>
+
           <button
             className="btn cart-button btn-sm"
             onClick={() => toggleCartModal(true)}
@@ -65,6 +80,8 @@ function Navbar(prop) {
           </button>
         </div>
       </div>
+
+
 
       <CartModal
         showCartModal={showCartModal}

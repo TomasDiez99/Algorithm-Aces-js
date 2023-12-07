@@ -6,6 +6,8 @@ import HistoryPage from "./pages/HistoryPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { useState } from "react";
+import Login from "./components/LoginComponents/Login";
+import Register from "./components/LoginComponents/Register";
 
 function App() {
   const [orderProductPairList, setOrderProductPairList] = useState([]);
@@ -56,6 +58,8 @@ function App() {
         />
         <Route path="/history/:clientEmail" element={<HistoryPage />} />
         <Route path="*" element={<ErrorPage />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Routes>
       <Footer />
     </div>

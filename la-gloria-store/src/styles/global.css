@@ -7,6 +7,16 @@
     background-color: var(--color-secondary);
 }
 
+.btn.login-button {
+    background-color: black;
+    color: var(--color-accent-2);
+}
+
+.btn.login-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+
 .btn.cart-button {
     background-color: black;
     color: var(--color-accent-2);
