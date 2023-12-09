@@ -13,7 +13,7 @@ export const AuthProvider = ({children}) => {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ email, password }),
+                body: JSON.stringify({email, password}),
             });
 
             if (!response.ok) {
@@ -31,12 +31,24 @@ export const AuthProvider = ({children}) => {
             navigate("/");
         } catch (error) {
             console.error("Error during login:", error);
-            //navigate("/error");
+            navigate("/error");
         }
     };
 
+    const logOut = async () => {
+        try {
+            await fetch("http://127.0.0.1:8000/rest/auth/logout");
+            setAuth({});
+            navigate("/");
+        } catch (error) {
+            console.error("error during logout", error);
+            setAuth({});
+            navigate("/");
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{auth,setAuth,loginAuth}}>
+        <AuthContext.Provider value={{auth, setAuth, loginAuth}}>
             {children}
         </AuthContext.Provider>
     );
