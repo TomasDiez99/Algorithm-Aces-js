@@ -5,7 +5,13 @@ const AuthContext = createContext({});
 
 export const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState({});
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
+
+    const handleErrorMessage = (errorMsg)  => {
+        setErrorMessage("The next error happened while logging: " + errorMsg);
+    }
+
     const loginAuth = async (email, password) => {
         try {
             const response = await fetch("http://127.0.0.1:8000/rest/auth/login", {
@@ -17,21 +23,21 @@ export const AuthProvider = ({children}) => {
             });
 
             if (!response.ok) {
-                throw new Error("Authentication failed");
+                handleErrorMessage("Wrong mail or password");
             }
+            else{
+                const data = await response.json();
+                const accessToken = data.authorization.token;
 
-            const data = await response.json();
-            const accessToken = data.authorization.token;
-            console.log(accessToken);
-            setAuth({
-                email,
-                password,
-                accessToken
-            });
-            navigate("/");
+                setAuth({
+                    email,
+                    password,
+                    accessToken
+                });
+                navigate("/");
+            }
         } catch (error) {
-            console.error("Error during login:", error);
-            navigate("/error");
+            handleErrorMessage(error);
         }
     };
 
@@ -53,7 +59,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{auth, setAuth, loginAuth, logOut}}>
+        <AuthContext.Provider value={{auth, setAuth, loginAuth, logOut, errorMessage}}>
             {children}
         </AuthContext.Provider>
     );
