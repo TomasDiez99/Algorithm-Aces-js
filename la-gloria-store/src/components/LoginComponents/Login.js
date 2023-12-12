@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "../../styles/global.css";
 import "../../styles/login.css";
+import {useAuth} from "../../hooks/useAuth";
 
 function Login() {
+    const { loginAuth } = useAuth();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -14,11 +17,14 @@ function Login() {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Aquí puedes realizar acciones adicionales, como enviar la información a un servidor
-        console.log("Email:", email);
-        console.log("Password:", password);
+
+        try {
+            await loginAuth(email, password);
+        } catch (error) {
+            console.error("Error during login:", error);
+        }
     };
 
     return (

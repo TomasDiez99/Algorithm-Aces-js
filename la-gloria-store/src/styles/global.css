@@ -7,7 +7,8 @@
     background-color: var(--color-secondary);
 }
 
-.btn.login-button {
+.btn.login-button,
+.btn.dropdown-button {
     background-color: black;
     color: var(--color-accent-2);
 }
