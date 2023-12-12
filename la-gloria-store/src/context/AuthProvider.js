@@ -37,7 +37,12 @@ export const AuthProvider = ({children}) => {
 
     const logOut = async () => {
         try {
-            await fetch("http://127.0.0.1:8000/rest/auth/logout");
+            await fetch("http://127.0.0.1:8000/rest/auth/logout", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
             setAuth({});
             navigate("/");
         } catch (error) {
@@ -48,7 +53,7 @@ export const AuthProvider = ({children}) => {
     }
 
     return (
-        <AuthContext.Provider value={{auth, setAuth, loginAuth}}>
+        <AuthContext.Provider value={{auth, setAuth, loginAuth, logOut}}>
             {children}
         </AuthContext.Provider>
     );
