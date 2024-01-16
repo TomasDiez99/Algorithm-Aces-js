@@ -2,6 +2,7 @@ import React, {useState, createContext} from "react";
 import {useNavigate} from "react-router-dom";
 
 const AuthContext = createContext({});
+const LOGIN_ERROR_MESSAGE = "Wrong mail or password";
 
 export const AuthProvider = ({children}) => {
     const [auth, setAuth] = useState({});
@@ -23,7 +24,7 @@ export const AuthProvider = ({children}) => {
             });
 
             if (!response.ok) {
-                handleErrorMessage("Wrong mail or password");
+                handleErrorMessage(LOGIN_ERROR_MESSAGE);
             }
             else{
                 const data = await response.json();
@@ -37,7 +38,7 @@ export const AuthProvider = ({children}) => {
                 navigate("/");
             }
         } catch (error) {
-            handleErrorMessage(error);
+            handleErrorMessage(LOGIN_ERROR_MESSAGE);
         }
     };
 
