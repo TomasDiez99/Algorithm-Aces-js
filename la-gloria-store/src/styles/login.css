@@ -88,7 +88,7 @@
     left: -9999px;
 }
 
-.errmsg {
+.feedback-message {
     background-color: black;
     position : absolute;
     color: white;

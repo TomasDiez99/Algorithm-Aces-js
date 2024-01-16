@@ -29,7 +29,7 @@ function Login() {
     return (
         <div className="login-container">
             <form onSubmit={handleSubmit} className="login-form">
-                <p className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">
+                <p className={errorMessage ? "feedback-message" : "offscreen"} aria-live="assertive">
                     {errorMessage}
                 </p>
                 <h2>Log In</h2>

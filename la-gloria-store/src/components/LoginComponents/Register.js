@@ -89,44 +89,10 @@ function Register() {
         }
     };
 
-
-   /* const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const vEmail = EMAIL_REGEX.test(email);
-        const vPassword = PASSWORD_REGEX.test(password);
-
-        if (!vEmail) {
-            handleErrorMessage(EMAIL_ERROR_MESSAGE)
-        }
-        if (!vPassword) {
-            handleErrorMessage(PASSWORD_ERROR_MESSAGE)
-        } else {
-            try {
-                const response = await fetch("http://127.0.0.1:8000/rest/auth/register", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({email, password}),
-                });
-
-                if (!response.ok) {
-                    handleErrorMessage("Error creating client");
-                }
-                await handleSuccessMessage(SUCCESS_MESSAGE);
-                navigate("/login");
-            } catch (error) {
-                handleErrorMessage("Error during client creation:");
-            }
-        }
-
-    };*/
-
     return (
         <div className="register-container">
             <form onSubmit={handleSubmit} className="login-form">
-                <p className={showMessage ? "errmsg" : "offscreen"} aria-live="assertive">
+                <p className={showMessage ? "feedback-message" : "offscreen"} aria-live="assertive">
                     {errorMessage || successMessage}
                 </p>
 
