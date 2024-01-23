@@ -10,6 +10,8 @@ import Login from "./components/LoginComponents/Login";
 import Register from "./components/LoginComponents/Register";
 import {AuthProvider} from "./context/AuthProvider";
 import RequireAuth from "./components/LoginComponents/RequiereAuth";
+import MercadoPago from "./components/MercadoPago";
+
 
 function App() {
     const [orderProductPairList, setOrderProductPairList] = useState([]);
@@ -64,6 +66,7 @@ function App() {
                         path="/history/:clientEmail"
                         element={<RequireAuth><HistoryPage /></RequireAuth>}
                     />
+                    <Route path="/mercado-pago" element={<MercadoPago />} /> {/* Nueva ruta para MercadoPago */}
                     <Route path="*" element={<ErrorPage/>}/>
                     <Route path="login" element={<Login/>}/>
                     <Route path="register" element={<Register/>}/>
@@ -72,6 +75,6 @@ function App() {
             </div>
         </AuthProvider>
     );
-}
+
 
 export default App;
