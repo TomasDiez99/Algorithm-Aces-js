@@ -9,6 +9,7 @@ import {useState} from "react";
 import Login from "./components/LoginComponents/Login";
 import Register from "./components/LoginComponents/Register";
 import {AuthProvider} from "./context/AuthProvider";
+import RequireAuth from "./components/LoginComponents/RequiereAuth";
 
 function App() {
     const [orderProductPairList, setOrderProductPairList] = useState([]);
@@ -59,7 +60,10 @@ function App() {
                             getUpdatedStock={getUpdatedStock}
                         />}
                     />
-                    <Route path="/history/:clientEmail" element={<HistoryPage/>}/>
+                    <Route
+                        path="/history/:clientEmail"
+                        element={<RequireAuth><HistoryPage /></RequireAuth>}
+                    />
                     <Route path="*" element={<ErrorPage/>}/>
                     <Route path="login" element={<Login/>}/>
                     <Route path="register" element={<Register/>}/>
