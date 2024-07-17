@@ -9,7 +9,7 @@ function BrandFilter(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/brands")
+    fetch("https://algorithm-aces.vercel.app/rest/brands")
       .then((response) => response.json())
       .then((json) => {
         const enabledBrands = json.data.filter(

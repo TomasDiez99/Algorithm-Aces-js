@@ -13,13 +13,13 @@ function ProductGrid(props) {
   useEffect(() => {
     let url;
     if (categoryFilter !== "" && brandFilter !== "") {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
+      url = `https://algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
     } else if (categoryFilter !== "") {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
+      url = `https://algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
     } else if (brandFilter !== "") {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
+      url = `https://algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
     } else {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
+      url = `https://algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
     }
     fetchProductsFromApi(url);
   }, [categoryFilter, brandFilter, currentPage]);

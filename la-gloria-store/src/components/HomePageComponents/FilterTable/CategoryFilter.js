@@ -9,7 +9,7 @@ function CategoryFilter(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/categories")
+    fetch("https://algorithm-aces.vercel.app/rest/categories")
       .then((response) => response.json())
       .then((json) => {
         const enabledCategories = json.data.filter(
