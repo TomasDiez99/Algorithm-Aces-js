@@ -21,6 +21,7 @@ function ProductGrid(props) {
     } else {
       url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
     }
+    console.log(url);
     fetchProductsFromApi(url);
   }, [categoryFilter, brandFilter, currentPage]);
 
