@@ -7,20 +7,33 @@ function BrandFilter(props) {
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const navigate = useNavigate();
+  const url = "https://backend-la-gloria.vercel.app/rest/brands/";
 
   useEffect(() => {
-    fetch("https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/brands")
-      .then((response) => response.json())
-      .then((json) => {
+    async function fetchData() {
+      try {
+        let fetchResult = await fetch(url);
+        
+        if (!fetchResult.ok) {
+          throw new Error(`HTTP error with status: ${fetchResult.status}`);
+        } 
+  
+        let json = await fetchResult.json();
+        console.log("My Json : \n"+JSON.stringify(json, null, 4))
         const enabledBrands = json.data.filter(
           (brand) => brand.enable === true
         );
         setBrands(enabledBrands);
-      })
-      .catch(() => {
-        navigate("/error");
-      });
+      } catch (e) {
+        console.error("Error: ", e.message);
+        //navigate("/error"); // Descomenta esta línea para redirigir en caso de error
+      }
+    }
+  
+    fetchData();
   }, []);
+  
+  
 
   const handleCheckboxChange = (event, brandName) => {
     const { checked } = event.target;

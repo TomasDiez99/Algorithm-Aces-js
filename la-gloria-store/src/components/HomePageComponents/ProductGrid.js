@@ -24,26 +24,29 @@ function ProductGrid(props) {
     console.log(url);
     fetchProductsFromApi(url);
   }, [categoryFilter, brandFilter, currentPage]);
-
-  const fetchProductsFromApi = (url) => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.data.length !== 0) {
-          setProducts(json.data);
-          setLastPage(json.meta.last_page);
-        } else if (currentPage !== 1) {
-          setCurrentPage(1);
-        } else {
-          alert(
-            "There are no products for the combination of filters selected"
-          );
-        }
-      })
-      .catch(() => {
-        navigate("/error");
-      });
+  
+  const fetchProductsFromApi = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const json = await response.json();
+      if (json.data && json.data.length > 0) {
+        setProducts(json.data);
+        setLastPage(json.meta.last_page);
+      } else if (currentPage !== 1) {
+        setCurrentPage(1);
+      } else {
+        alert("There are no products for the combination of filters selected");
+      }
+    } catch (error) {
+      console.error("Error fetching products: ", error);
+      navigate("/error");
+    }
   };
+  
 
   const goToPage = (page) => {
     if (page >= 1 && page <= lastPage) {
