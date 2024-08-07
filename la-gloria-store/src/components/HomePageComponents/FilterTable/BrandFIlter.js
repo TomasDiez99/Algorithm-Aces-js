@@ -12,7 +12,12 @@ function BrandFilter(props) {
   useEffect(() => {
     async function fetchData() {
       try {
-        let fetchResult = await fetch(url);
+        const requestOptions = {
+          method: "GET",
+          redirect: "follow",
+        };
+
+        let fetchResult = await fetch(url, requestOptions);
 
         if (!fetchResult.ok) {
           throw new Error(`HTTP error with status: ${fetchResult.status}`);

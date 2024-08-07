@@ -11,13 +11,17 @@ function ProductGrid(props) {
   const navigate = useNavigate();
   const url = "https://algorithm-aces-staging.vercel.app/rest";
 
-
   useEffect(() => {
     let url = getUrlEndpoint();
 
     const fetchProductsFromApi = async (url) => {
       try {
-        const response = await fetch(url);
+        const requestOptions = {
+          method: "GET",
+          redirect: "follow"
+        };
+
+        const response = await fetch(url, requestOptions);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
