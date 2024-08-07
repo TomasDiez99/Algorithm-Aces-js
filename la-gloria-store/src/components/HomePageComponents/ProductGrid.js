@@ -9,44 +9,36 @@ function ProductGrid(props) {
   const [lastPage, setLastPage] = useState(1);
   const [products, setProducts] = useState([]);
   const navigate = useNavigate();
+  const url = "https://algorithm-aces-staging.vercel.app/rest";
+
 
   useEffect(() => {
-    let url;
-    if (categoryFilter !== "" && brandFilter !== "") {
-      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
-    } else if (categoryFilter !== "") {
-      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
-    } else if (brandFilter !== "") {
-      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
-    } else {
-      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
-    }
-    console.log(url);
+    let url = getUrlEndpoint();
+
+    const fetchProductsFromApi = async (url) => {
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const json = await response.json();
+        if (json.data && json.data.length > 0) {
+          setProducts(json.data);
+          setLastPage(json.meta.last_page);
+        } else if (currentPage !== 1) {
+          setCurrentPage(1);
+        } else {
+          alert("There are no products for the combination of filters selected");
+        }
+      } catch (error) {
+        console.error("Error fetching products: ", error);
+        //navigate("/error");
+      }
+    };
+
     fetchProductsFromApi(url);
   }, [categoryFilter, brandFilter, currentPage]);
-  
-  const fetchProductsFromApi = async (url) => {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-  
-      const json = await response.json();
-      if (json.data && json.data.length > 0) {
-        setProducts(json.data);
-        setLastPage(json.meta.last_page);
-      } else if (currentPage !== 1) {
-        setCurrentPage(1);
-      } else {
-        alert("There are no products for the combination of filters selected");
-      }
-    } catch (error) {
-      console.error("Error fetching products: ", error);
-      navigate("/error");
-    }
-  };
-  
 
   const goToPage = (page) => {
     if (page >= 1 && page <= lastPage) {
@@ -95,6 +87,23 @@ function ProductGrid(props) {
       </div>
     </div>
   );
+
+  function getUrlEndpoint() {
+    let res = url;
+    if (categoryFilter !== "" && brandFilter !== "") {
+      res =
+        url +
+        `/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
+    } else if (categoryFilter !== "") {
+      res = url + `/products/category/${categoryFilter}?page=${currentPage}`;
+    } else if (brandFilter !== "") {
+      res = url + `/products/brand/${brandFilter}?page=${currentPage}`;
+    } else {
+      res = url + `/products?page=${currentPage}`;
+    }
+    console.log(res);
+    return res;
+  }
 }
 
 export default ProductGrid;

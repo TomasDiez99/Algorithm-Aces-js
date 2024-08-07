@@ -7,33 +7,30 @@ function BrandFilter(props) {
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
   const navigate = useNavigate();
-  const url = "https://backend-la-gloria.vercel.app/rest/brands/";
+  const url = "https://algorithm-aces-staging.vercel.app/rest/brands";
 
   useEffect(() => {
     async function fetchData() {
       try {
         let fetchResult = await fetch(url);
-        
+
         if (!fetchResult.ok) {
           throw new Error(`HTTP error with status: ${fetchResult.status}`);
-        } 
-  
+        }
+
         let json = await fetchResult.json();
-        console.log("My Json : \n"+JSON.stringify(json, null, 4))
         const enabledBrands = json.data.filter(
           (brand) => brand.enable === true
         );
         setBrands(enabledBrands);
       } catch (e) {
         console.error("Error: ", e.message);
-        //navigate("/error"); // Descomenta esta línea para redirigir en caso de error
+        //navigate("/error");
       }
     }
-  
+
     fetchData();
   }, []);
-  
-  
 
   const handleCheckboxChange = (event, brandName) => {
     const { checked } = event.target;
@@ -62,7 +59,9 @@ function BrandFilter(props) {
             />
             <span
               className={`filter-white ${
-                selectedBrand === brand.name ? "selected radius-component container-fluid" : ""
+                selectedBrand === brand.name
+                  ? "selected radius-component container-fluid"
+                  : ""
               }`}
             >
               {brand.name}
