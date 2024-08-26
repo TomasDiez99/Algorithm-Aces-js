@@ -1,10 +1,24 @@
-function min(a, b) {
-    return a < b ? a : b;
-}
+/**
+ * Utility function to create a delay.
+ *
+ * @param {number} ms - The number of milliseconds to delay.
+ * @returns {Promise<void>} - A promise that resolves after the specified delay.
+ */
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-export async function performGet({url, attempts = 4}) {
-    let response = undefined;
-
+/**
+ * Performs a GET request with retry logic.
+ *
+ * This function attempts to fetch data from the specified URL. It retries the request
+ * up to the specified number of attempts in case of failure. A delay is introduced
+ * between attempts to avoid overwhelming the server.
+ *
+ * @param {Object} options - Configuration options for the request.
+ * @param {string} options.url - The URL to fetch data from.
+ * @param {number} [options.attempts=4] - The number of retry attempts. Default is 4.
+ * @returns {Promise<Response|string>} - The response object if successful, otherwise an error message.
+ */
+export async function fetchMultiAttempt({ url, attempts = 40 }) {
     const requestInit = {
         method: "GET",
         headers: {
@@ -14,30 +28,35 @@ export async function performGet({url, attempts = 4}) {
         }
     };
 
-
-
-    for (let i = 0; i < min(attempts, 10); i++) {
-        // wait 200 milliseconds before each attempt
-        await new Promise((resolve) => setTimeout(resolve, 200));
-
+    for (let attempt = 1; attempt <= attempts; attempt++) {
         try {
-            response = await fetch(url, requestInit);
+            const response = await fetch(url, requestInit);
 
             if (response.ok) {
                 return response;
             } else {
-                console.error(`Attempt ${i + 1}: Server responded with status ${response.status}`);
+                console.error(`Attempt ${attempt}: Server responded with status ${response.status}`);
             }
-        } catch (e) {
-            console.error(`Attempt ${i + 1}: Error fetching with {GET} method`, e.message);
+        } catch (error) {
+            console.error(`Attempt ${attempt}: Error fetching with GET method - ${error.message}`);
         }
+
+        // Wait before the next attempt
+        await delay(200);
     }
 
-    if (response) {
-        console.error("Error fetching with {GET} method: ", response.statusText);
-        return response.statusText;
-    } else {
-        console.error("Failed to fetch after multiple attempts.");
-        return "Fetch failed after multiple attempts.";
-    }
+    console.error("Failed to fetch after multiple attempts.");
+    return "Fetch failed after multiple attempts.";
 }
+
+
+
+/**
+ * Handle error responses by opening the error content in a new window.
+ *
+ * @param {Response} response - The fetch response.
+ */
+export const handleErrorResponse = async (response) => {
+    let text = await response.text();
+    console.error(text);
+};

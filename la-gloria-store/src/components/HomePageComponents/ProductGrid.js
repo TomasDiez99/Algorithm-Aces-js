@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import ProductCard from "./ProductCard";
 import "../../styles/home.css";
 import {useNavigate} from "react-router-dom";
-import {performGet} from "../../utils";
+import {fetchMultiAttempt} from "../../utils";
 import {forApi, getApiBaseUrl} from "../../urlManager";
 
 function ProductGrid(props) {
@@ -19,7 +19,7 @@ function ProductGrid(props) {
             try {
 
 
-                const response = await performGet({url});
+                const response = await fetchMultiAttempt({url});
                 if (!response.ok) {
 
                     const text = await response.text();
