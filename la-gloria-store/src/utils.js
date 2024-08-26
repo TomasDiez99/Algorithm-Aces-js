@@ -19,10 +19,14 @@ export async function performGet({url, attempts = 4}) {
 
         // wait 1 second
         await new Promise((resolve) => setTimeout(resolve, 200));
+        try {
 
-        response = await fetch(url, requestInit);
-        if (response.ok) {
-            return response;
+            response = await fetch(url, requestInit);
+            if (response.ok) {
+                return response;
+            }
+        } catch (e) {
+            console.error(" Error fetching with {Get} method: on attempt ", i + 1, response.statusText, response);
         }
     }
 

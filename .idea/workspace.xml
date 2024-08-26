@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="422c001e-7352-4be8-9ddb-9a2b16b5e0c0" name="Changes" comment="make multiple attempts on each get method">
+    <list default="true" id="422c001e-7352-4be8-9ddb-9a2b16b5e0c0" name="Changes" comment="rollback">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/la-gloria-store/src/urls.json" beforeDir="false" afterPath="$PROJECT_DIR$/la-gloria-store/src/urls.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/la-gloria-store/src/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/la-gloria-store/src/utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +91,7 @@
       <option name="presentableId" value="Default" />
       <updated>1724688638691</updated>
       <workItem from="1724688639570" duration="1409000" />
-      <workItem from="1724690080318" duration="7393000" />
+      <workItem from="1724690080318" duration="7910000" />
     </task>
     <task id="LOCAL-00001" summary="make multiple attempts on each get method">
       <option name="closed" value="true" />
@@ -101,7 +101,23 @@
       <option name="project" value="LOCAL" />
       <updated>1724699565770</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="use relative">
+      <option name="closed" value="true" />
+      <created>1724700605517</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1724700605517</updated>
+    </task>
+    <task id="LOCAL-00003" summary="rollback">
+      <option name="closed" value="true" />
+      <created>1724700633601</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1724700633601</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +125,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="make multiple attempts on each get method" />
-    <option name="LAST_COMMIT_MESSAGE" value="make multiple attempts on each get method" />
+    <MESSAGE value="use relative" />
+    <MESSAGE value="rollback" />
+    <option name="LAST_COMMIT_MESSAGE" value="rollback" />
   </component>
 </project>
