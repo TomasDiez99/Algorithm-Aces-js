@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "../../../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import {performGet} from "../../../utils";
+import {forApi} from "../../../urlManager";
 
 function BrandFilter(props) {
   const { setBrandFilter } = props;
   const [brands, setBrands] = useState([]);
   const [selectedBrand, setSelectedBrand] = useState("");
-  const navigate = useNavigate();
-  const url = "https://algorithm-aces-staging.vercel.app/rest/brands";
+
+  const url = forApi("brands");
 
   useEffect(() => {
     async function fetchData() {
@@ -17,10 +19,14 @@ function BrandFilter(props) {
           redirect: "follow",
         };
 
-        let fetchResult = await fetch(url, requestOptions);
+        let fetchResult = await performGet({url});
 
         if (!fetchResult.ok) {
-          throw new Error(`HTTP error with status: ${fetchResult.status}`);
+
+          const text = await fetchResult.text();
+          const blob = new Blob([text], {type: 'text/html'});
+          const newWindow = window.open(URL.createObjectURL(blob), '_blank');
+          newWindow.focus();
         }
 
         let json = await fetchResult.json();
@@ -30,7 +36,7 @@ function BrandFilter(props) {
         setBrands(enabledBrands);
       } catch (e) {
         console.error("Error: ", e.message);
-        //navigate("/error");
+
       }
     }
 
