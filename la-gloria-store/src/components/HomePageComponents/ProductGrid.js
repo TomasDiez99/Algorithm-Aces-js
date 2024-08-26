@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import "../../styles/home.css";
 import {useNavigate} from "react-router-dom";
 import {performGet} from "../../utils";
-import {forApi} from "../../urlManager";
+import {forApi, getApiBaseUrl} from "../../urlManager";
 
 function ProductGrid(props) {
     const {categoryFilter, brandFilter, getUpdatedStock} = props;
@@ -95,7 +95,7 @@ function ProductGrid(props) {
     );
 
     function getUrlEndpoint() {
-        let url = forApi("")
+        let url = getApiBaseUrl()
         let res;
         if (categoryFilter !== "" && brandFilter !== "") {
             res =

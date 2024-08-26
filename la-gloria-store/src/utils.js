@@ -14,6 +14,8 @@ export async function performGet({url, attempts = 4}) {
         }
     };
 
+
+
     for (let i = 0; i < min(attempts, 10); i++) {
         // wait 200 milliseconds before each attempt
         await new Promise((resolve) => setTimeout(resolve, 200));

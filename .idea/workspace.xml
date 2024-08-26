@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="422c001e-7352-4be8-9ddb-9a2b16b5e0c0" name="Changes" comment="trycatch on for" />
+    <list default="true" id="422c001e-7352-4be8-9ddb-9a2b16b5e0c0" name="Changes" comment="correct handling error on retry">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/la-gloria-store/src/components/HomePageComponents/ProductGrid.js" beforeDir="false" afterPath="$PROJECT_DIR$/la-gloria-store/src/components/HomePageComponents/ProductGrid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/la-gloria-store/src/urlManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/la-gloria-store/src/urlManager.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/la-gloria-store/src/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/la-gloria-store/src/utils.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +93,7 @@
       <option name="presentableId" value="Default" />
       <updated>1724688638691</updated>
       <workItem from="1724688639570" duration="1409000" />
-      <workItem from="1724690080318" duration="8067000" />
+      <workItem from="1724690080318" duration="8971000" />
     </task>
     <task id="LOCAL-00001" summary="make multiple attempts on each get method">
       <option name="closed" value="true" />
@@ -122,7 +127,15 @@
       <option name="project" value="LOCAL" />
       <updated>1724701134454</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="correct handling error on retry">
+      <option name="closed" value="true" />
+      <created>1724701301947</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1724701301947</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +146,7 @@
     <MESSAGE value="use relative" />
     <MESSAGE value="rollback" />
     <MESSAGE value="trycatch on for" />
-    <option name="LAST_COMMIT_MESSAGE" value="trycatch on for" />
+    <MESSAGE value="correct handling error on retry" />
+    <option name="LAST_COMMIT_MESSAGE" value="correct handling error on retry" />
   </component>
 </project>
