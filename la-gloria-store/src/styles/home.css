@@ -1,48 +1,105 @@
+@import "./global.css";
+
 .footer-icon {
   text-decoration: none;
   color: inherit;
   cursor: pointer;
 }
 
-.icon-text {
-  margin-left: 0.5rem; /* Puedes ajustar el valor según tus necesidades */
+.footer-icon:hover {
+  color: red;
+  cursor: pointer;
 }
 
+.icon-text {
+  margin-left: 0.5rem;
+} 
+
+.title-text {
+  font-family: "Arial", sans-serif;
+}
+
+.home-page-title {
+  text-align: center;
+  background-color: var(--color-primary);
+  width: 80vw;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.secondary-text {
+  color: var(--color-secondary);
+}
+
+.white-text {
+  color: white;
+}
+
+
+.btn.newsletter-confirm-btn {
+  color: black;
+  background-color: var(--color-primary);
+}
+
+.container-fluid.newsletter-container {
+  background-color: black;
+  color: white;
+}
+
+h2, p {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 
 .btn {
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
-  color: white;
+  color: var(--color-accent-2);
   font-weight: bold;
   cursor: pointer;
 }
 
-.btn-red {
-  background-color: red;
+.btn.change-page-button {
+  width: 10rem;
+  color: var(--color-accent-2);
+  background-color: var(--color-secondary);
 }
-.filter-black {
-  background-color: #282c34;
+
+.btn.change-page-button:hover {
+  color: black;
+  background-color: var(--color-accent-2);
 }
+
+.filter-table {
+  background-color: var(--color-secondary);
+}
+
 .filter-white {
   color: white;
+
+  margin-left: 5px;
 }
-.page-background-color {
-  background-color: rgba(255, 0, 0, 0.3);
+
+.filter {
+  flex: 1;
+  margin-right: 4px;
 }
-.navbar-icon-img {
-  width: 100px;
-  height: 100px;
+
+.selected {
+  color: red;
 }
+
 
 .filter-title {
   text-align: center;
 }
 
-.grid-margin {
-  border-radius: 10px;
-  margin-right: 20px;
+.navbar-icon-img {
+  width: 100px;
+  height: 100px;
 }
+
 .radius-component {
   border-radius: 10px;
 }
@@ -58,39 +115,46 @@
   gap: 20px;
   justify-content: center;
   align-items: center;
-  margin: 0 20px;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
 }
 
-.paginateButtonStyle {
-  margin-top: 10px;
+.container-fluid.paginateButtonStyle {
+  margin-top: 3vh;
+  margin-bottom: 1vh;
   display: flex;
+  width: 50%;
   justify-content: center;
 }
 
 .home-container {
   display: flex;
   margin-right: 15px;
+  margin-bottom: 15px;
 }
 
-.filter {
-  flex: 1;
-  margin-right: 4px;
+.carousel-wrapper {
+  margin-bottom: 20px;
+}
+
+.home-carousel-container {
+  width: 100%;
+  height: 60vh;
+}
+
+.home-carousel-img {
+  height: 60vh;
 }
 
 .grid {
   flex: 4;
   margin-left: 4px;
+  background-color: var(--color-primary-light);
+  border-radius: 10px;
+  margin-right: 20px;
 }
 
 .radius-component {
-  margin-left: 5px;
-}
-
-.filter-black {
-  border-bottom: 1px solid black;
-}
-
-.filter-white {
   margin-left: 5px;
 }
 
@@ -102,9 +166,34 @@
   margin-left: 5px;
 }
 
-
 .card {
   width: 14rem;
+}
+
+.card-img-wrapper {
+  width: 100%;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+}
+
+.card-img-top {
+  max-height: 100%;
+  height: 100vh;
+  width: auto;
+  object-fit: fill;
+}
+
+
+
+.btn.card-button-details {
+  color: var(--color-accent-2);
+  background-color: var(--color-secondary);
+}
+
+.btn.card-button-details:hover {
+  color: black;
+  background-color: var(--color-primary);
 }
 
 

@@ -1,9 +1,27 @@
+@import "./global.css";
+
 .product-page-container {
   display: flex;
   flex-direction: column;
-  height: 100vh; 
+  height: 100vh;
+  width: 100%;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
   justify-content: center;
 }
+
+.banner-container {
+  height: 90vh;
+  display: flex; 
+  align-items: center; 
+}
+
+.vertical-banner {
+  max-width: 100%;
+  max-height: 100%; 
+  height: 100%;
+}
+
 
 .center-content {
   display: flex;
@@ -18,12 +36,52 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;
+  height: 90vh;
+}
+
+.carousel-image-wrapper {
+  height: 90vh;
+  max-height: 100%;
 }
 
 .carousel-image {
+  height: 90vh;
   max-width: 100%;
   max-height: 100%;
-  width: auto;
-  height: auto;
+}
+
+.more-button.btn {
+  border-color: var(--color-primary);
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+.more-button.btn:hover {
+  border-color: red;
+  background-color: red;
+  color: black;
+}
+
+.less-button.btn {
+  border-color: var(--color-primary);
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+.less-button.btn:hover {
+  border-color: red;
+  background-color: red;
+  color: black;
+}
+
+.add-to-cart-button.red-border {
+  border-color: var(--color-primary);
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+.add-to-cart-button.red-border:hover {
+  border-color: red;
+  background-color: red;
+  color: black;
 }

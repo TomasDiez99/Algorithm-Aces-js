@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import "../../App.css";
 
 function EmailCheckoutModal(props) {
     const {
@@ -53,7 +54,7 @@ function EmailCheckoutModal(props) {
         e.preventDefault();
 
         const response = await fetch(
-            `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
+            `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/clients/email/${email}`
         );
 
         if (response.ok) {
@@ -107,7 +108,7 @@ function EmailCheckoutModal(props) {
         const jsonBody = JSON.stringify(shoppingCart);
         try {
             const response = await fetch(
-                "https://la-gloria-store-algorithm-aces.vercel.app/rest/shopping-carts/",
+                "https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/shopping-carts/",
                 {
                     method: "POST",
                     headers: {
@@ -173,7 +174,7 @@ function EmailCheckoutModal(props) {
                             </div>
                             <button
                                 type="submit"
-                                className="btn btn-primary"
+                                className="btn checkout-button"
                                 disabled={success}
                             >
                                 Submit

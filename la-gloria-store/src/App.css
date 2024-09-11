@@ -38,6 +38,22 @@
 }
 
 .cart-table-container {
-  max-height: 400px; /* Establece la altura máxima del contenedor */
-  overflow-y: auto; /* Habilita el scroll vertical */
+  max-height: 400px;
+  overflow-y: auto;
 }
+
+.btn.remove-button {
+  background-color: black;
+  color: var(--color-accent-2);
+}
+
+.btn.remove-button:hover {
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
+}
+
+.btn.checkout-button {
+  background-color: var(--color-primary);
+  color: black;
+}
+

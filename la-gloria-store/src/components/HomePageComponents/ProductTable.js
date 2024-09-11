@@ -23,7 +23,7 @@ function ProductTable(props) {
                     setBrandFilter={brandFilterHandle}
                 />
             </div>
-            <div className="grid">
+            <div className="grid radius-component">
                 <ProductGrid 
                 categoryFilter={categoryFilter} 
                 brandFilter={brandFilter}

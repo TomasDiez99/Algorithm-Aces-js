@@ -10,7 +10,7 @@ function OrderDetailItem({ orderDetail, product, onRemove }) {
             <td>${product.price}</td>
             <td>{orderDetail.product_amount}</td>
             <td>
-                <button type="button" className="btn btn-danger" onClick={onRemove}>
+                <button type="button" className="btn remove-button" onClick={onRemove}>
                     Remove
                 </button>
             </td>
@@ -70,7 +70,7 @@ function ShoppingCart(props) {
             <div className="modal-footer">
                 <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn checkout-button"
                     data-bs-dismiss="modal"
                     onClick={() => handleShowModal(true)}
                     disabled={orderProductPairList.length === 0}

@@ -6,8 +6,8 @@ import "../../../styles/home.css";
 function FilterTable(props) {
     const {setCategoryFilter, setBrandFilter} = props;
     return (
-        <div className="radius-component filter-black">
-            <div className="filter-black">
+        <div className="filter-table radius-component">
+            <div>
                 <CategoryFilter setCategoryFilter={setCategoryFilter}/>
             </div>
             <div>

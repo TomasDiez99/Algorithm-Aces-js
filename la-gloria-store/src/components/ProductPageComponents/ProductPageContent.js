@@ -8,7 +8,7 @@ function ProductPageComponent(props) {
     orderProductPairList,
     handleOrderProductPairList,
     addOrderProductPair,
-    getUpdatedStock
+    getUpdatedStock,
   } = props;
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
@@ -19,23 +19,28 @@ function ProductPageComponent(props) {
       product_id: product.id,
       product_amount: quantity,
     };
-    
+
     const existingPairIndex = orderProductPairList.findIndex(
       ([pairProduct, _]) => pairProduct.product_id === product.id
     );
-    
+
     if (existingPairIndex !== -1) {
-      const [existingOrderDetail, existingProduct] = orderProductPairList[existingPairIndex];
-      const updatedProductAmount = existingOrderDetail.product_amount + quantity;
-      
+      const [existingOrderDetail, existingProduct] =
+        orderProductPairList[existingPairIndex];
+      const updatedProductAmount =
+        existingOrderDetail.product_amount + quantity;
+
       const updatedOrderDetail = {
         product_id: existingProduct.id,
         product_amount: updatedProductAmount,
       };
-      
+
       const updatedPairList = [...orderProductPairList];
-      updatedPairList[existingPairIndex] = [updatedOrderDetail, existingProduct];
-      
+      updatedPairList[existingPairIndex] = [
+        updatedOrderDetail,
+        existingProduct,
+      ];
+
       handleOrderProductPairList(updatedPairList);
     } else {
       addOrderProductPair([orderDetail, product]);
@@ -66,7 +71,7 @@ function ProductPageComponent(props) {
           <p>Brand: {product.brand.name}</p>
           <div className="quantity-control">
             <button
-              className="btn btn-primary btn-sm"
+              className="btn btn-sm less-button"
               onClick={() => handleProductAmount(quantity - 1)}
               disabled={quantity <= 1}
             >
@@ -74,7 +79,7 @@ function ProductPageComponent(props) {
             </button>
             <span className="quantity">{quantity}</span>
             <button
-              className="btn btn-primary btn-sm"
+              className="btn btn-sm more-button"
               onClick={() => handleProductAmount(quantity + 1)}
               disabled={quantity >= getUpdatedStock(product.id, product.stock)}
             >
@@ -82,9 +87,12 @@ function ProductPageComponent(props) {
             </button>
           </div>
           <button
-            className="btn btn-outline-success btn-lg"
+            className="btn btn-lg add-to-cart-button red-border"
             onClick={handleAddToCart}
-            disabled={addedToCart || quantity > getUpdatedStock(product.id, product.stock)}
+            disabled={
+              addedToCart ||
+              quantity > getUpdatedStock(product.id, product.stock)
+            }
           >
             Add to Cart
           </button>
