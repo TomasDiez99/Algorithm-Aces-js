@@ -1,15 +1,13 @@
 // Navbar.js
 
-import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import CartModal from "./ShoppingCart/CartModal";
 import LoginWrapper from "./PageWrappers/LoginWrapper";
 import "../styles/global.css";
-import "../styles/navbar.css";
 
-function Navbar(prop) {
-    const {orderProductPairList, handleOrderProductPairList} = prop;
-    const [showCartModal, setShowCartModal] = useState(false);
+function Navbar() {
+  const [showCartModal, setShowCartModal] = useState(false);
 
     const toggleCartModal = (show) => {
         setShowCartModal(show);
@@ -49,14 +47,12 @@ function Navbar(prop) {
                 </div>
             </div>
 
-            <CartModal
-                showCartModal={showCartModal}
-                handleCloseCart={() => toggleCartModal(false)}
-                orderProductPairList={orderProductPairList}
-                handleOrderProductPairList={handleOrderProductPairList}
-            />
-        </nav>
-    );
+        <CartModal
+            showCartModal={showCartModal}
+            handleCloseCart={() => toggleCartModal(false)}
+        />
+      </nav>
+  );
 }
 
 export default Navbar;

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
+import { useShoppingCart } from "../../hooks/useShoppingCart";
 
 function ProductCard(props) {
-  const { id, name, image, price, enable, stock, getUpdatedStock } = props;
+  const { id, name, image, price, enable, stock} = props;
+  const {getUpdatedStock} = useShoppingCart();
   const [isLoading, setIsLoading] = useState(true);
 
   function handleImageLoadError(e) {

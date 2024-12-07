@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/product-page.css";
+import { useShoppingCart } from "../../hooks/useShoppingCart";
 
 function ProductPageComponent(props) {
   const {
-    product,
+    product
+  } = props;
+
+  const {
     orderProductPairList,
     handleOrderProductPairList,
     addOrderProductPair,
     getUpdatedStock,
-  } = props;
+  } = useShoppingCart();
+
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
   const navigate = useNavigate();

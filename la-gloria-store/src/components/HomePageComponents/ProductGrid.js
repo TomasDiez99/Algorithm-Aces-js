@@ -6,7 +6,7 @@ import {fetchMultiAttempt} from "../../utils";
 import {forApi, getApiBaseUrl} from "../../urlManager";
 
 function ProductGrid(props) {
-    const {categoryFilter, brandFilter, getUpdatedStock} = props;
+    const {categoryFilter, brandFilter} = props;
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
@@ -64,7 +64,6 @@ function ProductGrid(props) {
                             price={product.price}
                             enable={product.enable}
                             stock={product.stock}
-                            getUpdatedStock={getUpdatedStock}
                         />
                     </div>
                 ))}

@@ -1,16 +1,16 @@
 import React, {useState, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import "../../App.css";
+import { useShoppingCart } from "../../hooks/useShoppingCart";
 
 function EmailCheckoutModal(props) {
     const {
-        orderProductPairList,
-        handleOrderProductPairList,
         show,
         handleCloseEmailCheckoutModal,
         handleCloseCart,
     } = props;
 
+    const {orderProductPairList, handleOrderProductPairList} = useShoppingCart();
     const [email, setEmail] = useState("");
     const [shoppingCart, setShoppingCart] = useState({
         total_price: 0,

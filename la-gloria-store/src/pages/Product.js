@@ -6,13 +6,7 @@ import { useParams } from "react-router-dom";
 import "../styles/product-page.css";
 import { useNavigate } from "react-router-dom";
 
-function Product(prop) {
-  const {
-    orderProductPairList,
-    handleOrderProductPairList,
-    addOrderProductPair,
-    getUpdatedStock,
-  } = prop;
+function Product() {
   const [product, setProduct] = useState(null);
 
   const params = useParams();
@@ -56,10 +50,6 @@ function Product(prop) {
         <div className="col-5">
           <ProductPageContent
             product={product}
-            orderProductPairList={orderProductPairList}
-            handleOrderProductPairList={handleOrderProductPairList}
-            addOrderProductPair={addOrderProductPair}
-            getUpdatedStock={getUpdatedStock}
           />
         </div>
         <div className="col-2 justify-content-end">
