@@ -7,27 +7,40 @@
     background-color: var(--color-secondary);
 }
 
-.btn.cart-button {
+.btn.login-button,
+.btn.dropdown-button {
     background-color: black;
     color: var(--color-accent-2);
-  }
-  
+
+}
+
+.btn.login-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+.btn.cart-button {
+    background-color: black;
+    height: 100%;
+    color: var(--color-accent-2);
+}
+
 .btn.cart-button:hover {
     background-color: var(--color-primary);
     color: var(--color-secondary);
 }
-  
+
 .btn.history-button {
     background-color: var(--color-secondary);
     color: var(--color-accent-2);
-  }
-  
+}
+
 .btn.history-button:hover {
     background-color: red;
     color: black;
 }
 
 .btn.see-history-button {
-  background-color: var(--color-primary);
-  color: black;
+    background-color: var(--color-primary);
+    color: black;
 }
