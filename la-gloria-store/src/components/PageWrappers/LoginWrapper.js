@@ -1,16 +1,17 @@
 import React from "react";
-import { useAuth } from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
-import {DropdownButton, Dropdown} from "react-bootstrap";
+import {useAuth} from "../../hooks/useAuth";
+import {useNavigate} from "react-router-dom";
+import {Dropdown} from "react-bootstrap";
 import "../../styles/global.css";
+import "../../styles/navbar.css";
 
 function LoginWrapper() {
-    const { auth, logOut } = useAuth();
+    const {auth, logOut} = useAuth();
     const navigate = useNavigate();
 
 
     const verifyAuthToken = () => {
-       return auth?.accessToken ? renderDropdownMenu() : renderLoginButton();
+        return auth?.accessToken ? renderDropdownMenu() : renderLoginButton();
     };
 
     const handleDropdownSelect = (selectedOption) => {
@@ -22,37 +23,40 @@ function LoginWrapper() {
     };
 
     const renderLoginButton = () => {
-        return (
-            <button
-                className="btn login-button btn-sm"
-                onClick={() => navigate("/login")}
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Login"
-            >
-                <i className="fas fa-user"></i>
-            </button>
-        );
+        return (<button
+            className="btn login-button btn-sm"
+            onClick={() => navigate("/login")}
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Login"
+        >
+            <i className="fas fa-user"></i>
+        </button>);
     };
 
     const renderDropdownMenu = () => {
         return (
-            <DropdownButton
-                variant={""}
-                className="btn dropdown-button btn-sm"
-                title={<i className="fas fa-user"></i>}
-                id="dropdown-basic"
-            >
-                <Dropdown.Item onClick={() => handleDropdownSelect("history")}>
-                    History
-                </Dropdown.Item>
-                <Dropdown.Item onClick={() => handleDropdownSelect("logout")}>
-                    Logout
-                </Dropdown.Item>
-            </DropdownButton>
-        );
+            <Dropdown>
+                <Dropdown.Toggle
+                    variant=""
+                    id="dropdown-basic"
+                    className="btn dropdown-button btn-sm profile-button"
+                >
+                    <i className="fas fa-user"></i>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item
+                        onClick={() => handleDropdownSelect("history")}>
+                        History
+                    </Dropdown.Item>
+                    <Dropdown.Item onClick={() => handleDropdownSelect("logout")}>
+                        Logout
+                    </Dropdown.Item>
+                </Dropdown.Menu>
+            </Dropdown>
+        )
+            ;
     };
-
 
     return verifyAuthToken();
 }

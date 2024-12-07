@@ -68,7 +68,7 @@ function Register() {
                 handleErrorMessage(PASSWORD_ERROR_MESSAGE);
             } else {
                 try {
-                    const response = await fetch("http://127.0.0.1:8000/rest/auth/register", {
+                    const response = await fetch("https://algorithm-aces.vercel.app/rest/auth/register", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",

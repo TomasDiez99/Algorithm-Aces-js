@@ -1,0 +1,21 @@
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #f8f9fa;
+}
+
+.navbar-buttons-container {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 100%;
+    flex-direction: row;
+}
+
+.profile-button {
+
+    background-color: black;
+    color: var(--color-accent-2);
+}
