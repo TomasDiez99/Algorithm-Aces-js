@@ -15,7 +15,7 @@ export const AuthProvider = ({children}) => {
 
     const loginAuth = async (email, password) => {
         try {
-            const response = await fetch("http://127.0.0.1:8000/rest/auth/login", {
+            const response = await fetch("https://algorithm-aces.vercel.app/rest/auth/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -44,7 +44,7 @@ export const AuthProvider = ({children}) => {
 
     const logOut = async () => {
         try {
-            await fetch("http://127.0.0.1:8000/rest/auth/logout", {
+            await fetch("https://algorithm-aces.vercel.app/rest/auth/logout", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
