@@ -13,36 +13,40 @@ function ProductGrid(props) {
   useEffect(() => {
     let url;
     if (categoryFilter !== "" && brandFilter !== "") {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
+      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}/brand/${brandFilter}?page=${currentPage}`;
     } else if (categoryFilter !== "") {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
+      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products/category/${categoryFilter}?page=${currentPage}`;
     } else if (brandFilter !== "") {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
+      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products/brand/${brandFilter}?page=${currentPage}`;
     } else {
-      url = `https://la-gloria-store-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
+      url = `https://la-gloria-store-git-vercel-deploy-algorithm-aces.vercel.app/rest/products?page=${currentPage}`;
     }
+    console.log(url);
     fetchProductsFromApi(url);
   }, [categoryFilter, brandFilter, currentPage]);
-
-  const fetchProductsFromApi = (url) => {
-    fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        if (json.data.length !== 0) {
-          setProducts(json.data);
-          setLastPage(json.meta.last_page);
-        } else if (currentPage !== 1) {
-          setCurrentPage(1);
-        } else {
-          alert(
-            "There are no products for the combination of filters selected"
-          );
-        }
-      })
-      .catch(() => {
-        navigate("/error");
-      });
+  
+  const fetchProductsFromApi = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const json = await response.json();
+      if (json.data && json.data.length > 0) {
+        setProducts(json.data);
+        setLastPage(json.meta.last_page);
+      } else if (currentPage !== 1) {
+        setCurrentPage(1);
+      } else {
+        alert("There are no products for the combination of filters selected");
+      }
+    } catch (error) {
+      console.error("Error fetching products: ", error);
+      navigate("/error");
+    }
   };
+  
 
   const goToPage = (page) => {
     if (page >= 1 && page <= lastPage) {

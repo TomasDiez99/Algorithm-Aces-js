@@ -7,20 +7,63 @@ function CategoryFilter(props) {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const navigate = useNavigate();
+  const url = "https://backend-la-gloria.vercel.app/rest/categories/";
 
   useEffect(() => {
-    fetch("https://la-gloria-store-algorithm-aces.vercel.app/rest/categories")
-      .then((response) => response.json())
-      .then((json) => {
+    async function fetchData() {
+
+      const headers = new Headers();
+      headers.append('Content-Type','application/json'); 
+      headers.append("User-Agent","PostmanRuntime/7.40.0");
+      //headers.append("Accept","*/*");
+      //headers.append("Accept-Encoding","gzip, deflate, br");
+      //headers.append("Connection","keep-alive");
+      try {
+        let fetchResult = {ok:false} ;
+        try{
+          
+        
+        fetchResult = await fetch(url, {
+          method : 'GET',
+          headers : new Headers({
+            'Content-Type':'application/json',
+            "User-Agent":"PostmanRuntime/7.40.0",
+            'Access-Control-Allow-Origin':"*",
+          })
+        });
+
+        }catch(e)
+        {
+          console.log(e.name + " ... si, falla el fetch  "+e.message + " stack: "+e.stack);
+        }
+
+        if (!fetchResult.ok) {
+          console.log(`error en fetch HTTP error with status: ${fetchResult.status}`);
+        }
+
+        console.log("la request esta bien a ver el json content")
+;
+        let json = await fetchResult.json();
+
+        console.log("el json content esta bien a ver el format")
+
+ ;       
+        console.log("My Json : \n"+JSON.stringify(json, null, 4))
+
+;
+        console.log("el format estaba bien ,que m falla?");
         const enabledCategories = json.data.filter(
           (category) => category.enable === true
         );
         setCategories(enabledCategories);
-      })
-      .catch(() => {
-        navigate("/error");
-      });
+      } catch (e) {
+        console.error("Error: ", e.message);
+        //navigate("/error");
+      }
+    }
+    fetchData();
   }, []);
+  
 
   const handleCheckboxChange = (event, categoryName) => {
     const { checked } = event.target;
