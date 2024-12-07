@@ -29,7 +29,7 @@ export const AuthProvider = ({children}) => {
             else{
                 const data = await response.json();
                 const accessToken = data.authorization.token;
-
+                
                 setAuth({
                     email,
                     password,
@@ -44,10 +44,11 @@ export const AuthProvider = ({children}) => {
 
     const logOut = async () => {
         try {
-            await fetch("https://algorithm-aces.vercel.app/rest/auth/logout", {
+            const response = await fetch("https://algorithm-aces.vercel.app/rest/auth/logout", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${auth.accessToken}`
                 },
             });
             setAuth({});
