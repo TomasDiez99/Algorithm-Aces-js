@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import "../styles/history-page.css";
+import {fetchMultiAttempt} from "../utils";
+import {forApi} from "../urlManager";
 
 function HistoryPage() {
     const params = useParams();
@@ -15,7 +17,7 @@ function HistoryPage() {
         const fetchShoppingCarts = async () => {
             try {
                 const response = await fetch(
-                    `https://la-gloria-store-algorithm-aces.vercel.app/rest/shopping-carts/history/${email}`
+                    `https://algorithm-aces.vercel.app/rest/shopping-carts/history/${email}`
                 );
                 const data = await response.json();
                 setShoppingCarts(data);
@@ -39,12 +41,16 @@ function HistoryPage() {
 
     const retrieveOrderDetailData = async (shoppingCartId) => {
         try {
-            const response = await fetch(
-                `https://la-gloria-store-algorithm-aces.vercel.app/rest/order-details/shopping-cart/${shoppingCartId}`
-            );
-            const data = await response.json();
-            const pairs = await getOrderDetailProductPairs(data);
-            setOrderDetailProductPairs(pairs);
+            const url = forApi(`order-details/shopping-cart/${shoppingCartId}`);
+            console.log(url);
+            const response = await fetchMultiAttempt({url});
+            if (response.ok) {
+                const data = await response.json();
+                const pairs = await getOrderDetailProductPairs(data);
+                setOrderDetailProductPairs(pairs);
+            } else {
+                console.log("Error");
+            }
         } catch (error) {
             navigate("/error");
         }
@@ -66,9 +72,8 @@ function HistoryPage() {
 
     const getProduct = async (productId) => {
         try {
-            const response = await fetch(
-                `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
-            );
+            const url = forApi(`products/id/${productId}`);
+            const response = await fetchMultiAttempt({url});
             if (response.ok) {
                 const json = await response.json();
                 return json.data;
