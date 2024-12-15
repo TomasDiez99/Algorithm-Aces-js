@@ -4,14 +4,13 @@ import HomeCarrousel from '../components/HomePageComponents/HomeCarrousel';
 import NewsletterSection from '../components/HomePageComponents/NewsletterSection';
 
 
-function Home(props) {
-    const { getUpdatedStock }=props;
+function Home() {
 
     return (
         <div
         >
             <HomeCarrousel/>
-            <ProductTable getUpdatedStock={getUpdatedStock}/>
+            <ProductTable/>
             <NewsletterSection/>
         </div>
     );

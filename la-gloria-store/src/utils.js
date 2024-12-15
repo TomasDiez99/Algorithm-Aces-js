@@ -18,7 +18,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
  * @param {number} [options.attempts=4] - The number of retry attempts. Default is 4.
  * @returns {Promise<Response|string>} - The response object if successful, otherwise an error message.
  */
-export async function fetchMultiAttempt({ url, attempts = 40 }) {
+export async function fetchMultiAttempt({url, attempts = 40}) {
     const requestInit = {
         method: "GET",
         headers: {
@@ -48,7 +48,6 @@ export async function fetchMultiAttempt({ url, attempts = 40 }) {
     console.error("Failed to fetch after multiple attempts.");
     return "Fetch failed after multiple attempts.";
 }
-
 
 
 /**

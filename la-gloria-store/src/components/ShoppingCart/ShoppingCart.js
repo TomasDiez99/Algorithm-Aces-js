@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import EmailCheckoutModal from "./EmailCheckoutModal";
 import "../../App.css";
+import { useShoppingCart } from "../../hooks/useShoppingCart";
 
 function OrderDetailItem({ orderDetail, product, onRemove }) {
 
@@ -20,7 +21,8 @@ function OrderDetailItem({ orderDetail, product, onRemove }) {
 
 
 function ShoppingCart(props) {
-    const {orderProductPairList, handleOrderProductPairList, handleCloseCart} = props;
+    const {handleCloseCart} = props;
+    const {orderProductPairList, handleOrderProductPairList} = useShoppingCart();
     const [showEmailCheckoutModal, setShowEmailCheckoutModal] = useState(false);
 
     const handleShowModal = (show) => {
@@ -61,11 +63,9 @@ function ShoppingCart(props) {
             </div>
 
             <EmailCheckoutModal
-                orderProductPairList={orderProductPairList}
                 show={showEmailCheckoutModal}
                 handleCloseEmailCheckoutModal={() => handleShowModal(false)}
                 handleCloseCart={handleCloseCart}
-                handleOrderProductPairList={handleOrderProductPairList}
             />
             <div className="modal-footer">
                 <button
