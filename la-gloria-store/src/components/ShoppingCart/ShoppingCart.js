@@ -3,6 +3,9 @@ import EmailCheckoutModal from "./EmailCheckoutModal";
 import "../../App.css";
 import {useShoppingCart} from "../../hooks/useShoppingCart";
 import {useNavigate} from "react-router-dom";
+import {useAuth} from "../../hooks/useAuth";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function OrderDetailItem({orderDetail, product, onRemove}) {
     return (
@@ -25,6 +28,7 @@ function ShoppingCart(props) {
     const {orderProductPairList, handleOrderProductPairList} = useShoppingCart();
     const [showEmailCheckoutModal, setShowEmailCheckoutModal] = useState(false);
     const navigate = useNavigate();
+    const {auth} = useAuth();
 
     const handleShowModal = (show) => {
         setShowEmailCheckoutModal(show);
@@ -40,7 +44,14 @@ function ShoppingCart(props) {
     function handleMercadoPagoPayment() {
         console.log("Going to MercadoPago");
         handleCloseCart();
-        navigate("/mercado-pago");
+        if(!!auth.accessToken)  {
+            navigate("/mercado-pago");
+        } 
+        else {
+            toast.info("You need to be logged in to proceed with the payment");
+            navigate ("/login")
+        }
+        
     }
 
     return (
