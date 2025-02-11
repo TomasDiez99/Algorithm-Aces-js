@@ -9,6 +9,19 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'bootstrap-css-only/css/bootstrap.min.css';
 import 'mdbreact/dist/css/mdb.css';
 
+// Service Worker Registration
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("/service-worker.js")
+      .then((registration) => {
+        console.log("Service Worker registered successfully:", registration);
+      })
+      .catch((error) => {
+        console.log("Service Worker registration failed:", error);
+      });
+  });
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
