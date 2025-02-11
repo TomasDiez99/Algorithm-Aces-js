@@ -4,6 +4,7 @@ import "../../styles/home.css";
 import {useNavigate} from "react-router-dom";
 import {fetchMultiAttempt} from "../../utils";
 import {forApi, getApiBaseUrl} from "../../urlManager";
+import { toast } from 'react-toastify';
 
 function ProductGrid(props) {
     const {categoryFilter, brandFilter} = props;
@@ -11,13 +12,13 @@ function ProductGrid(props) {
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         let url = getUrlEndpoint();
 
         const fetchProductsFromApi = async (url) => {
             try {
-
 
                 const response = await fetchMultiAttempt({url});
                 if (!response.ok) {
@@ -35,10 +36,11 @@ function ProductGrid(props) {
                 } else if (currentPage !== 1) {
                     setCurrentPage(1);
                 } else {
-                    alert("There are no products for the combination of filters selected");
+                    toast.error("There are no products for the combination of filters selected");
                 }
             } catch (error) {
-                console.error("Error fetching products: ", error);
+                toast.error("Please go online to view the products available for the selected brands and categories.");
+                //console.error("Error fetching products: ", error);
                 //navigate("/error");
             }
         };
