@@ -39,9 +39,9 @@ function ProductGrid(props) {
                     toast.error("There are no products for the combination of filters selected");
                 }
             } catch (error) {
-                toast.error("Please go online to view the products available for the selected brands and categories.");
+                //toast.error("Please go online to view the products available for the selected brands and categories.");
                 //console.error("Error fetching products: ", error);
-                //navigate("/error");
+                navigate("/errorPWA");
             }
         };
 
