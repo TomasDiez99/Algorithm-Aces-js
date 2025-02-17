@@ -42,24 +42,19 @@ function Product() {
   };
 
   return (
-    <div className="product-page-container container-fluid">
-      <div className="row">
-        <div className="col-5 debug-1">
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <div className="flex flex-col lg:flex-row justify-center w-full lg:w-10/12">
+        <div className="w-full lg:w-5/12 mb-4 lg:mb-0 mt-4">
           <ProductCarrousel product={product} />
         </div>
-        <div className="col-5">
-          <ProductPageContent
-            product={product}
-          />
+        <div className="w-full lg:w-5/12 mt-4">
+          <ProductPageContent product={product} />
         </div>
-        <div className="col-2 justify-content-end">
-          <a href="#">
-            <VerticalBanner />
-          </a>
-        </div>
+        
       </div>
     </div>
   );
+
 }
 
 export default Product;
