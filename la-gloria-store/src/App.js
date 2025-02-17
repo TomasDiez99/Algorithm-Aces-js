@@ -22,6 +22,7 @@ function App() {
             <ShoppingCartProvider>
                 <div>
                     <Navbar/>
+                    <div className="pt-5">
                     <Routes>
                         <Route
                             path="/"
@@ -41,6 +42,8 @@ function App() {
                         <Route path="register" element={<Register/>}/>
                         <Route path="/errorPWA" element={<PwaErrorPage/>}/>
                     </Routes>
+                    </div>
+                    
                     <Footer/>
                 </div>
             </ShoppingCartProvider> 
