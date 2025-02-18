@@ -49,12 +49,14 @@ const MercadoPago = () => {
                 order_details: orderProductPairList
             }
 
-            const paymentData = JSON.stringify({
+            let paymentDataJSON = {
                 ...formData,
                 shoppingCartData
-            });
+            };
 
-            console.log("paymentData : ", paymentData);
+            console.log("paymentDataJSON : ", paymentDataJSON);
+
+            const paymentData = JSON.stringify(paymentDataJSON);
 
             const response = await fetch(url, {
                 method: "POST",
@@ -65,7 +67,8 @@ const MercadoPago = () => {
                 body: paymentData,
             });
 
-            const result = await response.json();
+            const jsonData = await response.json();
+            const result = jsonData['payment'];
             console.log("Response result: ", result);
             handleResponse(result.status, result.status_detail);
 
