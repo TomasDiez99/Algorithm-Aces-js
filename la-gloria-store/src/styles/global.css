@@ -19,6 +19,16 @@
     color: var(--color-secondary);
 }
 
+.btn.drawer-button {
+    background-color: black;
+    color: var(--color-accent-2);
+}
+
+.btn.drawer-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+
 .btn.cart-button {
     background-color: black;
     height: 100%;
