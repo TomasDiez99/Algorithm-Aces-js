@@ -4,14 +4,28 @@ import BrandFilter from "./BrandFIlter";
 import "../../../styles/home.css";
 
 function FilterTable(props) {
-    const {setCategoryFilter, setBrandFilter} = props;
+    const {setCategoryFilter, 
+        setBrandFilter, 
+        selectedCategory, 
+        setSelectedCategory,
+        selectedBrand, 
+        setSelectedBrand} = props;
+
     return (
         <div className="filter-table radius-component">
             <div>
-                <CategoryFilter setCategoryFilter={setCategoryFilter}/>
+                <CategoryFilter 
+                    setCategoryFilter={setCategoryFilter}
+                    selectedCategory={selectedCategory}
+                    setSelectedCategory={setSelectedCategory}
+                />
             </div>
             <div>
-                <BrandFilter setBrandFilter={setBrandFilter}/>
+                <BrandFilter 
+                    setBrandFilter={setBrandFilter}
+                    selectedBrand={selectedBrand}
+                    setSelectedBrand={setSelectedBrand}
+                />
             </div>
         </div>
     );

@@ -5,11 +5,16 @@ import "../styles/navbar.css";
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import FilterTable from './HomePageComponents/FilterTable/FilterTable';
 
-function Drawer() {
+function Drawer(props) {
   const [show, setShow] = useState(false);
-
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const {setCategoryFilter, setBrandFilter} = props;
+  // Persist selected category and brand
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("");
+
 
   return (
     <>
@@ -19,7 +24,14 @@ function Drawer() {
 
       <Offcanvas show={show} onHide={handleClose}>
         <Offcanvas.Header closeButton>
-          <FilterTable></FilterTable>
+          <FilterTable
+            setCategoryFilter={setCategoryFilter}
+            setBrandFilter={setBrandFilter}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            selectedBrand={selectedBrand}
+            setSelectedBrand={setSelectedBrand}
+          />
         </Offcanvas.Header>
       </Offcanvas>
     </>

@@ -2,12 +2,17 @@ import Nav from 'react-bootstrap/Nav';
 import Drawer from './drawer';
 import "../styles/navbar.css";
 
-function ActionBar() {
+function ActionBar(props) {
+  const {setCategoryFilter, setBrandFilter} = props;
+
   return (
     <Nav className="action-bar" variant="pills" defaultActiveKey="/home">
       <Nav.Item>
         <div className="action-bar-buttons-container">
-            <Drawer/>
+            <Drawer
+              setCategoryFilter={setCategoryFilter}
+              setBrandFilter={setBrandFilter}
+            />
         </div>
       </Nav.Item>
     </Nav>

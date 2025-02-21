@@ -9,7 +9,7 @@ function Home() {
 
     return (
         <div>
-            <ActionBar/>
+            {/* <ActionBar/> */}
             <div style={{ height: "60px" }} /> 
             <HomeCarrousel/>
             <ProductTable/>
