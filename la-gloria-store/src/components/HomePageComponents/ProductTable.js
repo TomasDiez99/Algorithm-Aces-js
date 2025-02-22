@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import FilterTable from './FilterTable/FilterTable';
 import ProductGrid from './ProductGrid';
 import "../../styles/home.css";
 import ActionBar from '../../components/ActionBar';
@@ -22,10 +21,6 @@ function ProductTable() {
                     setCategoryFilter={categoryFilterHandle}
                     setBrandFilter={brandFilterHandle}
                 />
-                {/* <FilterTable
-                    setCategoryFilter={categoryFilterHandle}
-                    setBrandFilter={brandFilterHandle}
-                /> */}
             </div>
             <div className="grid radius-component">
                 <ProductGrid 
