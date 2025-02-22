@@ -22,17 +22,22 @@ function Drawer(props) {
       <i class="fa fa-filter" aria-hidden="true"></i>
       </button>
 
-      <Offcanvas show={show} onHide={handleClose}>
+      <Offcanvas show={show} onHide={handleClose} className="full-width-drawer">
+
         <Offcanvas.Header closeButton>
-          <FilterTable
-            setCategoryFilter={setCategoryFilter}
-            setBrandFilter={setBrandFilter}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-            selectedBrand={selectedBrand}
-            setSelectedBrand={setSelectedBrand}
-          />
+          
         </Offcanvas.Header>
+        
+        <Offcanvas.Body className="scrollable-body">
+          <FilterTable
+                  setCategoryFilter={setCategoryFilter}
+                  setBrandFilter={setBrandFilter}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                  selectedBrand={selectedBrand}
+                  setSelectedBrand={setSelectedBrand}
+                />
+        </Offcanvas.Body>
       </Offcanvas>
     </>
   );

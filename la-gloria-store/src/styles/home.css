@@ -71,8 +71,13 @@ h2, p {
   background-color: var(--color-accent-2);
 }
 
+
 .filter-table {
-  background-color: var(--color-secondary);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--color-secondary)
 }
 
 .filter-white {
@@ -149,20 +154,10 @@ h2, p {
   object-fit: fill;
 }
 
-/* .productGridStyle {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3vh;
-  margin-bottom: 1vh;
-} */
-
 .productGridStyle {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px; /* Espacio entre tarjetas */
+  gap: 20px; 
   justify-content: center;
   align-items: center;
   margin-top: 3vh;
@@ -178,20 +173,14 @@ h2, p {
   justify-content: center;
 }
 
-/* .home-container {
-  display: flex;
-  margin-right: 15px;
-  margin-bottom: 15px;
-} */
-
 .home-container {
-  display: flex;          /* Usa Flexbox para organizar los elementos internos en línea o columna */
-  margin-bottom: 15px;    /* Espacio debajo del contenedor para separarlo de otros elementos */
-  padding-left: 5vw;      /* Espaciado interno a la izquierda basado en el ancho de la ventana */
-  padding-right: 5vw;     /* Espaciado interno a la derecha basado en el ancho de la ventana */
-  max-width: 1200px;      /* Limita el ancho máximo del contenedor a 1200px para que no se expanda demasiado */
-  margin-left: auto;      /* Centra el contenedor horizontalmente */
-  margin-right: auto;     /* Centra el contenedor horizontalmente */
+  display: flex;          
+  margin-bottom: 15px;    
+  padding-left: 5vw;      
+  padding-right: 5vw;     
+  max-width: 1200px;      
+  margin-left: auto;      
+  margin-right: auto;     
 }
 
 
