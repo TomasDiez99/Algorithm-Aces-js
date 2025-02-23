@@ -78,6 +78,7 @@ function ProductGrid(props) {
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Previous Page"
+                    aria-label="Previous Page button"
                 >
                     Previous
                 </button>
@@ -88,6 +89,7 @@ function ProductGrid(props) {
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Next Page"
+                    aria-label="Next Page button"
                 >
                     Next
                 </button>

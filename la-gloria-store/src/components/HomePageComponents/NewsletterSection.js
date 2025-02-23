@@ -31,7 +31,7 @@ function NewsletterSection() {
                 aria-label="Your email address"
               />
             </div>
-            <button className="btn newsletter-confirm-btn mt-2" type="submit">
+            <button className="btn newsletter-confirm-btn mt-2" type="submit" aria-label="Confirm button">
               Confirm
             </button>
           </form>

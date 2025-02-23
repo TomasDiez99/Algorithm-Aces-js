@@ -41,6 +41,7 @@ function Navbar() {
                         onClick={() => toggleCartModal(true)}
                         data-bs-toggle="tooltip"
                         data-bs-placement="bottom"
+                        aria-label="Shopping Cart"
                         title="Shopping Cart">
                         <i className="fas fa-shopping-cart"></i>
                     </button>
