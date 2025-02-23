@@ -86,7 +86,7 @@ function HistoryPage() {
     };
 
     return (
-        <div>
+        <div className="pt-5">
             <h1 className="text-center">History</h1>
             <p className="text-center">{email}</p>
             <div className="table-wrapper">
