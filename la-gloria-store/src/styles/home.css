@@ -1,5 +1,12 @@
 @import "./global.css";
 
+/* Apply focus-visible styles with !important */
+.btn:focus-visible {
+  outline: 3px solid #ffcc00 !important; /* Ensure the outline color takes priority */
+  outline-offset: 2px !important; /* Ensure the offset takes priority */
+  border-radius: 4px !important; /* Optional: for rounded outline */
+}
+
 .footer-icon {
   text-decoration: none;
   color: inherit;
