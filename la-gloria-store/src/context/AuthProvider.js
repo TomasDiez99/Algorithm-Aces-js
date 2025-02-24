@@ -9,7 +9,7 @@ export const AuthProvider = ({children}) => {
     const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
-    const handleErrorMessage = (errorMsg)  => {
+    const handleErrorMessage = (errorMsg) => {
         setErrorMessage("The next error happened while logging: " + errorMsg);
     }
 
@@ -25,16 +25,27 @@ export const AuthProvider = ({children}) => {
 
             if (!response.ok) {
                 handleErrorMessage(LOGIN_ERROR_MESSAGE);
-            }
-            else{
+            } else {
                 const data = await response.json();
                 const accessToken = data.authorization.token;
-                
+
+                const clientDataResponse = await fetch(
+                    `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
+                );
+
+                let client_id = -1;
+                if (clientDataResponse.ok) {
+                    const client = await clientDataResponse.json();
+                    client_id = client.data.id;
+                }
+
                 setAuth({
                     email,
+                    client_id,
                     password,
                     accessToken
                 });
+
                 navigate("/");
             }
         } catch (error) {
@@ -63,7 +74,8 @@ export const AuthProvider = ({children}) => {
     const isAuthenticated = () => !!auth.accessToken;
 
     return (
-        <AuthContext.Provider value={{auth, setAuth, loginAuth, logOut, errorMessage,setErrorMessage,isAuthenticated}}>
+        <AuthContext.Provider
+            value={{auth, setAuth, loginAuth, logOut, errorMessage, setErrorMessage, isAuthenticated}}>
             {children}
         </AuthContext.Provider>
     );

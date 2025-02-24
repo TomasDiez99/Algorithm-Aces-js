@@ -11,7 +11,8 @@ import Register from "./components/LoginComponents/Register";
 import {AuthProvider} from "./context/AuthProvider";
 import {ShoppingCartProvider} from "./context/ShoppingCartProvider";
 import RequireAuth from "./components/LoginComponents/RequiereAuth";
-import MercadoPago from "./components/MercadoPago";
+import MercadoPago from "./components/MercadoPagoComponents/MercadoPago";
+import { ToastContainer } from 'react-toastify';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                     <Footer/>
                 </div>
             </ShoppingCartProvider> 
+           <ToastContainer /> 
         </AuthProvider>
     );
 }
