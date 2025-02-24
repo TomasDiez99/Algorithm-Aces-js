@@ -6,14 +6,14 @@ import {handleResponse} from "./paymentHandlers";
 import {forApi} from "../../urlManager";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useNavigate} from "react-router-dom";
 
 const MercadoPago = () => {
     const {auth} = useAuth();
-    const {orderProductPairList} = useShoppingCart();
-    // const url = forApi("/process_payment");
-    //localhost url
+    const {orderProductPairList, handleOrderProductPairList} = useShoppingCart();
+    const navigate = useNavigate();
 
-    const url = "http://localhost:8000/rest/payment/create";
+    const url = forApi("payment/create");
 
     initMercadoPago(
         'TEST-69fb160d-4a3e-4385-a038-a7320b91b5d8',
@@ -72,8 +72,14 @@ const MercadoPago = () => {
             console.log("Response result: ", jsonData);
             handleResponse(result.status, result.status_detail);
 
+            if (result.status === "approved") {
+                handleOrderProductPairList([]); //clear the shopping cart
+            }
+            navigate("/");
+
         } catch (error) {
             console.log("Error onSubmit: ", error);
+            navigate("/");
         }
     }
 
