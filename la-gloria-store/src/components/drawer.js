@@ -18,7 +18,7 @@ function Drawer(props) {
 
   return (
     <>
-      <button className=' btn drawer-button btn-sm' onClick={handleShow}>
+      <button className=' btn drawer-button btn-sm' onClick={handleShow} aria-label="Open filter table">
       <i class="fa fa-filter" aria-hidden="true"></i>
       </button>
 

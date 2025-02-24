@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
-import "../styles/history-page.css";
+import "../styles/global.css";
 import {fetchMultiAttempt} from "../utils";
 import {forApi} from "../urlManager";
 
@@ -106,7 +106,8 @@ function HistoryPage() {
                                 <td>${cart.total_price}</td>
                                 <td>
                                     <button
-                                        className="btn btn-sm see-cart-details-button"
+                                        className="btn login-button btn-sm see-cart-details-button"
+                                        aria-label="See order details button"
                                         onClick={() => handleRowClick(index, cart.id)}
                                     >
                                         {expandedRows.includes(index) ? "-" : "+"}

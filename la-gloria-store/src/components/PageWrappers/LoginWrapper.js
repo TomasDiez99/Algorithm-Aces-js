@@ -53,6 +53,7 @@ const renderLoginButton = () => {
             data-bs-toggle="tooltip"
             data-bs-placement="bottom"
             title="Login"
+            aria-label="Login button"
         >
             <i className="fas fa-user"></i>
         </button>
@@ -71,10 +72,11 @@ const renderLoginButton = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Item
+                        aria-label="History button"
                         onClick={() => handleDropdownSelect("history")}>
                         History
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleDropdownSelect("logout")}>
+                    <Dropdown.Item aria-label="Logout button" onClick={() => handleDropdownSelect("logout")}>
                         Logout
                     </Dropdown.Item>
                 </Dropdown.Menu>

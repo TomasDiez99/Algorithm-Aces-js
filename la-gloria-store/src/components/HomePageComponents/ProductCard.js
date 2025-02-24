@@ -50,11 +50,11 @@ function ProductCard(props) {
         <p className="card-text">${price}</p>
         <div className="text-center">
           {isProductAvailable() ? (
-            <button className="btn card-button-details" onClick={handleSeeDetails}>
+            <button className="btn card-button-details" onClick={handleSeeDetails} aria-label=" Product detail button">
               See details
             </button>
           ) : (
-            <button className="btn card-button-details" disabled>
+            <button className="btn card-button-details" disabled aria-label="Product Unavailable">
               Product Unavailable
             </button>
           )}

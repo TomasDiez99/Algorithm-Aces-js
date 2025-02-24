@@ -12,7 +12,7 @@ const PwaErrorPage = () => {
       <p className='error-p'>
         Once you're back online, everything will work as expected.
       </p>
-      <Link to="/" className="btn error-btn">Go back to Home</Link>
+      <Link to="/" className="btn error-btn" aria-label="Go back to the home page" >Go back to Home</Link>
     </div>
   );
 }
