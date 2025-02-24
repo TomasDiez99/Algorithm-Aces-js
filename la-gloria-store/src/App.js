@@ -5,7 +5,7 @@ import ErrorPage from "./pages/ErrorPage";
 import HistoryPage from "./pages/HistoryPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Login from "./components/LoginComponents/Login";
 import Register from "./components/LoginComponents/Register";
 import {AuthProvider} from "./context/AuthProvider";
@@ -17,6 +17,19 @@ import PwaErrorPage from "./pages/PwaErrorPage";
 
 
 function App() {
+
+    useEffect(() => {
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/6754543d2480f5b4f5a99dfd/1iegmi4pq';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    }, []);
+
     return (
         <AuthProvider>
             <ShoppingCartProvider>
