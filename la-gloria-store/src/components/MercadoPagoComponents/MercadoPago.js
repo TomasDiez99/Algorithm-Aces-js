@@ -69,7 +69,7 @@ const MercadoPago = () => {
 
             const jsonData = await response.json();
             const result = jsonData['payment'];
-            console.log("Response result: ", result);
+            console.log("Response result: ", jsonData);
             handleResponse(result.status, result.status_detail);
 
         } catch (error) {
