@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom";
 import {Dropdown} from "react-bootstrap";
 import "../../styles/global.css";
 import "../../styles/navbar.css";
+import { redirectIfOffline } from "../../utils";
+
 
 function LoginWrapper() {
     const {auth, logOut} = useAuth();
@@ -14,14 +16,22 @@ function LoginWrapper() {
         return auth?.accessToken ? renderDropdownMenu() : renderLoginButton();
     };
 
-    const handleDropdownSelect = (selectedOption) => {
+   /* const handleDropdownSelect = (selectedOption) => {
         if (selectedOption === "history") {
             navigate(`/history/${auth.email}`);
         } else if (selectedOption === "logout") {
             logOut();
         }
-    };
+    };*/
 
+    const handleDropdownSelect = (selectedOption) => {
+        if (selectedOption === "history") {
+            redirectIfOffline(navigate, `/history/${auth.email}`);
+        } else if (selectedOption === "logout") {
+            logOut();
+        }
+    };
+/*
     const renderLoginButton = () => {
         return (<button
             className="btn login-button btn-sm"
@@ -33,6 +43,21 @@ function LoginWrapper() {
             <i className="fas fa-user"></i>
         </button>);
     };
+*/
+
+const renderLoginButton = () => {
+    return (
+        <button
+            className="btn login-button btn-sm"
+            onClick={() => redirectIfOffline(navigate, "/login")}
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Login"
+        >
+            <i className="fas fa-user"></i>
+        </button>
+    );
+};
 
     const renderDropdownMenu = () => {
         return (

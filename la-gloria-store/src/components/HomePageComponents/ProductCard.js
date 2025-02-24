@@ -2,11 +2,18 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
 import { useShoppingCart } from "../../hooks/useShoppingCart";
+import {useNavigate} from "react-router-dom";
+import { redirectIfOffline } from "../../utils";
 
 function ProductCard(props) {
   const { id, name, image, price, enable, stock} = props;
   const {getUpdatedStock} = useShoppingCart();
   const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+
+  function handleSeeDetails() {
+    redirectIfOffline(navigate, `/product/${id}`);
+  }
 
   function handleImageLoadError(e) {
     e.target.src = "/notfound.png";
@@ -43,9 +50,9 @@ function ProductCard(props) {
         <p className="card-text">${price}</p>
         <div className="text-center">
           {isProductAvailable() ? (
-            <Link to={`/product/${id}`} className="btn card-button-details">
+            <button className="btn card-button-details" onClick={handleSeeDetails}>
               See details
-            </Link>
+            </button>
           ) : (
             <button className="btn card-button-details" disabled>
               Product Unavailable
