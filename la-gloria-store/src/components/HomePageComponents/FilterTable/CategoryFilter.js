@@ -44,9 +44,9 @@ const createCheckboxChangeHandler = (setSelectedCategory, setCategoryFilter) => 
     }
 };
 
-function CategoryFilter({ setCategoryFilter }) {
+function CategoryFilter({ setCategoryFilter, selectedCategory, setSelectedCategory }) {
     const [categories, setCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    //const [selectedCategory, setSelectedCategory] = useState("");
     const url = forApi("categories");
 
     useEffect(() => {

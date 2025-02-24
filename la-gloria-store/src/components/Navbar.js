@@ -14,7 +14,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
             <div className="navbar-container">
                 <div>
                     <Link

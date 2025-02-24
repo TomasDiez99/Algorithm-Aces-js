@@ -64,7 +64,6 @@ function ProductPageComponent(props) {
 
   return (
     <div className="center-content">
-      <h1>Product info</h1>
       {product ? (
         <div>
           <h3>
