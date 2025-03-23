@@ -16,22 +16,22 @@ function LoginWrapper() {
         return auth?.accessToken ? renderDropdownMenu() : renderLoginButton();
     };
 
-   /* const handleDropdownSelect = (selectedOption) => {
+    const handleDropdownSelect = (selectedOption) => {
         if (selectedOption === "history") {
             navigate(`/history/${auth.email}`);
         } else if (selectedOption === "logout") {
             logOut();
         }
-    };*/
-
-    const handleDropdownSelect = (selectedOption) => {
-        if (selectedOption === "history") {
-            redirectIfOffline(navigate, `/history/${auth.email}`);
-        } else if (selectedOption === "logout") {
-            logOut();
-        }
     };
-/*
+
+    // const handleDropdownSelect = (selectedOption) => {
+    //     if (selectedOption === "history") {
+    //         redirectIfOffline(navigate, `/history/${auth.email}`);
+    //     } else if (selectedOption === "logout") {
+    //         logOut();
+    //     }
+    // };
+
     const renderLoginButton = () => {
         return (<button
             className="btn login-button btn-sm"
@@ -43,22 +43,22 @@ function LoginWrapper() {
             <i className="fas fa-user"></i>
         </button>);
     };
-*/
 
-const renderLoginButton = () => {
-    return (
-        <button
-            className="btn login-button btn-sm"
-            onClick={() => redirectIfOffline(navigate, "/login")}
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            title="Login"
-            aria-label="Login button"
-        >
-            <i className="fas fa-user"></i>
-        </button>
-    );
-};
+
+// const renderLoginButton = () => {
+//     return (
+//         <button
+//             className="btn login-button btn-sm"
+//             onClick={() => redirectIfOffline(navigate, "/login")}
+//             data-bs-toggle="tooltip"
+//             data-bs-placement="bottom"
+//             title="Login"
+//             aria-label="Login button"
+//         >
+//             <i className="fas fa-user"></i>
+//         </button>
+//     );
+// };
 
     const renderDropdownMenu = () => {
         return (

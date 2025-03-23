@@ -23,7 +23,9 @@ self.addEventListener("fetch", (event) => {
   if (
     event.request.url.includes("/rest/products") ||
     event.request.url.includes("/rest/brands") ||
-    event.request.url.includes("/rest/categories")
+    event.request.url.includes("/rest/categories") ||
+    event.request.url.includes("/rest/shopping-carts/history/") ||
+    event.request.url.includes("/rest/order-details/shopping-cart/") 
   ) {
     event.respondWith(
       caches.open("api-cache").then((cache) => {

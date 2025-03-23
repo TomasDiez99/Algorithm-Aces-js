@@ -43,13 +43,15 @@ function HistoryPage() {
         try {
             const url = forApi(`order-details/shopping-cart/${shoppingCartId}`);
             console.log(url);
-            const response = await fetchMultiAttempt({url});
+            //const response = await fetchMultiAttempt({url});
+            const response = await fetch(url);
             if (response.ok) {
                 const data = await response.json();
                 const pairs = await getOrderDetailProductPairs(data);
                 setOrderDetailProductPairs(pairs);
             } else {
-                console.log("Error");
+                console.log("Error history");
+                navigate("/errorPWA");
             }
         } catch (error) {
             navigate("/error");
