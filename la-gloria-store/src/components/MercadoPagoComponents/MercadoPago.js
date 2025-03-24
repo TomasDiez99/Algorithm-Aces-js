@@ -68,18 +68,28 @@ const MercadoPago = () => {
             });
 
             const jsonData = await response.json();
-            const result = jsonData['payment'];
-            console.log("Response result: ", jsonData);
-            handleResponse(result.status, result.status_detail);
-
-            if (result.status === "approved") {
+            if(jsonData.error === "Product amount is greater than product stock."){
+                console.log("Error onSubmit: ", jsonData.error);
                 handleOrderProductPairList([]); //clear the shopping cart
+                navigate("/");
             }
-            navigate("/");
+            else{
+                const result = jsonData['payment'];
+                console.log("Response result: ", jsonData);
+                handleResponse(result.status, result.status_detail);
+    
+                if (result.status === "approved") {
+                    handleOrderProductPairList([]); //clear the shopping cart
+                }
+                console.log("estoy en el else");
+                navigate("/");
+            }
+           
 
         } catch (error) {
-            console.log("Error onSubmit: ", error);
-            navigate("/");
+            console.log("Error onSubmit en catch ", error);
+            handleOrderProductPairList([]); //clear the shopping cart
+            navigate("/error");
         }
     }
 
