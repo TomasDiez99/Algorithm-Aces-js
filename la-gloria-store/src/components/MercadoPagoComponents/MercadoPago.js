@@ -69,6 +69,10 @@ const MercadoPago = () => {
 
             const jsonData = await response.json();
             if(jsonData.error === "Product amount is greater than product stock."){
+                const statusError = "rejected";
+                const status_detailError = "cc_rejected_other_reason"
+                handleResponse(statusError, status_detailError);
+
                 console.log("Error onSubmit: ", jsonData.error);
                 handleOrderProductPairList([]); //clear the shopping cart
                 navigate("/");

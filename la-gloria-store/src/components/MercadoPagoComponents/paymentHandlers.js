@@ -1,6 +1,9 @@
 import { toast } from 'react-toastify';
 
 export const errorHandlers = {
+    cc_rejected_other_reason: () => {
+        toast.error("ERROR: Product amount is greater than product stock.");
+    },
     cc_rejected_call_for_authorize: () => {
         toast.error("ERROR: Rejected due to validation needed for authorization.");
     },
