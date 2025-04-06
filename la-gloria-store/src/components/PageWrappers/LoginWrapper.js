@@ -67,6 +67,7 @@ function LoginWrapper() {
                     variant=""
                     id="dropdown-basic"
                     className="btn dropdown-button btn-sm profile-button"
+                    aria-label="Dropdown button"
                 >
                     <i className="fas fa-user"></i>
                 </Dropdown.Toggle>
