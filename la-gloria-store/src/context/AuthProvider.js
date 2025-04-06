@@ -30,7 +30,7 @@ export const AuthProvider = ({children}) => {
                 const accessToken = data.authorization.token;
 
                 const clientDataResponse = await fetch(
-                    `https://la-gloria-store-algorithm-aces.vercel.app/rest/clients/email/${email}`
+                    `https://algorithm-aces.vercel.app/rest/clients/email/${email}`
                 );
 
                 let client_id = -1;

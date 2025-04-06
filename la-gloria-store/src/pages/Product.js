@@ -17,7 +17,7 @@ function Product() {
     const fetchData = async (productId) => {
       try {
         const response = await fetch(
-          `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
+          `https://algorithm-aces.vercel.app/rest/products/id/${productId}`
         );
         if (response.ok) {
           const json = await response.json();
