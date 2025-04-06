@@ -1,80 +1,78 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../styles/product-page.css";
-import { useShoppingCart } from "../../hooks/useShoppingCart";
+"use client"
+
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import "../../styles/product-page.css"
+import { useShoppingCart } from "../../hooks/useShoppingCart"
 
 function ProductPageComponent(props) {
-  const {
-    product
-  } = props;
+  const { product } = props
 
-  const {
-    orderProductPairList,
-    handleOrderProductPairList,
-    addOrderProductPair,
-    getUpdatedStock,
-  } = useShoppingCart();
+  const { orderProductPairList, handleOrderProductPairList, addOrderProductPair, getUpdatedStock } = useShoppingCart()
 
-  const [quantity, setQuantity] = useState(1);
-  const [addedToCart, setAddedToCart] = useState(false);
-  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1)
+  const [addedToCart, setAddedToCart] = useState(false)
+  const navigate = useNavigate()
 
   const handleAddToCart = () => {
     const orderDetail = {
       product_id: product.id,
       product_amount: quantity,
-    };
+    }
 
     const existingPairIndex = orderProductPairList.findIndex(
-      ([pairProduct, _]) => pairProduct.product_id === product.id
-    );
+      ([pairProduct, _]) => pairProduct.product_id === product.id,
+    )
 
     if (existingPairIndex !== -1) {
-      const [existingOrderDetail, existingProduct] =
-        orderProductPairList[existingPairIndex];
-      const updatedProductAmount =
-        existingOrderDetail.product_amount + quantity;
+      const [existingOrderDetail, existingProduct] = orderProductPairList[existingPairIndex]
+      const updatedProductAmount = existingOrderDetail.product_amount + quantity
 
       const updatedOrderDetail = {
         product_id: existingProduct.id,
         product_amount: updatedProductAmount,
-      };
+      }
 
-      const updatedPairList = [...orderProductPairList];
-      updatedPairList[existingPairIndex] = [
-        updatedOrderDetail,
-        existingProduct,
-      ];
+      const updatedPairList = [...orderProductPairList]
+      updatedPairList[existingPairIndex] = [updatedOrderDetail, existingProduct]
 
-      handleOrderProductPairList(updatedPairList);
+      handleOrderProductPairList(updatedPairList)
     } else {
-      addOrderProductPair([orderDetail, product]);
+      addOrderProductPair([orderDetail, product])
     }
 
-    setAddedToCart(true);
-    navigate("/");
-  };
+    setAddedToCart(true)
+    navigate("/")
+  }
 
   const handleProductAmount = (newAmount) => {
-    const updatedStock = getUpdatedStock(product.id, product.stock);
+    const updatedStock = getUpdatedStock(product.id, product.stock)
     if (newAmount >= 1 && newAmount <= updatedStock) {
-      setQuantity(newAmount);
+      setQuantity(newAmount)
     }
-  };
+  }
 
   return (
     <div className="center-content">
       {product ? (
         <div>
-          <h3>
-            <strong>{product.name}</strong>
-          </h3>
+          <h3>{product.name}</h3>
           <h2>Current stock: {getUpdatedStock(product.id, product.stock)}</h2>
-          <p>Price: ${product.price}</p>
-          <p>Description: {product.desc}</p>
-          <p>Size: {product.size}</p>
-          <p>Category: {product.category.name}</p>
-          <p>Brand: {product.brand.name}</p>
+          <p>
+            <strong>Price:</strong> ${product.price}
+          </p>
+          <p>
+            <strong>Description:</strong> {product.desc}
+          </p>
+          <p>
+            <strong>Size:</strong> {product.size}
+          </p>
+          <p>
+            <strong>Category:</strong> {product.category.name}
+          </p>
+          <p>
+            <strong>Brand:</strong> {product.brand.name}
+          </p>
           <div className="quantity-control">
             <button
               className="btn btn-sm less-button"
@@ -95,10 +93,7 @@ function ProductPageComponent(props) {
           <button
             className="btn btn-lg add-to-cart-button red-border"
             onClick={handleAddToCart}
-            disabled={
-              addedToCart ||
-              quantity > getUpdatedStock(product.id, product.stock)
-            }
+            disabled={addedToCart || quantity > getUpdatedStock(product.id, product.stock)}
           >
             Add to Cart
           </button>
@@ -107,7 +102,8 @@ function ProductPageComponent(props) {
         <p>Loading product...</p>
       )}
     </div>
-  );
+  )
 }
 
-export default ProductPageComponent;
+export default ProductPageComponent
+
