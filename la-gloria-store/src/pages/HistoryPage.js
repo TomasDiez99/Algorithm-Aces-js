@@ -89,14 +89,13 @@ function HistoryPage() {
   return (
     <div className="history-page-container pt-5">
       <h1 className="text-center history-title">Shopping History</h1>
-      <p className="text-center history-email">{email}</p>
       <div className="table-wrapper">
         <table className="table history-table">
           <thead className="history-table-header">
             <tr>
               <th>Date</th>
               <th>Total Price</th>
-              <th></th>
+              <th>See Details</th>
             </tr>
           </thead>
           <tbody>

@@ -6,13 +6,23 @@
   color: var(--color-accent-2);
 }
 
-.history-title {
+/* .history-title {
   color: var(--color-primary);
   margin-bottom: 1rem;
+  background-color: var(--color-secondary);
+} */
+
+.history-title {
+  background-color: var(--color-secondary);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 90%;
+  margin: 0 auto 1rem auto; /* center and space below */
 }
 
 .history-email {
-  color: var(--color-accent-2);
+  color: black;
   font-style: italic;
   margin-bottom: 2rem;
 }
