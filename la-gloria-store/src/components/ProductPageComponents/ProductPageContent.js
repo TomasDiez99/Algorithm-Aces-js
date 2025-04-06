@@ -71,6 +71,8 @@ function ProductPageComponent(props) {
           </h3>
           <h2>Current stock: {getUpdatedStock(product.id, product.stock)}</h2>
           <p>Price: ${product.price}</p>
+          <p>Description: {product.desc}</p>
+          <p>Size: {product.size}</p>
           <p>Category: {product.category.name}</p>
           <p>Brand: {product.brand.name}</p>
           <div className="quantity-control">
