@@ -1,19 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
+import "../../styles/productCard.css";
 import { useShoppingCart } from "../../hooks/useShoppingCart";
-//import {useNavigate} from "react-router-dom";
-//import { redirectIfOffline } from "../../utils";
+
 
 function ProductCard(props) {
   const { id, name, image, price, enable, stock} = props;
   const {getUpdatedStock} = useShoppingCart();
   const [isLoading, setIsLoading] = useState(true);
-  // const navigate = useNavigate();
-
-  // function handleSeeDetails() {
-  //   redirectIfOffline(navigate, `/product/${id}`);
-  // }
 
   function handleImageLoadError(e) {
     e.target.src = "/notfound.png";
