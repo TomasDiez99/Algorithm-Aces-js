@@ -1,76 +1,127 @@
 @import "./global.css";
 
 .product-page-container {
+  padding: 2rem;
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  margin-top: 3vh;
-  margin-bottom: 3vh;
   justify-content: center;
+  align-items: center;
 }
 
-.banner-container {
-  height: 90vh;
-  display: flex; 
-  align-items: center; 
+.product-layout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1200px;
+  background-color: var(--color-secondary);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
 }
 
-.vertical-banner {
+.product-image-container {
+  flex: 1;
+  min-width: 0;
+  padding: 1.5rem;
+}
+
+.product-details-container {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: var(--color-accent-2);
+}
+
+.carousel-container {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.carousel-image-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.carousel-image {
   max-width: 100%;
-  max-height: 100%; 
-  height: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  border-radius: 8px;
 }
-
 
 .center-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  height: 100%;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.carousel-container {
+.center-content > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.center-content h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+
+.center-content h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.center-content p {
+  margin-bottom: 0.75rem;
+  font-size: 1rem;
+}
+
+.quantity-control {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 90vh;
+  margin: 1.5rem 0;
+  gap: 0.5rem;
+  align-self: flex-start;
 }
 
-.carousel-image-wrapper {
-  height: 90vh;
-  max-height: 100%;
+.quantity {
+  padding: 0.5rem 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  min-width: 3rem;
+  text-align: center;
 }
 
-.carousel-image {
-  height: 90vh;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.more-button.btn {
-  border-color: var(--color-primary);
-  background-color: black;
-  color: var(--color-accent-2);
-}
-
-.more-button.btn:hover {
-  border-color: red;
-  background-color: red;
-  color: black;
-}
-
+.more-button.btn,
 .less-button.btn {
   border-color: var(--color-primary);
   background-color: black;
   color: var(--color-accent-2);
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  padding: 0;
+  transition: all 0.2s ease;
 }
 
+.more-button.btn:hover,
 .less-button.btn:hover {
-  border-color: red;
-  background-color: red;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
   color: black;
 }
 
@@ -78,10 +129,74 @@
   border-color: var(--color-primary);
   background-color: black;
   color: var(--color-accent-2);
+  padding: 0.75rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+  align-self: flex-start;
 }
 
 .add-to-cart-button.red-border:hover {
-  border-color: red;
-  background-color: red;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
   color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 5, 5, 0.3);
 }
+
+.add-to-cart-button.red-border:disabled {
+  background-color: #333;
+  border-color: #555;
+  color: #777;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+  .product-layout {
+    flex-direction: column;
+    max-width: 600px;
+  }
+
+  .product-image-container,
+  .product-details-container {
+    width: 100%;
+  }
+
+  .center-content,
+  .center-content > div {
+    align-items: center;
+    text-align: center;
+  }
+
+  .quantity-control {
+    align-self: center;
+  }
+
+  .add-to-cart-button.red-border {
+    align-self: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .product-page-container {
+    padding: 1rem;
+  }
+
+  .product-layout {
+    border-radius: 8px;
+  }
+
+  .product-image-container,
+  .product-details-container {
+    padding: 1rem;
+  }
+
+  .center-content h3 {
+    font-size: 1.5rem;
+  }
+}
+
