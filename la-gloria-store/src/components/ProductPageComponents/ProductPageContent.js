@@ -78,6 +78,7 @@ function ProductPageComponent(props) {
               className="btn btn-sm less-button"
               onClick={() => handleProductAmount(quantity - 1)}
               disabled={quantity <= 1}
+              aria-label="Decrease quantity"
             >
               -
             </button>
@@ -86,6 +87,7 @@ function ProductPageComponent(props) {
               className="btn btn-sm more-button"
               onClick={() => handleProductAmount(quantity + 1)}
               disabled={quantity >= getUpdatedStock(product.id, product.stock)}
+              aria-label="Increase quantity"
             >
               +
             </button>
@@ -94,6 +96,7 @@ function ProductPageComponent(props) {
             className="btn btn-lg add-to-cart-button red-border"
             onClick={handleAddToCart}
             disabled={addedToCart || quantity > getUpdatedStock(product.id, product.stock)}
+            aria-label={`Add ${quantity} ${product.name}(s) to cart`}
           >
             Add to Cart
           </button>
