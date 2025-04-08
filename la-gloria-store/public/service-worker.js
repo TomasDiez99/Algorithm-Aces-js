@@ -5,6 +5,8 @@ const urlsToCache = [
   "/",
   "/index.html",
   "/logo.png",
+  "/HomeCarrouselBanners/banner2.png",
+  "/HomeCarrouselBanners//banner5.png",
   "/error",
   "/errorPWA"
 ];
