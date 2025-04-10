@@ -4,18 +4,19 @@ import "../../styles/home.css";
 import {useNavigate} from "react-router-dom";
 import {fetchMultiAttempt} from "../../utils";
 import {forApi, getApiBaseUrl} from "../../urlManager";
-import { toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 
 function ProductGrid(props) {
-    const {categoryFilter, brandFilter} = props;
-    const [currentPage, setCurrentPage] = useState(1);
+    const {categoryFilter, brandFilter, currentPage, setCurrentPage} = props;
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
         let url = getUrlEndpoint();
+
+        console.log("useEffect called with currentPage:", currentPage);
 
         const fetchProductsFromApi = async (url) => {
             try {
@@ -34,6 +35,8 @@ function ProductGrid(props) {
                     setProducts(json.data);
                     setLastPage(json.meta.last_page);
                 } else if (currentPage !== 1) {
+
+                    console.log("entered else if currentPage !== 1 with page ", currentPage);
                     setCurrentPage(1);
                 } else {
                     toast.error("There are no products for the combination of filters selected");
@@ -51,6 +54,7 @@ function ProductGrid(props) {
     const goToPage = (page) => {
         if (page >= 1 && page <= lastPage) {
             setCurrentPage(page);
+            console.log("goToPage called with page:", page);
         }
     };
 
@@ -73,8 +77,12 @@ function ProductGrid(props) {
             <div className="container-fluid paginateButtonStyle radius-component">
                 <button
                     className="btn change-page-button"
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
+                    onClick={() => {
+                        goToPage(currentPage - 1);
+                    }}
+                    disabled={
+                        currentPage === 1
+                    }
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Previous Page"

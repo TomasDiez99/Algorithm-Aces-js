@@ -5,18 +5,21 @@ import ErrorPage from "./pages/ErrorPage";
 import HistoryPage from "./pages/HistoryPage";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import Login from "./components/LoginComponents/Login";
 import Register from "./components/LoginComponents/Register";
 import {AuthProvider} from "./context/AuthProvider";
 import {ShoppingCartProvider} from "./context/ShoppingCartProvider";
 import RequireAuth from "./components/LoginComponents/RequiereAuth";
 import MercadoPago from "./components/MercadoPagoComponents/MercadoPago";
-import { ToastContainer } from 'react-toastify';
+import {ToastContainer} from 'react-toastify';
 import PwaErrorPage from "./pages/PwaErrorPage";
 
 
 function App() {
+
+    const initialPage = 1;
+    const [currentPage, setCurrentPage] = React.useState(initialPage);
 
     useEffect(() => {
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
@@ -36,31 +39,33 @@ function App() {
                 <div>
                     <Navbar/>
                     <div className="pt-5">
-                    <Routes>
-                        <Route
-                            path="/"
-                            element={<Home
-                            />}/>
-                        <Route
-                            path="/product/:productId"
-                            element={<Product/>}
-                        />
-                        <Route
-                            path="/history/:clientEmail"
-                            element={<RequireAuth><HistoryPage /></RequireAuth>}
-                        />
-                        <Route path="/mercado-pago" element={<MercadoPago />} /> {/* Nueva ruta para MercadoPago */}
-                        <Route path="*" element={<ErrorPage/>}/>
-                        <Route path="login" element={<Login/>}/>
-                        <Route path="register" element={<Register/>}/>
-                        <Route path="/errorPWA" element={<PwaErrorPage/>}/>
-                    </Routes>
+                        <Routes>
+                            <Route
+                                path="/"
+                                element={<Home
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                />}/>
+                            <Route
+                                path="/product/:productId"
+                                element={<Product/>}
+                            />
+                            <Route
+                                path="/history/:clientEmail"
+                                element={<RequireAuth><HistoryPage/></RequireAuth>}
+                            />
+                            <Route path="/mercado-pago" element={<MercadoPago/>}/> {/* Nueva ruta para MercadoPago */}
+                            <Route path="*" element={<ErrorPage/>}/>
+                            <Route path="login" element={<Login/>}/>
+                            <Route path="register" element={<Register/>}/>
+                            <Route path="/errorPWA" element={<PwaErrorPage/>}/>
+                        </Routes>
                     </div>
-                    
+
                     <Footer/>
                 </div>
-            </ShoppingCartProvider> 
-           <ToastContainer /> 
+            </ShoppingCartProvider>
+            <ToastContainer/>
         </AuthProvider>
     );
 }

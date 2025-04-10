@@ -5,14 +5,19 @@ import NewsletterSection from '../components/HomePageComponents/NewsletterSectio
 import ActionBar from '../components/ActionBar';
 
 
-function Home() {
+function Home(props) {
+
+    const {currentPage, setCurrentPage} = props;
 
     return (
         <div>
             {/* <ActionBar/> */}
-            <div style={{ height: "60px" }} /> 
+            <div style={{height: "60px"}}/>
             <HomeCarrousel/>
-            <ProductTable/>
+            <ProductTable
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+            />
             <NewsletterSection/>
         </div>
     );
