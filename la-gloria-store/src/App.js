@@ -22,16 +22,32 @@ function App() {
     const [currentPage, setCurrentPage] = React.useState(initialPage);
 
     useEffect(() => {
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-        (function () {
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        const loadTawk = () => {
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
             s1.async = true;
             s1.src = 'https://embed.tawk.to/6754543d2480f5b4f5a99dfd/1iegmi4pq';
             s1.charset = 'UTF-8';
             s1.setAttribute('crossorigin', '*');
             s0.parentNode.insertBefore(s1, s0);
-        })();
+        };
+    
+        if (navigator.onLine) {
+            try {
+                loadTawk();
+            } catch (e) {
+                console.error("Failed to load Tawk script:", e);
+            }
+        } else {
+            console.warn("Tawk script not loaded: no internet connection.");
+            window.addEventListener("online", () => {
+                console.log("Back online, loading Tawk...");
+                loadTawk();
+            }, { once: true });
+        }
     }, []);
+    
 
     return (
         <AuthProvider>
