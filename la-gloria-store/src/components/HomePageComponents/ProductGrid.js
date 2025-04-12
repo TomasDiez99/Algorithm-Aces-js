@@ -11,12 +11,13 @@ function ProductGrid(props) {
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    const [blockNextPrev, setBlockNextPrev] = useState(false);
 
 
     useEffect(() => {
         let url = getUrlEndpoint();
 
-        console.log("useEffect called with currentPage:", currentPage);
+        console.log("useEffect called in product grid with currentPage:", currentPage);
 
         const fetchProductsFromApi = async (url) => {
             try {
@@ -45,6 +46,8 @@ function ProductGrid(props) {
                 //toast.error("Please go online to view the products available for the selected brands and categories.");
                 //console.error("Error fetching products: ", error);
                 navigate("/errorPWA");
+            } finally {
+                setBlockNextPrev(false); // Reactivar botones despues de fetchear
             }
         };
 
@@ -52,7 +55,8 @@ function ProductGrid(props) {
     }, [categoryFilter, brandFilter, currentPage]);
 
     const goToPage = (page) => {
-        if (page >= 1 && page <= lastPage) {
+        if (page >= 1 && page <= lastPage && !blockNextPrev) {
+            setBlockNextPrev(true);
             setCurrentPage(page);
             console.log("goToPage called with page:", page);
         }
@@ -80,9 +84,7 @@ function ProductGrid(props) {
                     onClick={() => {
                         goToPage(currentPage - 1);
                     }}
-                    disabled={
-                        currentPage === 1
-                    }
+                    disabled={currentPage === 1 || blockNextPrev}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Previous Page"
@@ -93,7 +95,7 @@ function ProductGrid(props) {
                 <button
                     className="btn change-page-button"
                     onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === lastPage}
+                    disabled={currentPage === lastPage || blockNextPrev}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Next Page"
@@ -119,7 +121,6 @@ function ProductGrid(props) {
         } else {
             res = url + `/products?page=${currentPage}`;
         }
-        console.log(res);
         return res;
     }
 }
