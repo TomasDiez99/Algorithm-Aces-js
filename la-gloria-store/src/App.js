@@ -32,7 +32,7 @@ function App() {
             s1.setAttribute('crossorigin', '*');
             s0.parentNode.insertBefore(s1, s0);
         };
-    
+
         if (navigator.onLine) {
             try {
                 loadTawk();
@@ -44,16 +44,20 @@ function App() {
             window.addEventListener("online", () => {
                 console.log("Back online, loading Tawk...");
                 loadTawk();
-            }, { once: true });
+            }, {once: true});
         }
     }, []);
-    
+
 
     return (
         <AuthProvider>
             <ShoppingCartProvider>
                 <div>
-                    <Navbar/>
+                    <Navbar
+                        currentPage={currentPage}
+                        setCurrentPage={setCurrentPage}
+                        initialPage={initialPage}
+                    />
                     <div className="pt-5">
                         <Routes>
                             <Route
