@@ -58,7 +58,6 @@ function ProductGrid(props) {
         if (page >= 1 && page <= lastPage && !blockNextPrev) {
             setBlockNextPrev(true);
             setCurrentPage(page);
-            console.log("goToPage called with page:", page);
         }
     };
 

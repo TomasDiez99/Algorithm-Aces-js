@@ -65,17 +65,27 @@ function App() {
                                 element={<Home
                                     currentPage={currentPage}
                                     setCurrentPage={setCurrentPage}
+                                    initialPage={initialPage}
                                 />}/>
                             <Route
                                 path="/product/:productId"
-                                element={<Product/>}
+                                element={<Product
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                    initialPage={initialPage}
+                                />}
                             />
                             <Route
                                 path="/history/:clientEmail"
                                 element={<RequireAuth><HistoryPage/></RequireAuth>}
                             />
                             <Route path="/mercado-pago" element={<MercadoPago/>}/> {/* Nueva ruta para MercadoPago */}
-                            <Route path="*" element={<ErrorPage/>}/>
+                            <Route path="*" element={
+                                <ErrorPage
+                                    currentPage={currentPage}
+                                    setCurrentPage={setCurrentPage}
+                                    initialPage={initialPage}
+                                />}/>
                             <Route path="login" element={<Login/>}/>
                             <Route path="register" element={<Register/>}/>
                             <Route path="/errorPWA" element={<PwaErrorPage/>}/>

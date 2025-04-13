@@ -26,7 +26,7 @@ function Navbar(props) {
                         title="Home"
                         onClick={() => {
                             if (currentPage !== initialPage) {
-                                setCurrentPage(initialPage); // Solo actualiza si no está ya en la página inicial
+                                setCurrentPage(initialPage);
                             }
                         }}
                     >
