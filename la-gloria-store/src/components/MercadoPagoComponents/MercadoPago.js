@@ -7,6 +7,8 @@ import {forApi} from "../../urlManager";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {useNavigate} from "react-router-dom";
+import "../../styles/mercado-pago.css";
+
 
 const MercadoPago = () => {
     const {auth} = useAuth();
@@ -116,13 +118,15 @@ const MercadoPago = () => {
 
     return (
         <>
+
+        <div className="mp-main-container">
             <CardPayment
                 initialization={initialization}
                 onSubmit={onSubmit}
                 onReady={onReady}
                 onError={onError}
             />
-            {/* <ToastContainer /> */}
+        </div>
         </>
     );
 };

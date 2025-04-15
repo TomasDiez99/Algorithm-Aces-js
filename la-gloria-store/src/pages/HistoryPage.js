@@ -87,65 +87,67 @@ function HistoryPage() {
   }
 
   return (
-    <div className="history-page-container pt-5">
-      <h1 className="text-center history-title">Shopping History</h1>
-      <div className="table-wrapper">
-        <table className="table history-table">
-          <thead className="history-table-header">
-            <tr>
-              <th>Date</th>
-              <th>Total Price</th>
-              <th>See Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            {shoppingCarts.map((cart, index) => (
-              <React.Fragment key={cart.id}>
-                <tr className="history-row">
-                  <td>{cart.date}</td>
-                  <td>${cart.total_price}</td>
-                  <td>
-                    <button
-                      className="btn btn-sm history-expand-button"
-                      aria-label="See order details button"
-                      onClick={() => handleRowClick(index, cart.id)}
-                    >
-                      {expandedRows.includes(index) ? "-" : "+"}
-                    </button>
-                  </td>
-                </tr>
-                {expandedRows.includes(index) && (
-                  <tr>
-                    <td colSpan="3">
-                      <div className="order-details">
-                        <table className="details-table">
-                          <thead className="details-table-header">
-                            <tr>
-                              <th>Product Amount</th>
-                              <th>Product Name</th>
-                              <th>Product Price</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {orderDetailProductPairs
-                              .filter(([orderDetail]) => orderDetail.shopping_cart_id === cart.id)
-                              .map(([orderDetail, product]) => (
-                                <tr key={orderDetail.id} className="details-row">
-                                  <td>{orderDetail.product_amount}</td>
-                                  <td>{product.name}</td>
-                                  <td>${product.price}</td>
-                                </tr>
-                              ))}
-                          </tbody>
-                        </table>
-                      </div>
+    <div className="history-page-wrapper"> 
+      <div className="history-page-container pt-5">
+        <h1 className="text-center history-title">Shopping History</h1>
+        <div className="table-wrapper">
+          <table className="table history-table">
+            <thead className="history-table-header">
+              <tr>
+                <th>Date</th>
+                <th>Total Price</th>
+                <th>See Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              {shoppingCarts.map((cart, index) => (
+                <React.Fragment key={cart.id}>
+                  <tr className="history-row">
+                    <td>{cart.date}</td>
+                    <td>${cart.total_price}</td>
+                    <td>
+                      <button
+                        className="btn btn-sm history-expand-button"
+                        aria-label="See order details button"
+                        onClick={() => handleRowClick(index, cart.id)}
+                      >
+                        {expandedRows.includes(index) ? "-" : "+"}
+                      </button>
                     </td>
                   </tr>
-                )}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
+                  {expandedRows.includes(index) && (
+                    <tr>
+                      <td colSpan="3">
+                        <div className="order-details">
+                          <table className="details-table">
+                            <thead className="details-table-header">
+                              <tr>
+                                <th>Product Amount</th>
+                                <th>Product Name</th>
+                                <th>Product Price</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {orderDetailProductPairs
+                                .filter(([orderDetail]) => orderDetail.shopping_cart_id === cart.id)
+                                .map(([orderDetail, product]) => (
+                                  <tr key={orderDetail.id} className="details-row">
+                                    <td>{orderDetail.product_amount}</td>
+                                    <td>{product.name}</td>
+                                    <td>${product.price}</td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )
