@@ -50,7 +50,7 @@ function HistoryPage() {
         setOrderDetailProductPairs(pairs)
       } else {
         console.log("Error history")
-        navigate("/errorPWA")
+        navigate("/error")
       }
     } catch (error) {
       navigate("/error")

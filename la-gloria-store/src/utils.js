@@ -60,7 +60,7 @@ export const handleErrorResponse = async (response) => {
     console.error(text);
 };
 
-export const redirectIfOffline = (navigate, onlineRoute, offlineRoute = "/errorPWA") => {
+export const redirectIfOffline = (navigate, onlineRoute, offlineRoute = "/error") => {
     if (!navigator.onLine) {
         navigate(offlineRoute);
     } else {

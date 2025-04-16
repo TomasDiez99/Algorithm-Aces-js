@@ -11,19 +11,18 @@ function ProductGrid(props) {
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    const [blockNextPrev, setBlockNextPrev] = useState(false);
 
 
     useEffect(() => {
         let url = getUrlEndpoint();
-
-        console.log("useEffect called with currentPage:", currentPage);
+        console.log("useEffect called in product grid with currentPage:", currentPage);
 
         const fetchProductsFromApi = async (url) => {
             try {
-
-                const response = await fetchMultiAttempt({url});
+                const response = await fetch(url);
                 if (!response.ok) {
-
+                    console.log("Error fetching products when loading page: ${currentPage}", response.status);
                     const text = await response.text();
                     const blob = new Blob([text], {type: 'text/html'});
                     const newWindow = window.open(URL.createObjectURL(blob), '_blank');
@@ -35,26 +34,30 @@ function ProductGrid(props) {
                     setProducts(json.data);
                     setLastPage(json.meta.last_page);
                 } else if (currentPage !== 1) {
-
                     console.log("entered else if currentPage !== 1 with page ", currentPage);
                     setCurrentPage(1);
                 } else {
                     toast.error("There are no products for the combination of filters selected");
                 }
             } catch (error) {
-                //toast.error("Please go online to view the products available for the selected brands and categories.");
-                //console.error("Error fetching products: ", error);
-                navigate("/errorPWA");
+                console.error("Error fetching products:", error);
+                setCurrentPage((currentPage > 1) ? currentPage - 1 : currentPage);
+                navigate("/error", {replace: true});
+            } finally {
+                setBlockNextPrev(false); // Reactivar botones despues de fetchear
             }
         };
+
+        //push the current page to history with react
+        window.history.pushState({page: currentPage}, `Page ${currentPage}`, `/?page=${currentPage}`);
 
         fetchProductsFromApi(url);
     }, [categoryFilter, brandFilter, currentPage]);
 
     const goToPage = (page) => {
-        if (page >= 1 && page <= lastPage) {
+        if (page >= 1 && page <= lastPage && !blockNextPrev) {
+            setBlockNextPrev(true);
             setCurrentPage(page);
-            console.log("goToPage called with page:", page);
         }
     };
 
@@ -80,9 +83,7 @@ function ProductGrid(props) {
                     onClick={() => {
                         goToPage(currentPage - 1);
                     }}
-                    disabled={
-                        currentPage === 1
-                    }
+                    disabled={currentPage === 1 || blockNextPrev}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Previous Page"
@@ -93,7 +94,7 @@ function ProductGrid(props) {
                 <button
                     className="btn change-page-button"
                     onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === lastPage}
+                    disabled={currentPage === lastPage || blockNextPrev}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Next Page"
@@ -119,7 +120,6 @@ function ProductGrid(props) {
         } else {
             res = url + `/products?page=${currentPage}`;
         }
-        console.log(res);
         return res;
     }
 }

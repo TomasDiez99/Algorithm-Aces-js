@@ -1,13 +1,14 @@
 // Navbar.js
 
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {Link} from "react-router-dom";
 import CartModal from "./ShoppingCart/CartModal";
 import LoginWrapper from "./PageWrappers/LoginWrapper";
 import "../styles/global.css";
 
-function Navbar() {
-  const [showCartModal, setShowCartModal] = useState(false);
+function Navbar(props) {
+    const {currentPage, setCurrentPage, initialPage} = props;
+    const [showCartModal, setShowCartModal] = useState(false);
 
     const toggleCartModal = (show) => {
         setShowCartModal(show);
@@ -23,6 +24,11 @@ function Navbar() {
                         data-bs-toggle="tooltip"
                         data-bs-placement="bottom"
                         title="Home"
+                        onClick={() => {
+                            if (currentPage !== initialPage) {
+                                setCurrentPage(initialPage);
+                            }
+                        }}
                     >
                         <img
                             src="/logo.png"
@@ -48,12 +54,12 @@ function Navbar() {
                 </div>
             </div>
 
-        <CartModal
-            showCartModal={showCartModal}
-            handleCloseCart={() => toggleCartModal(false)}
-        />
-      </nav>
-  );
+            <CartModal
+                showCartModal={showCartModal}
+                handleCloseCart={() => toggleCartModal(false)}
+            />
+        </nav>
+    );
 }
 
 export default Navbar;
