@@ -16,7 +16,6 @@ function Product(props) {
     const navigate = useNavigate()
 
     useEffect(() => {
-
         const fetchData = async (productId) => {
             try {
                 const response = await fetch(`https://algorithm-aces.vercel.app/rest/products/id/${productId}`)
@@ -31,13 +30,13 @@ function Product(props) {
                     // if (currentPage !== initialPage) {
                     //     setCurrentPage(initialPage)
                     // }
-                    navigate("/error")
+                    navigate("/error", {replace: true});
                 }
             } catch (error) {
                 // if (currentPage !== initialPage) {
                 //     setCurrentPage(initialPage);
                 // }
-                navigate("/error")
+                navigate("/error", {replace: true});
             }
         }
 

@@ -27,30 +27,15 @@ const ErrorPage = (props) => {
 
     useEffect(() => {
         console.log("Current page:", currentPage);
-        console.log("Shoul change the title to Error");
+        console.log("Should change the title to Error");
         document.title = "Error";
+    }, [currentPage]);
 
-        // Detect location changes
-        const unlisten = () => {
-            if (location.state && location.state.fromBackButton) {
-                console.log("Detected back navigation with currentPage:", currentPage);
-                moveToSafeCachedCurrentPage();
-                navigate("/");
-            }
-        };
-
-        unlisten(); // Call the logic on location change
-
-        return () => {
-            // Cleanup logic if needed
-        };
-    }, [location, currentPage, setCurrentPage, initialPage, navigate]);
 
     return (
         <div className="error-container">
             <h1 className='error-h1'>¡Ups! Something went wrong.</h1>
             <p className='error-p'>Sorry for the inconvenience. Please try to go back to the start and try again.</p>
-            <p className='error-p'>Current Page: {currentPage}</p>
             <Link
                 to="/"
                 className="btn error-btn"

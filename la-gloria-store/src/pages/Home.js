@@ -12,9 +12,6 @@ function Home(props) {
 
     useEffect(() => {
         document.title = (currentPage === initialPage) ? "Home" : `Page ${currentPage}`;
-
-        //push the current page to history with react
-        window.history.pushState({page: currentPage}, `Page ${currentPage}`, `/?page=${currentPage}`);
     }, [currentPage]);
 
     return (

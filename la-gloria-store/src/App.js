@@ -13,7 +13,6 @@ import {ShoppingCartProvider} from "./context/ShoppingCartProvider";
 import RequireAuth from "./components/LoginComponents/RequiereAuth";
 import MercadoPago from "./components/MercadoPagoComponents/MercadoPago";
 import {ToastContainer} from 'react-toastify';
-import PwaErrorPage from "./pages/PwaErrorPage";
 
 
 function App() {
@@ -88,7 +87,6 @@ function App() {
                                 />}/>
                             <Route path="login" element={<Login/>}/>
                             <Route path="register" element={<Register/>}/>
-                            <Route path="/errorPWA" element={<PwaErrorPage/>}/>
                         </Routes>
                     </div>
 
