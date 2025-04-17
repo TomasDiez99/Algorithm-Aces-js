@@ -6,6 +6,7 @@
     --color-accent-2: white;
     background-color: var(--color-secondary);
 }
+
 .login-container {
     display: flex;
     justify-content: center;
@@ -33,7 +34,6 @@
     align-items: center;
     height: 100vh;
 }
-
 
 
 .login-form h2 {
@@ -78,9 +78,21 @@
     cursor: pointer;
 }
 
+.register-submit-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
 .login-submit-button:hover {
     background-color: var(--color-primary);
     color: var(--color-secondary);
+}
+
+.login-submit-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
 }
 
 .offscreen {
@@ -90,7 +102,7 @@
 
 .feedback-message {
     background-color: black;
-    position : absolute;
+    position: absolute;
     color: white;
     font-weight: bold;
     border-radius: 5px;

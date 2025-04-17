@@ -4,10 +4,11 @@ import "../../styles/login.css";
 import {useAuth} from "../../hooks/useAuth";
 
 function Login() {
-    const {loginAuth, errorMessage,setErrorMessage} = useAuth();
+    const {loginAuth, errorMessage, setErrorMessage} = useAuth();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         setErrorMessage("");
@@ -23,7 +24,9 @@ function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         await loginAuth(email, password);
+        setLoading(false);
     };
 
     return (
@@ -44,7 +47,12 @@ function Login() {
                 <p className="register-link">
                     Don't have an account? <a href="/register">Sign up here</a>.
                 </p>
-                <button type="submit" className="login-submit-button">Sing in</button>
+                <button
+                    type="submit"
+                    className="login-submit-button"
+                    disabled={loading}>
+                    {loading ? "Logging in..." : "Sign in"}
+                </button>
             </form>
         </div>
     );

@@ -18,7 +18,7 @@ function Register() {
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
     const [showMessage, setShowMessage] = useState(false);
-
+    const [loading, setLoading] = useState(false);
 
 
     useEffect(() => {
@@ -68,13 +68,17 @@ function Register() {
                 handleErrorMessage(PASSWORD_ERROR_MESSAGE);
             } else {
                 try {
+                    setLoading(true);
+
                     const response = await fetch("https://algorithm-aces.vercel.app/rest/auth/register", {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ email, password }),
+                        body: JSON.stringify({email, password}),
                     });
+
+                    setLoading(false);
 
                     if (!response.ok) {
                         handleErrorMessage("Error creating client");
@@ -82,8 +86,10 @@ function Register() {
                         await handleSuccessMessage(SUCCESS_MESSAGE);
                         navigate("/login");
                     }
+
                 } catch (error) {
                     handleErrorMessage("Error during client creation:");
+                    setLoading(false);
                 }
             }
         }
@@ -106,7 +112,12 @@ function Register() {
                     Password:
                     <input type="password" value={password} onChange={handlePasswordChange}/>
                 </label>
-                <button type="submit" className="register-submit-button">Sing up</button>
+                <button
+                    type="submit"
+                    className="register-submit-button"
+                    disabled={loading}>
+                    {loading ? "Signing in..." : "Register"}
+                </button>
             </form>
         </div>
     );
