@@ -53,9 +53,9 @@ const BrandCheckbox = ({brand, isSelected, onChange}) => (
     </div>
 );
 
-function BrandFilter({setBrandFilter}) {
+function BrandFilter({setBrandFilter, selectedBrand, setSelectedBrand}) {
     const [brands, setBrands] = useState([]);
-    const [selectedBrand, setSelectedBrand] = useState("");
+    //const [selectedBrand, setSelectedBrand] = useState("");
 
     const url = forApi("brands");
 

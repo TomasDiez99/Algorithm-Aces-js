@@ -19,3 +19,35 @@
     background-color: black;
     color: var(--color-accent-2);
 }
+
+/* .action-bar {
+    position: fixed;
+    top: 60px; 
+    left: 0;
+    width: 100%;
+    background: white; 
+    z-index: 1000; 
+    padding: 10px 0;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+  } */
+  
+  .action-bar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: white;
+    z-index: 1000;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex; /* Enables Flexbox */
+    justify-content: flex-end; /* Pushes content to the right */
+    align-items: center;
+}
+
+.action-bar-buttons-container {
+    display: flex;
+    justify-content: flex-end; /* Align items to the right */
+    align-items: center;
+    width: 100%; /* Takes full width */
+}

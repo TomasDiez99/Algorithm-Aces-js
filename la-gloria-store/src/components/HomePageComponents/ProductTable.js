@@ -1,36 +1,38 @@
-import React, {useState} from 'react';
-import FilterTable from './FilterTable/FilterTable';
-import ProductGrid from './ProductGrid';
-import "../../styles/home.css";
+"use client"
 
-function ProductTable() {
-    const [categoryFilter, setCategoryFilter] = useState('');
-    const [brandFilter, setBrandFilter] = useState('');
+import {useState} from "react"
+import ProductGrid from "./ProductGrid"
+import "../../styles/home.css"
+import ActionBar from "../../components/ActionBar"
+
+function ProductTable(props) {
+
+    const {currentPage, setCurrentPage} = props;
+    const [categoryFilter, setCategoryFilter] = useState("");
+    const [brandFilter, setBrandFilter] = useState("");
 
     const categoryFilterHandle = (category) => {
-        setCategoryFilter(category);
-    };
+        setCategoryFilter(category)
+    }
     const brandFilterHandle = (brand) => {
-        setBrandFilter(brand);
-    };
+        setBrandFilter(brand)
+    }
 
     return (
         <div className="home-container">
-            <div className="filter">
-                <FilterTable
-                    setCategoryFilter={categoryFilterHandle}
-                    setBrandFilter={brandFilterHandle}
-                />
+            <div className="w-100">
+                <ActionBar setCategoryFilter={categoryFilterHandle} setBrandFilter={brandFilterHandle}/>
             </div>
-            <div className="grid radius-component">
-                <ProductGrid 
-                categoryFilter={categoryFilter} 
-                brandFilter={brandFilter}
+            <div className="grid radius-component w-100">
+                <ProductGrid
+                    categoryFilter={categoryFilter}
+                    brandFilter={brandFilter}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
                 />
             </div>
         </div>
-    );
-
+    )
 }
 
-export default ProductTable;
+export default ProductTable

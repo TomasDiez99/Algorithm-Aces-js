@@ -59,3 +59,11 @@ export const handleErrorResponse = async (response) => {
     let text = await response.text();
     console.error(text);
 };
+
+export const redirectIfOffline = (navigate, onlineRoute, offlineRoute = "/error") => {
+    if (!navigator.onLine) {
+        navigate(offlineRoute);
+    } else {
+        navigate(onlineRoute);
+    }
+};

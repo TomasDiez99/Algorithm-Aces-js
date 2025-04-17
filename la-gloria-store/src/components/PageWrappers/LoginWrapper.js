@@ -4,6 +4,8 @@ import {useNavigate} from "react-router-dom";
 import {Dropdown} from "react-bootstrap";
 import "../../styles/global.css";
 import "../../styles/navbar.css";
+import { redirectIfOffline } from "../../utils";
+
 
 function LoginWrapper() {
     const {auth, logOut} = useAuth();
@@ -22,6 +24,14 @@ function LoginWrapper() {
         }
     };
 
+    // const handleDropdownSelect = (selectedOption) => {
+    //     if (selectedOption === "history") {
+    //         redirectIfOffline(navigate, `/history/${auth.email}`);
+    //     } else if (selectedOption === "logout") {
+    //         logOut();
+    //     }
+    // };
+
     const renderLoginButton = () => {
         return (<button
             className="btn login-button btn-sm"
@@ -34,6 +44,22 @@ function LoginWrapper() {
         </button>);
     };
 
+
+// const renderLoginButton = () => {
+//     return (
+//         <button
+//             className="btn login-button btn-sm"
+//             onClick={() => redirectIfOffline(navigate, "/login")}
+//             data-bs-toggle="tooltip"
+//             data-bs-placement="bottom"
+//             title="Login"
+//             aria-label="Login button"
+//         >
+//             <i className="fas fa-user"></i>
+//         </button>
+//     );
+// };
+
     const renderDropdownMenu = () => {
         return (
             <Dropdown>
@@ -41,15 +67,17 @@ function LoginWrapper() {
                     variant=""
                     id="dropdown-basic"
                     className="btn dropdown-button btn-sm profile-button"
+                    aria-label="Dropdown button"
                 >
                     <i className="fas fa-user"></i>
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                     <Dropdown.Item
+                        aria-label="History button"
                         onClick={() => handleDropdownSelect("history")}>
                         History
                     </Dropdown.Item>
-                    <Dropdown.Item onClick={() => handleDropdownSelect("logout")}>
+                    <Dropdown.Item aria-label="Logout button" onClick={() => handleDropdownSelect("logout")}>
                         Logout
                     </Dropdown.Item>
                 </Dropdown.Menu>

@@ -1,5 +1,5 @@
 :root {
-    --color-primary: #FF0000;
+    --color-primary: #FF0505;
     --color-primary-light: #c12f2f;
     --color-secondary: #0D1821;
     --color-accent-1: #651919;
@@ -15,6 +15,16 @@
 }
 
 .btn.login-button:hover {
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+}
+
+.btn.drawer-button {
+    background-color: black;
+    color: var(--color-accent-2);
+}
+
+.btn.drawer-button:hover {
     background-color: var(--color-primary);
     color: var(--color-secondary);
 }
@@ -44,3 +54,40 @@
     background-color: var(--color-primary);
     color: black;
 }
+
+/* Drawer que ocupa todo el espacio disponible */
+.full-width-drawer .offcanvas {
+    width: 100% !important; /* Ocupa todo el ancho disponible */
+    max-width: none;
+    position: fixed; /* Asegura que el Offcanvas sea fijo */
+    left: 0;
+    top: 0;
+    height: 100vh; /* Ocupa todo el alto de la pantalla */
+    z-index: 1050;
+    overflow: hidden; /* No permite que el drawer se desplace horizontalmente */
+  }
+  
+  /* Body del Offcanvas que será desplazable verticalmente */
+  .scrollable-body {
+    overflow-y: auto; /* Habilita el desplazamiento vertical */
+    -webkit-overflow-scrolling: touch; /* Desplazamiento suave en iOS */
+    max-height: 100vh; /* Limita la altura del body al 100% de la pantalla */
+    padding-right: 15px; /* Asegura que el contenido no se corte debido a la barra de desplazamiento */
+    overflow-x: hidden; /* Desactiva el desplazamiento horizontal */
+  }
+  
+  /* Evitar el desbordamiento de texto y contenido dentro de scrollable-body */
+  .scrollable-body * {
+    white-space: normal; /* Asegura que el texto y los elementos se ajusten dentro del área visible */
+  }
+  
+  /* Para móviles */
+  @media (max-width: 768px) {
+    .full-width-drawer .offcanvas {
+      height: 100vh; /* El Offcanvas ocupa toda la altura en móviles */
+    }
+  
+    .scrollable-body {
+      max-height: 100vh; /* Asegura que el body sea completamente desplazable en móviles */
+    }
+  }

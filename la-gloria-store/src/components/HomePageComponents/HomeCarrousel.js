@@ -4,10 +4,7 @@ import "../../styles/home.css";
 
 const HomeCarrousel = () => {
   const imageUrls = [
-    "/HomeCarrouselBanners/banner1.jpg",
     "/HomeCarrouselBanners/banner2.jpg",
-    "/HomeCarrouselBanners/banner3.jpg",
-    "/HomeCarrouselBanners/banner4.jpg",
     "/HomeCarrouselBanners/banner5.jpg",
   ];
 

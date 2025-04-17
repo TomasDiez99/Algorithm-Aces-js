@@ -1,20 +1,21 @@
 // Navbar.js
 
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, {useContext, useState} from "react";
+import {Link} from "react-router-dom";
 import CartModal from "./ShoppingCart/CartModal";
 import LoginWrapper from "./PageWrappers/LoginWrapper";
 import "../styles/global.css";
 
-function Navbar() {
-  const [showCartModal, setShowCartModal] = useState(false);
+function Navbar(props) {
+    const {currentPage, setCurrentPage, initialPage} = props;
+    const [showCartModal, setShowCartModal] = useState(false);
 
     const toggleCartModal = (show) => {
         setShowCartModal(show);
     };
 
     return (
-        <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <nav className="navbar navbar-expand-lg bg-body-tertiary fixed-top">
             <div className="navbar-container">
                 <div>
                     <Link
@@ -23,6 +24,11 @@ function Navbar() {
                         data-bs-toggle="tooltip"
                         data-bs-placement="bottom"
                         title="Home"
+                        onClick={() => {
+                            if (currentPage !== initialPage) {
+                                setCurrentPage(initialPage);
+                            }
+                        }}
                     >
                         <img
                             src="/logo.png"
@@ -41,18 +47,19 @@ function Navbar() {
                         onClick={() => toggleCartModal(true)}
                         data-bs-toggle="tooltip"
                         data-bs-placement="bottom"
+                        aria-label="Shopping Cart"
                         title="Shopping Cart">
                         <i className="fas fa-shopping-cart"></i>
                     </button>
                 </div>
             </div>
 
-        <CartModal
-            showCartModal={showCartModal}
-            handleCloseCart={() => toggleCartModal(false)}
-        />
-      </nav>
-  );
+            <CartModal
+                showCartModal={showCartModal}
+                handleCloseCart={() => toggleCartModal(false)}
+            />
+        </nav>
+    );
 }
 
 export default Navbar;

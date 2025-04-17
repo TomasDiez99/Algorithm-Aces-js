@@ -6,14 +6,16 @@ import {handleResponse} from "./paymentHandlers";
 import {forApi} from "../../urlManager";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {useNavigate} from "react-router-dom";
+import "../../styles/mercado-pago.css";
+
 
 const MercadoPago = () => {
     const {auth} = useAuth();
-    const {orderProductPairList} = useShoppingCart();
-    // const url = forApi("/process_payment");
-    //localhost url
+    const {orderProductPairList, handleOrderProductPairList} = useShoppingCart();
+    const navigate = useNavigate();
 
-    const url = "http://localhost:8000/rest/payment/create";
+    const url = forApi("payment/create");
 
     initMercadoPago(
         'TEST-69fb160d-4a3e-4385-a038-a7320b91b5d8',
@@ -68,12 +70,32 @@ const MercadoPago = () => {
             });
 
             const jsonData = await response.json();
-            const result = jsonData['payment'];
-            console.log("Response result: ", jsonData);
-            handleResponse(result.status, result.status_detail);
+            if(jsonData.error === "Product amount is greater than product stock."){
+                const statusError = "rejected";
+                const status_detailError = "cc_rejected_other_reason"
+                handleResponse(statusError, status_detailError);
+
+                console.log("Error onSubmit: ", jsonData.error);
+                handleOrderProductPairList([]); //clear the shopping cart
+                navigate("/");
+            }
+            else{
+                const result = jsonData['payment'];
+                console.log("Response result: ", jsonData);
+                handleResponse(result.status, result.status_detail);
+    
+                if (result.status === "approved") {
+                    handleOrderProductPairList([]); //clear the shopping cart
+                }
+                console.log("estoy en el else");
+                navigate("/");
+            }
+           
 
         } catch (error) {
-            console.log("Error onSubmit: ", error);
+            console.log("Error onSubmit en catch ", error);
+            handleOrderProductPairList([]); //clear the shopping cart
+            navigate("/error");
         }
     }
 
@@ -96,13 +118,15 @@ const MercadoPago = () => {
 
     return (
         <>
+
+        <div className="mp-main-container">
             <CardPayment
                 initialization={initialization}
                 onSubmit={onSubmit}
                 onReady={onReady}
                 onError={onError}
             />
-            {/* <ToastContainer /> */}
+        </div>
         </>
     );
 };

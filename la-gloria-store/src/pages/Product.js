@@ -1,65 +1,67 @@
-import React, { useEffect, useState } from "react";
-import ProductCarrousel from "../components/ProductPageComponents/ProductCarrousel";
-import ProductPageContent from "../components/ProductPageComponents/ProductPageContent";
-import VerticalBanner from "../components/ProductPageComponents/VerticalBanner";
-import { useParams } from "react-router-dom";
-import "../styles/product-page.css";
-import { useNavigate } from "react-router-dom";
+"use client"
 
-function Product() {
-  const [product, setProduct] = useState(null);
+import {useEffect, useState} from "react"
+import ProductCarrousel from "../components/ProductPageComponents/ProductCarrousel"
+import ProductPageContent from "../components/ProductPageComponents/ProductPageContent"
+import {useParams} from "react-router-dom"
+import "../styles/product-page.css"
+import {useNavigate} from "react-router-dom"
 
-  const params = useParams();
-  const productId = params.productId;
-  const navigate = useNavigate();
+function Product(props) {
+    const {currentPage, setCurrentPage, initialPage} = props;
+    const [product, setProduct] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async (productId) => {
-      try {
-        const response = await fetch(
-          `https://la-gloria-store-algorithm-aces.vercel.app/rest/products/id/${productId}`
-        );
-        if (response.ok) {
-          const json = await response.json();
-          setProduct(json.data);
-          const localProduct = json.data;
-          checkProductUnavailable(localProduct);
-        } else {
-          navigate("/error");
+    const params = useParams()
+    const productId = params.productId
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const fetchData = async (productId) => {
+            try {
+                const response = await fetch(`https://algorithm-aces.vercel.app/rest/products/id/${productId}`)
+                if (response.ok) {
+                    const json = await response.json()
+                    setProduct(json.data)
+                    const localProduct = json.data
+                    document.title = localProduct.name
+                    checkProductUnavailable(localProduct)
+                } else {
+                    // console.log("Error fetching product data and entering fetch else:", response.status);
+                    // if (currentPage !== initialPage) {
+                    //     setCurrentPage(initialPage)
+                    // }
+                    navigate("/error", {replace: true});
+                }
+            } catch (error) {
+                // if (currentPage !== initialPage) {
+                //     setCurrentPage(initialPage);
+                // }
+                navigate("/error", {replace: true});
+            }
         }
-      } catch (error) {
-        navigate("/error");
-      }
-    };
 
-    fetchData(productId);
-  }, [productId]);
+        fetchData(productId)
+    }, [productId])
 
-  const checkProductUnavailable = (product) => {
-    if (product.stock === 0 || product.enable === false) {
-      navigate("/error");
+    const checkProductUnavailable = (product) => {
+        if (product.enable === false) {
+            navigate("/error")
+        }
     }
-  };
 
-  return (
-    <div className="product-page-container container-fluid">
-      <div className="row">
-        <div className="col-5 debug-1">
-          <ProductCarrousel product={product} />
+    return (
+        <div className="product-page-container">
+            <div className="product-layout">
+                <div className="product-image-container">
+                    <ProductCarrousel product={product}/>
+                </div>
+                <div className="product-details-container">
+                    <ProductPageContent product={product}/>
+                </div>
+            </div>
         </div>
-        <div className="col-5">
-          <ProductPageContent
-            product={product}
-          />
-        </div>
-        <div className="col-2 justify-content-end">
-          <a href="#">
-            <VerticalBanner />
-          </a>
-        </div>
-      </div>
-    </div>
-  );
+    )
 }
 
-export default Product;
+export default Product
+

@@ -91,6 +91,7 @@ function ShoppingCart(props) {
                     className="btn checkout-button"
                     data-bs-dismiss="modal"
                     onClick={() => handleMercadoPagoPayment()}
+                    aria-label="Checkout button"
                     disabled={orderProductPairList.length === 0}
                 >
                     Checkout

@@ -4,24 +4,25 @@ import "../../styles/home.css";
 import {useNavigate} from "react-router-dom";
 import {fetchMultiAttempt} from "../../utils";
 import {forApi, getApiBaseUrl} from "../../urlManager";
+import {toast} from 'react-toastify';
 
 function ProductGrid(props) {
-    const {categoryFilter, brandFilter} = props;
-    const [currentPage, setCurrentPage] = useState(1);
+    const {categoryFilter, brandFilter, currentPage, setCurrentPage} = props;
     const [lastPage, setLastPage] = useState(1);
     const [products, setProducts] = useState([]);
     const navigate = useNavigate();
+    const [blockNextPrev, setBlockNextPrev] = useState(false);
+
 
     useEffect(() => {
         let url = getUrlEndpoint();
+        console.log("useEffect called in product grid with currentPage:", currentPage);
 
         const fetchProductsFromApi = async (url) => {
             try {
-
-
-                const response = await fetchMultiAttempt({url});
+                const response = await fetch(url);
                 if (!response.ok) {
-
+                    console.log("Error fetching products when loading page: ${currentPage}", response.status);
                     const text = await response.text();
                     const blob = new Blob([text], {type: 'text/html'});
                     const newWindow = window.open(URL.createObjectURL(blob), '_blank');
@@ -33,21 +34,29 @@ function ProductGrid(props) {
                     setProducts(json.data);
                     setLastPage(json.meta.last_page);
                 } else if (currentPage !== 1) {
+                    console.log("entered else if currentPage !== 1 with page ", currentPage);
                     setCurrentPage(1);
                 } else {
-                    alert("There are no products for the combination of filters selected");
+                    toast.error("There are no products for the combination of filters selected");
                 }
             } catch (error) {
-                console.error("Error fetching products: ", error);
-                //navigate("/error");
+                console.error("Error fetching products:", error);
+                setCurrentPage((currentPage > 1) ? currentPage - 1 : currentPage);
+                navigate("/error", {replace: true});
+            } finally {
+                setBlockNextPrev(false); // Reactivar botones despues de fetchear
             }
         };
+
+        //push the current page to history with react
+        window.history.pushState({page: currentPage}, `Page ${currentPage}`, `/?page=${currentPage}`);
 
         fetchProductsFromApi(url);
     }, [categoryFilter, brandFilter, currentPage]);
 
     const goToPage = (page) => {
-        if (page >= 1 && page <= lastPage) {
+        if (page >= 1 && page <= lastPage && !blockNextPrev) {
+            setBlockNextPrev(true);
             setCurrentPage(page);
         }
     };
@@ -71,21 +80,25 @@ function ProductGrid(props) {
             <div className="container-fluid paginateButtonStyle radius-component">
                 <button
                     className="btn change-page-button"
-                    onClick={() => goToPage(currentPage - 1)}
-                    disabled={currentPage === 1}
+                    onClick={() => {
+                        goToPage(currentPage - 1);
+                    }}
+                    disabled={currentPage === 1 || blockNextPrev}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Previous Page"
+                    aria-label="Previous Page button"
                 >
                     Previous
                 </button>
                 <button
                     className="btn change-page-button"
                     onClick={() => goToPage(currentPage + 1)}
-                    disabled={currentPage === lastPage}
+                    disabled={currentPage === lastPage || blockNextPrev}
                     data-toggle="tooltip"
                     data-placement="top"
                     title="Next Page"
+                    aria-label="Next Page button"
                 >
                     Next
                 </button>
@@ -107,7 +120,6 @@ function ProductGrid(props) {
         } else {
             res = url + `/products?page=${currentPage}`;
         }
-        console.log(res);
         return res;
     }
 }
