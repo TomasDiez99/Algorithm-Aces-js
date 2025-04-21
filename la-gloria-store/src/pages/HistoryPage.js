@@ -41,7 +41,6 @@ function HistoryPage() {
   const retrieveOrderDetailData = async (shoppingCartId) => {
     try {
       const url = forApi(`order-details/shopping-cart/${shoppingCartId}`)
-      console.log(url)
       //const response = await fetchMultiAttempt({url});
       const response = await fetch(url)
       if (response.ok) {
@@ -49,7 +48,6 @@ function HistoryPage() {
         const pairs = await getOrderDetailProductPairs(data)
         setOrderDetailProductPairs(pairs)
       } else {
-        console.log("Error history")
         navigate("/error")
       }
     } catch (error) {

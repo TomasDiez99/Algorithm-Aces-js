@@ -26,10 +26,6 @@ function Product(props) {
                     document.title = localProduct.name
                     checkProductUnavailable(localProduct)
                 } else {
-                    // console.log("Error fetching product data and entering fetch else:", response.status);
-                    // if (currentPage !== initialPage) {
-                    //     setCurrentPage(initialPage)
-                    // }
                     navigate("/error", {replace: true});
                 }
             } catch (error) {

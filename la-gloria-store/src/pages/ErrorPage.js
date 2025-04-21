@@ -8,26 +8,20 @@ const ErrorPage = (props) => {
     const location = useLocation();
 
     function resetCurrentPage() {
-        console.log("Entered resetCurrentPage with currentPage:", currentPage);
         if (currentPage !== initialPage) {
             setCurrentPage(initialPage);
         }
-        console.log("Current page after resetCurrentPage:", currentPage);
     }
 
     function moveToSafeCachedCurrentPage() {
-        console.log("Entered moveToSafeCachedCurrentPage with currentPage:", currentPage);
         if (currentPage > 1) {
             setCurrentPage(currentPage - 1);
         } else {
             setCurrentPage(initialPage); // initialPage should be 1
         }
-        console.log("Current page after moveToSafeCachedCurrentPage:", currentPage);
     }
 
     useEffect(() => {
-        console.log("Current page:", currentPage);
-        console.log("Should change the title to Error");
         document.title = "Error";
     }, [currentPage]);
 

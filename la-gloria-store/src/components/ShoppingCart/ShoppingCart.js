@@ -42,7 +42,6 @@ function ShoppingCart(props) {
     };
 
     function handleMercadoPagoPayment() {
-        console.log("Going to MercadoPago");
         handleCloseCart();
         if(!!auth.accessToken)  {
             navigate("/mercado-pago");

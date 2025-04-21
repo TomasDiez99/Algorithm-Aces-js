@@ -25,7 +25,6 @@ export const errorHandlers = {
 };
 
 export const resolveErrorText = (statusDetail) => {
-    console.log("Resolving error for status: ", statusDetail);
     const errorHandler = errorHandlers[statusDetail] || errorHandlers.default;
     errorHandler(); 
 };
@@ -53,48 +52,3 @@ export const handleResponse = (status, statusDetail) => {
     handler(statusDetail);
 };
 
-
-/*
-export const errorHandlers = {
-    cc_rejected_call_for_authorize: () => {
-        console.log("ERROR: Rejected due to validation needed for authorization.");
-    },
-    cc_rejected_insufficient_amount: () => {
-        console.log("ERROR: Payment rejected due to insufficient funds.");
-    },
-    cc_rejected_bad_filled_security_code: () => {
-        console.log("ERROR: Rejected due to invalid security code.");
-    },
-    cc_rejected_bad_filled_date: () => {
-        console.log("ERROR: Rejected due to expiration date issue.");
-    },
-    cc_rejected_bad_filled_other: () => {
-        console.log("ERROR: Rejected due to form error.");
-    },
-    default: () => {
-        console.log("ERROR: An error occurred while processing the card payment.");
-    }
-};
-
-export const resolveErrorText = (statusDetail) => {
-    console.log("Resolving error for status: ", statusDetail);
-    const errorHandler = errorHandlers[statusDetail] || errorHandlers.default;
-    errorHandler(); 
-};
-
-
-export const responseHandlers = {
-    approved: () => console.log("Payment approved"),
-    in_process: () => console.log("Payment in process"),
-    pending: () => console.log("Payment pending"),
-    rejected: (statusDetail) => {
-        resolveErrorText(statusDetail);
-    },
-    default: () => console.log("Unknown status"),
-};
-
-export const handleResponse = (status,statusDetail) => {
-    const handler = responseHandlers[status] || responseHandlers.default;
-    handler(statusDetail);
-};
-*/

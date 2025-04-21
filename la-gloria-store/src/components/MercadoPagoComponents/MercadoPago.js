@@ -32,16 +32,13 @@ const MercadoPago = () => {
             const orderDetailPrice = productPrice * productAmount;
             total += orderDetailPrice;
         }
-        console.log("total: ", total);
         return total;
     }
 
     const onSubmit = async (formData) => {
-        console.log("formData: ", formData);
 
         try {
 
-            console.log("auth: ", auth);
 
             // shoppingCartData Json
             const shoppingCartData = {
@@ -56,7 +53,6 @@ const MercadoPago = () => {
                 shoppingCartData
             };
 
-            console.log("paymentDataJSON : ", paymentDataJSON);
 
             const paymentData = JSON.stringify(paymentDataJSON);
 
@@ -75,32 +71,27 @@ const MercadoPago = () => {
                 const status_detailError = "cc_rejected_other_reason"
                 handleResponse(statusError, status_detailError);
 
-                console.log("Error onSubmit: ", jsonData.error);
                 handleOrderProductPairList([]); //clear the shopping cart
                 navigate("/");
             }
             else{
                 const result = jsonData['payment'];
-                console.log("Response result: ", jsonData);
                 handleResponse(result.status, result.status_detail);
     
                 if (result.status === "approved") {
                     handleOrderProductPairList([]); //clear the shopping cart
                 }
-                console.log("estoy en el else");
                 navigate("/");
             }
            
 
         } catch (error) {
-            console.log("Error onSubmit en catch ", error);
             handleOrderProductPairList([]); //clear the shopping cart
             navigate("/error");
         }
     }
 
     const onError = async (error) => {
-        console.log("Entro en el onError: ", error);
     };
 
 
@@ -112,8 +103,6 @@ const MercadoPago = () => {
     };
 
     const onReady = async () => {
-        console.log("cargado exitosamente");
-        console.log("initialization: ", initialization);
     };
 
     return (

@@ -16,13 +16,11 @@ function ProductGrid(props) {
 
     useEffect(() => {
         let url = getUrlEndpoint();
-        console.log("useEffect called in product grid with currentPage:", currentPage);
 
         const fetchProductsFromApi = async (url) => {
             try {
                 const response = await fetch(url);
                 if (!response.ok) {
-                    console.log("Error fetching products when loading page: ${currentPage}", response.status);
                     const text = await response.text();
                     const blob = new Blob([text], {type: 'text/html'});
                     const newWindow = window.open(URL.createObjectURL(blob), '_blank');
@@ -34,7 +32,6 @@ function ProductGrid(props) {
                     setProducts(json.data);
                     setLastPage(json.meta.last_page);
                 } else if (currentPage !== 1) {
-                    console.log("entered else if currentPage !== 1 with page ", currentPage);
                     setCurrentPage(1);
                 } else {
                     toast.error("There are no products for the combination of filters selected");

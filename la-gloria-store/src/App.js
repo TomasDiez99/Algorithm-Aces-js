@@ -41,7 +41,6 @@ function App() {
         } else {
             console.warn("Tawk script not loaded: no internet connection.");
             window.addEventListener("online", () => {
-                console.log("Back online, loading Tawk...");
                 loadTawk();
             }, {once: true});
         }

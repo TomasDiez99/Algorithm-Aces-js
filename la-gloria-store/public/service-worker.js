@@ -15,7 +15,6 @@ const urlsToCache = [
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            console.log("Opened cache");
             return cache.addAll(urlsToCache);
         })
     );
@@ -41,12 +40,10 @@ self.addEventListener("fetch", (event) => {
                     })
                     .catch((error) => {
                         // Si la red falla, se intenta obtener desde la caché
-                        console.log('Network error or resource not available:', error);
                         return caches.match(event.request).then((cachedResponse) => {
                             if (cachedResponse) {
                                 return cachedResponse; // Regresamos lo que esté en la caché
                             } else {
-                                console.log("no hay nada en cache")
                                 // return caches.match('/error');
                             }
                         });
@@ -63,7 +60,6 @@ self.addEventListener("activate", (event) => {
             Promise.all(
                 cacheNames.map((cache) => {
                     if (cache !== CACHE_NAME && cache !== "api-cache") {
-                        console.log("Deleting old cache:", cache);
                         return caches.delete(cache);
                     }
                 })
