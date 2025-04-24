@@ -43,14 +43,18 @@ function ShoppingCart(props) {
 
     function handleMercadoPagoPayment() {
         handleCloseCart();
-        if(!!auth.accessToken)  {
-            navigate("/mercado-pago");
-        } 
-        else {
-            toast.info("You need to be logged in to proceed with the payment");
-            navigate ("/login")
+        if(!navigator.onLine ){
+            navigate("/error");
         }
-        
+        else{
+            if(!!auth.accessToken)  {
+                navigate("/mercado-pago");
+            } 
+            else {
+                toast.info("You need to be logged in to proceed with the payment");
+                navigate ("/login")
+            }
+        }      
     }
 
     return (
