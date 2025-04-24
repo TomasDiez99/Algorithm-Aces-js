@@ -53,31 +53,46 @@ Panel de operarios
 
 # PWA
 
-## Descripción
+### Descripción
 
 #### Se transformó la aplicación web desarrollada en React en una Progressive Web App (PWA) para mejorar la experiencia del usuario en dispositivos móviles y permitir su instalación como una app nativa.
 
 #### Una PWA permite que la aplicación se instale en el dispositivo del usuario, funcione sin conexión (offline), cargue más rápido y ofrezca una experiencia similar a una app móvil. Esto mejora el compromiso del usuario y su percepción de rendimiento.
 
-#### Para ello, se realizaron los siguientes pasos:
+#### La aplicacion PWA funciona para los sistemas operativos Windows, Linux, Android, IOS
 
-### Paso 1: Modificación del archivo manifest.json
 
-#### El archivo manifest.json contiene la metada necesaria para definir cómo se verá e identificará la app cuando esté instalada. En nuestro proyecto, está ubicado en la-gloria-store/build/manifest.json
+### Para instalarla (Google Chrome)
 
-![img_9.png](img_9.png)
+#### Hacemos click en el siguiente icono arriba a la derecha en el buscador
 
-#### Se puede ver que contiene datos de los íconos de la app, el nombre, la descripción, url como entry point, entre otros.
+![img_7.png](img_7.png)
 
-#### Paso 2: Registro y configuracion del Service Worker
-
-#### React provee soporte para PWA. Si se usó el comando create-react-app para iniciar la app, se puede usar el archivo serviceWorker.js que viene por defecto. Si no, lo creamos (en nuestro caso, está en la-gloria-store/public/service-worker.js). Luego, lo registramos en el index.js de la app.
+#### Luego le damos click al boton instalar
 
 ![img_8.png](img_8.png)
 
-#### En la imagen se puede ver cómo se agrega el service worker (con el método register) luego de cargar (evento escuchado con window.addEventListener('load')). Esto solo se hace si se detectó que el navegador soporta service workers (con la instrucción if ('serviceWorker' in navigator)).
+#### Y ya podremos ver la aplicacion en nuestro escritorio
 
-#### Funcionalidades PWA
+![img_9.png](img_9.png)
+
+### Para instalarla (Safari IOS)
+
+#### Primero dirigirnos a la pagina y darle a compartir y luego le damos click a Add to Home Screen
+
+![img_10.png](img_10.png)
+
+#### Hacemos click en Add
+
+![img_11.png](img_11.png)
+
+#### Luego ya la podremos visualizar en nuestro telefono
+
+![img_12.png](img_12.png)
+
+![img_13.png](img_13.png)
+
+### Funcionalidades PWA
 
 #### Cuando inicia la carga de la app, el service worker guarda en cache recursos que se usan con frecuencia (imagenes del carrousel, por ejemplo). Esto permite que la app funcione offline y cargue más rápido.
 
