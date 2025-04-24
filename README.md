@@ -87,4 +87,4 @@ Panel de operarios
 
 #### El carrito de compras es visualizable totalmente aún sin conexión y la manipulación del mísmo tambien, ya que se maneja en el lado del cliente. Sin embargo, el checkout no es accesible sin conexión, ya que requiere una conexión a Mercado Pago para poder procesar el pago.
 
-##### Cuando se quiere acceder a un sitio que requiere mandatoriamente 
+##### Cuando se quiere acceder a un sitio que requiere mandatoriamente conexion a red, se redirige automaticamente a un sitio offline mostrando un mensaje de error.
