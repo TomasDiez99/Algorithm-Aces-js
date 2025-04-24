@@ -65,11 +65,11 @@ Panel de operarios
 
 #### El archivo manifest.json contiene la metada necesaria para definir cómo se verá e identificará la app cuando esté instalada. En nuestro proyecto, está ubicado en la-gloria-store/build/manifest.json
 
-![img_7.png](img_7.png)
+![img_9.png](img_9.png)
 
 #### Se puede ver que contiene datos de los íconos de la app, el nombre, la descripción, url como entry point, entre otros.
 
-#### Paso 2: Registro del Service Worker
+#### Paso 2: Registro y configuracion del Service Worker
 
 #### React provee soporte para PWA. Si se usó el comando create-react-app para iniciar la app, se puede usar el archivo serviceWorker.js que viene por defecto. Si no, lo creamos (en nuestro caso, está en la-gloria-store/public/service-worker.js). Luego, lo registramos en el index.js de la app.
 
@@ -77,6 +77,14 @@ Panel de operarios
 
 #### En la imagen se puede ver cómo se agrega el service worker (con el método register) luego de cargar (evento escuchado con window.addEventListener('load')). Esto solo se hace si se detectó que el navegador soporta service workers (con la instrucción if ('serviceWorker' in navigator)).
 
-#### Paso 3: Instalación y configuración del Service Worker
+#### Funcionalidades PWA
 
-##### En el archivo service-worker.js,
+#### Cuando inicia la carga de la app, el service worker guarda en cache recursos que se usan con frecuencia (imagenes del carrousel, por ejemplo). Esto permite que la app funcione offline y cargue más rápido.
+
+#### Además, cuando se navega por la app, el service worker intercepta las peticiones e intenta responder con los recursos cacheados en lugar de hacer una nueva a la red, ahorrando tiempo y tráfico.
+
+#### Si durante la navegación de la app se pierde la conexión, hay ciertas funcionalidades y vistas que siguen siendo accesibles. Por ejemplo, el carrousel de imagenes y la vista de productos que hayan sido visitados previamente (ya que están cacheados). Las páginas del home previamente vistas tambien son accesibles.
+
+#### El carrito de compras es visualizable totalmente aún sin conexión y la manipulación del mísmo tambien, ya que se maneja en el lado del cliente. Sin embargo, el checkout no es accesible sin conexión, ya que requiere una conexión a Mercado Pago para poder procesar el pago.
+
+##### Cuando se quiere acceder a un sitio que requiere mandatoriamente 
