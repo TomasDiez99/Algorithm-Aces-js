@@ -43,7 +43,17 @@ Panel de operarios
 
 #### El dashboard de buckets dentro del proyecto supabase nos permite hacer un abm y lectura de archivos de varios tipos, proveyendo tambien URLs para acceder a los archivos.
 
+#### Se implementó un botón en el formulario de creación y edición de productos que permite subir una imagen al bucket de Supabase Storage y luego se guarda la URL en la base de datos. Se optimizó para que si la imagen que se subió ya está guardada (hay varios métodos pero elegimos la convención de nombre de archivo) no se suba nuevamente, y se reutiliza la url existente.
+
+#### Se decidió no dejar que se eliminen o sobrescriban imagenes en el bucket. Aún así, el administrador con las credenciales correctas puede manipular y eliminar manualmente los datos de los buckets.
+
 ![img_6.png](img_6.png)
+
+![img_17.png](img_17.png)
+
+![img_18.png](img_18.png)
+
+#### Luego de seleccionar una imagen, se pulsa "Upload" para ver una previsualización de la imagen cargada. 
 
 #### Se usó Supabase Storage con Buckets ya que el sistema ya estaba instanciando un proyecto supabase. Esto hizo su setup más sencillo y rápido. Además, los buckets son sencillos de entender y visualizar para la administración de imagenes.
 
