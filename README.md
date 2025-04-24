@@ -6,12 +6,8 @@
 
 #### Se eligió Spatie porque es una librería muy popular y bien mantenida, con una buena documentación y soporte. Además, permite crear permisos y roles de manera sencilla y rápida.
 
-Se implementa la creación y vinculación entre permisos y roles en el seeder de la base de datos.
-
-![img_1.png](img_1.png)
-
 #### Como buena práctica, Spatie recomienda no usar los roles directamente, sino crear un nuevo rol y asignarle los permisos que se necesiten. En este caso, se creó el rol de superadmin y se le asignaron todos los permisos disponibles. Luego, a la hora de checkear si el usuario tiene un rol o permiso, se recomienda usar consultas de permisos en lugar de usar consulta de rol. Esto es porque los roles pueden cambiar, pero los permisos son más estables y no cambian con frecuencia. 
-#### Esto permite una segregación de facultades más modular y flexiblee, evitando roles similares. Además, esto permite usar directivas @can en las vistas de Blade, lo que permite que se use Laravel Gates, que provee ventanas de autorización para el frontend.
+
 
 # Servicio web en Laravel
 
@@ -103,3 +99,30 @@ Panel de operarios
 #### El carrito de compras es visualizable totalmente aún sin conexión y la manipulación del mísmo tambien, ya que se maneja en el lado del cliente. Sin embargo, el checkout no es accesible sin conexión, ya que requiere una conexión a Mercado Pago para poder procesar el pago.
 
 ##### Cuando se quiere acceder a un sitio que requiere mandatoriamente conexion a red, se redirige automaticamente a un sitio offline mostrando un mensaje de error.
+
+# Guias de accesibilidad
+
+### 1.4.3 Contrast (Minimum)
+
+#### La presentación visual del texto y las imágenes del texto tiene una relación de contraste de al menos 4,5:1 
+#### Se utiliza la pagina Contrast Checker https://webaim.org/resources/contrastchecker/ para comprar contraste de colores
+
+### 1.1.1 Non-text Content
+
+#### Todo contenido no textual que se presenta al usuario tiene una alternativa de texto que cumple la misma función, excepto en las situaciones que se enumeran a continuación.
+
+#### Para lograr esta guia se les agrega el atributo "alt" a las imagenes, a los botones se les agrega un atributo "aria-label"
+
+#### Para chequear que no se nos haya pasado por alto algun lugar que agregar estos atributos, utilizamos la extension WAVE que tiene funcionalidades para verificar accesibilidad
+
+![img_14.png](img_14.png)
+
+### 2.1.1 Keyboard | 2.1.2 No Keyboard Trap | 2.4.7 Focus Visible  
+
+#### Se puede navergar a traves de toda la pagina mediante del uso del teclado, sin la posibilidad de quedarse atrapado en un componente, tambien la pagina matiene un orden logico Top-Down  al navegar con el teclado. Al moverse por la pagina con el teclado mediante css hicimos que se encuadre el componente.
+
+![img_15.png](img_15.png)
+
+#### Tambien hicimos uso de la herramienta LightHouse provista por Google Chrome para probar los elementos que esta puede testear automaticamente 
+
+![img_16.png](img_16.png)
