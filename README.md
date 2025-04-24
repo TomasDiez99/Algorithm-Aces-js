@@ -8,6 +8,7 @@
 
 #### Como buena práctica, Spatie recomienda no usar los roles directamente, sino crear un nuevo rol y asignarle los permisos que se necesiten. En este caso, se creó el rol de superadmin y se le asignaron todos los permisos disponibles. Luego, a la hora de checkear si el usuario tiene un rol o permiso, se recomienda usar consultas de permisos en lugar de usar consulta de rol. Esto es porque los roles pueden cambiar, pero los permisos son más estables y no cambian con frecuencia. 
 
+#### El rol de super admin tiene acceso completo de escritura, mientras que el rol de admin solo puede modificar el stock de los productos.
 
 # Servicio web en Laravel
 
